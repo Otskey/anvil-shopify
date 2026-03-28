@@ -106,12 +106,14 @@
 
   // ─── Post-animation unlock ────────────────────────────────────────────────
   function onAnimationComplete() {
-    // The only thing that was ever locked was the scroll-wrapper height/overflow
-    // (to prevent the oversized container from creating a scrollbar during the
-    // animation). Release it so the full page can scroll normally.
+    // Release the scroll-wrapper clip so the page can scroll.
     const sw = document.querySelector('.scroll-wrapper');
     sw.style.height   = 'auto';
     sw.style.overflow = 'visible';
+
+    // Reveal the nav and hero-frame text content.
+    document.getElementById('site-nav').classList.add('is-visible');
+    document.getElementById('hero-frame').classList.add('is-revealed');
 
     replayBtn.classList.add('is-visible');
   }
@@ -121,6 +123,10 @@
     const sw = document.querySelector('.scroll-wrapper');
     sw.style.height   = '100vh';
     sw.style.overflow = 'hidden';
+
+    // Hide nav and hero-frame text for the replay.
+    document.getElementById('site-nav').classList.remove('is-visible');
+    document.getElementById('hero-frame').classList.remove('is-revealed');
 
     replayBtn.classList.remove('is-visible');
     runAnimation();
