@@ -69,7 +69,7 @@ body {
   letter-spacing: -0.09em  →  tight, fashionable display spacing
 */
 .waka {
-  font-size: 38.89vw;
+  font-size: 38.9vw;
   line-height: 0.8;
   letter-spacing: -0.09em;
   font-weight: 700;
@@ -78,7 +78,7 @@ body {
   position: absolute;
   left: 0;
   right: 0;
-  top: 0;
+  top: 2vw;    /* matches original CSS, visually centers the two headings in the viewport */
   text-align: center;
   color: #1a1a1a;
 
@@ -319,7 +319,7 @@ body {
 
 .hero-frame-left,
 .hero-frame-right {
-  width: 10vw;
+  width: 11vw;
   padding: 1.5rem;
   display: flex;
   flex-direction: column;
