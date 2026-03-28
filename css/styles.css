@@ -1,0 +1,200 @@
+/* ============================================================
+   WAKA WAKA — Homepage animation replica
+   Techniques used:
+     1. CSS clip-path for the magazine-cover "unfurl"
+     2. CSS transform: scale() + transform-origin for the zoom
+     3. GSAP timeline drives everything — no CSS keyframes needed
+   ============================================================ */
+
+/* ── Reset & base ───────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  width: 100%;
+  background-color: #edeae4;      /* exact value from original CSS */
+}
+
+/* ── Font ───────────────────────────────────────────────────── */
+body {
+  font-family: 'Playfair Display', Georgia, serif;
+  /*
+    Original uses "Waka Sans" (proprietary).
+    Swap this declaration once you have the real font files:
+      font-family: 'Waka Sans', sans-serif;
+  */
+}
+
+/* ── Scroll wrapper ─────────────────────────────────────────── */
+/*
+  height: 100vh + overflow: hidden clips the oversized .container
+  during the animation so it doesn't cause a scrollbar.
+  After the animation JS sets height: auto + overflow: visible
+  so the full page can scroll normally.
+*/
+.scroll-wrapper {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+}
+
+/* ── Container — the magazine cover ─────────────────────────── */
+/*
+  Natural (scale 1) height: 145vw.
+  At 1920×1080 this is ~2784 px vs 1080 px viewport → initial scale ≈ 0.388.
+  The exact initial scale is calculated dynamically in animation.js so the
+  layout looks correct at every viewport aspect ratio.
+
+  transform-origin: top center keeps the top WAKA pinned to the top of the
+  screen as the container zooms in.
+*/
+.container {
+  position: relative;
+  width: 100%;
+  height: 145vw;              /* tall enough to hold: top WAKA + images + bottom WAKA */
+  transform-origin: top center;
+  will-change: transform;     /* hint for GPU compositing during the scale animation */
+}
+
+/* ── WAKA headings ───────────────────────────────────────────── */
+/*
+  38.89vw matches the original CSS exactly.
+  "Waka" (4 chars + condensed tracking) fills the full viewport width at scale 1.
+  line-height: 0.8  →  visible height ≈ 31.11vw per heading
+  letter-spacing: -0.09em  →  tight, fashionable display spacing
+*/
+.waka {
+  font-size: 38.89vw;
+  line-height: 0.8;
+  letter-spacing: -0.09em;
+  font-weight: 700;
+  font-style: italic;
+
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  text-align: center;
+  color: #1a1a1a;
+
+  pointer-events: none;
+  user-select: none;
+  white-space: nowrap;
+
+  /* GSAP sets opacity: 0 on page load */
+}
+
+.waka--bottom {
+  top: auto;
+  bottom: 0;
+}
+
+/* ── Grid animation wrapper ──────────────────────────────────── */
+/*
+  Sits between the two WAKA headings.
+  overflow: hidden is essential — it's the clipping ancestor for the
+  clip-path unfurl (so the images don't bleed into the headings).
+  GSAP sets clip-path: inset(0 0 100% 0) initially, then animates to
+  inset(0 0 0% 0) — revealing the content from top to bottom.
+*/
+.grid__animation-wrapper {
+  position: absolute;
+  /* top + bottom match the visible height of one WAKA heading */
+  top: calc(38.89vw * 0.8);
+  bottom: calc(38.89vw * 0.8);
+  left: 0;
+  right: 0;
+  overflow: hidden;
+}
+
+/* ── Image grid ──────────────────────────────────────────────── */
+.grid {
+  display: flex;
+  gap: 1vw;
+  height: 100%;
+  align-items: stretch;
+}
+
+.grid__item {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+/*
+  Original data-sizes: featured = 66vw, side = 28vw, gap = 1vw → 95vw.
+  We use calc() so the items fit exactly in the wrapper (100vw).
+  The remaining 5vw is absorbed as equal padding on each side.
+*/
+.grid__item--featured {
+  flex: 0 0 calc(67vw - 1vw);
+}
+
+.grid__item--side {
+  flex: 0 0 calc(33vw - 0.5vw);
+}
+
+/* ── Image containers ────────────────────────────────────────── */
+/*
+  height: 100% makes each image fill its grid item top-to-bottom,
+  matching the height of the grid__animation-wrapper exactly.
+  The background-color set inline on .responsive-image is the
+  extracted palette dominant colour — shows before the image loads.
+*/
+.grid__item-image {
+  height: 100%;
+  width: 100%;
+}
+
+.responsive-image {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  /* background-color set inline per image */
+}
+
+.responsive-image img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;    /* portrait photos: keep face/top in frame */
+}
+
+/* ── Replay button ───────────────────────────────────────────── */
+/*
+  Shown after the animation ends (added via JS).
+  Not part of the original — purely for demo convenience.
+*/
+.replay-btn {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 100;
+  padding: 8px 16px;
+  background: rgba(0, 0, 0, 0.75);
+  color: #fff;
+  font-size: 13px;
+  letter-spacing: 0.05em;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  opacity: 0;                     /* revealed by JS after animation */
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.replay-btn.is-visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.replay-btn:hover {
+  background: rgba(0, 0, 0, 0.9);
+}
