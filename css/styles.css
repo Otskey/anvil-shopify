@@ -319,7 +319,7 @@ body {
 
 .hero-frame-left,
 .hero-frame-right {
-  width: 22vw;
+  width: 10vw;
   padding: 1.5rem;
   display: flex;
   flex-direction: column;
