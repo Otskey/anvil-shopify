@@ -22,6 +22,7 @@
     </ul>
     <a href="#" class="nav-logo">ANVIL</a>
     <div class="nav-right">
+      <p class="hero-issue">Issue No. 001</p>
       <span id="clock"></span>
     </div>
   </nav>
@@ -37,7 +38,6 @@
       <p class="hero-tagline">furniture and functional objects, wood and steel, designed and handcrafted in the UK.</p>
     </div>
     <div class="hero-frame-right">
-      <p class="hero-issue">Issue No. 001</p>
       <div class="hero-scroll-hint">
         <div class="scroll-arrow"></div>
         <span>Scroll</span>
@@ -238,14 +238,15 @@
       el.addEventListener('mouseleave', () => cur.classList.remove('hover'));
     });
 
-    /* ── Live clock ── */
+    /* ── Live date ── */
     function tick() {
       const d = new Date();
+      const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
       document.getElementById('clock').textContent =
-        String(d.getHours()).padStart(2,'0') + ':' + String(d.getMinutes()).padStart(2,'0');
+        String(d.getDate()).padStart(2,'0') + ' ' + months[d.getMonth()] + ' ' + d.getFullYear();
     }
     tick();
-    setInterval(tick, 10000);
+    setInterval(tick, 60000);
 
     /* ── Hero frame: hide when user scrolls past the hero ── */
     const heroFrame    = document.getElementById('hero-frame');

@@ -63,13 +63,14 @@ body {
 
 /* ── WAKA headings ───────────────────────────────────────────── */
 /*
-  38.89vw matches the original CSS exactly.
-  "Waka" (4 chars + condensed tracking) fills the full viewport width at scale 1.
-  line-height: 0.8  →  visible height ≈ 31.11vw per heading
+  27vw is calibrated for "ANVIL" (5 chars) to sit boldly within the 78vw
+  content area between the two 11vw margin columns, with ~3vw clearance
+  on each side so the A and L don't clip the border lines.
+  line-height: 0.8  →  visible height = 21.6vw per heading
   letter-spacing: -0.09em  →  tight, fashionable display spacing
 */
 .waka {
-  font-size: 38.9vw;
+  font-size: 23vw;
   line-height: 0.8;
   letter-spacing: -0.09em;
   font-weight: 700;
@@ -78,7 +79,7 @@ body {
   position: absolute;
   left: 0;
   right: 0;
-  top: 2vw;    /* matches original CSS, visually centers the two headings in the viewport */
+  top: 1vw;    /* matches original CSS, visually centers the two headings in the viewport */
   text-align: center;
   color: #1a1a1a;
 
@@ -104,9 +105,9 @@ body {
 */
 .grid__animation-wrapper {
   position: absolute;
-  /* top + bottom match the visible height of one WAKA heading */
-  top: calc(38.89vw * 0.8);
-  bottom: calc(38.89vw * 0.8);
+  /* top + bottom match the visible height of one ANVIL heading (27vw × 0.8 = 21.6vw) */
+  top: calc(23.5vw * 0.8);
+  bottom: calc(23vw * 0.8);
   left: 0;
   right: 0;
   overflow: hidden;
@@ -237,13 +238,18 @@ body {
   display: grid;
   grid-template-columns: 1fr auto 1fr;
   align-items: center;
-  padding: 1.25rem 2rem;
+  padding: 1.25rem 1rem 1.25rem 2.5rem;
   opacity: 0;
   transition: opacity .5s ease;
 }
 
 .site-nav.is-visible {
   opacity: 1;
+}
+
+.site-nav.is-visible .hero-issue {
+  opacity: 1;
+  transform: none;
 }
 
 .nav-links {
@@ -286,7 +292,9 @@ body {
 
 .nav-right {
   display: flex;
+  align-items: center;
   justify-content: flex-end;
+  gap: 0.75rem;
 }
 
 #clock {
@@ -336,6 +344,8 @@ body {
   border-left: 1px solid rgba(14, 13, 11, .2);
   justify-content: space-between;
   padding-top: 5rem; /* clear the nav */
+  padding-left: 2rem;
+  padding-right: 1rem;
 }
 
 /* Text content — hidden until animation completes */
@@ -737,7 +747,7 @@ footer {
 }
 
 @media (max-width: 600px) {
-  .site-nav          { padding: 1rem 1.2rem; }
+  .site-nav          { padding: 1rem 1rem; }
   .nav-links         { gap: 1rem; }
   .product-grid      { grid-template-columns: 1fr; }
   .section-header    { padding: 2rem 1.2rem 1rem; }
