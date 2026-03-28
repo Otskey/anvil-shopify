@@ -27,16 +27,23 @@
     </div>
   </nav>
 
+  <!-- ─── HERO BORDER LINES — purely the vertical lines, independent of hero-frame ── -->
+  <div class="hero-border-left"  id="hero-border-left"></div>
+  <div class="hero-border-right" id="hero-border-right"></div>
+
   <!-- ─── HERO FRAME — borders always visible over animation ─────
        The thin left + right column lines show from page load,
        framing the animation like a magazine layout.
        Text content (label, tagline, etc.) fades in post-animation.
   ──────────────────────────────────────────────────────────────── -->
+  <!-- ─── HERO SIDEBAR TEXT — scrolls with page, stops at marquee ── -->
+  <div class="hero-sidebar-text" id="hero-sidebar-text">
+    <span class="hero-label">Collection 2026</span>
+    <p class="hero-tagline">furniture and functional objects, wood and steel, designed and handcrafted in the UK.</p>
+  </div>
+
   <div class="hero-frame" id="hero-frame">
-    <div class="hero-frame-left">
-      <span class="hero-label">Collection 2026</span>
-      <p class="hero-tagline">furniture and functional objects, wood and steel, designed and handcrafted in the UK.</p>
-    </div>
+    <div class="hero-frame-left"></div>
     <div class="hero-frame-right">
       <div class="hero-scroll-hint">
         <div class="scroll-arrow"></div>
@@ -70,8 +77,26 @@
             </div>
           </a>
 
-          <a href="#" class="grid__item grid__item--side" aria-label="Compartment Chair">
-            <div class="grid__item-image">
+          <div class="grid__item grid__item--side">
+
+            <!-- Top panel: workshop image + CTA -->
+            <div class="grid__item-panel">
+              <div class="responsive-image" style="background-color: #8c837b;">
+                <img
+                  src="/public/images/anvilworkshop.png"
+                  alt="Anvil Workshop"
+                  loading="eager"
+                >
+              </div>
+              <div class="grid__cta-overlay">
+                <span class="grid__cta-label">Our Collection</span>
+                <h3 class="grid__cta-heading">Visit our shop to see our wares.</h3>
+                <a href="/shop" class="grid__cta-btn">Explore the collection →</a>
+              </div>
+            </div>
+
+            <!-- Bottom panel: chair image -->
+            <div class="grid__item-panel">
               <div class="responsive-image" style="background-color: #84745c;">
                 <img
                   src="https://cdn.sanity.io/images/8yrspuwy/production/85e2d3ee172dbc24aeaa4dc1de012065aa99b871-2437x3047.jpg?w=600&fit=max&auto=format&q=85"
@@ -80,7 +105,8 @@
                 >
               </div>
             </div>
-          </a>
+
+          </div>
 
         </div>
       </div>
@@ -163,19 +189,7 @@
 
     </div>
 
-    <!-- Type band -->
-    <div class="type-band" aria-hidden="true">
-      <div class="type-band-track">
-        <span class="type-band-item">Objects</span><span class="type-band-sep"> — </span>
-        <span class="type-band-item">Furniture</span><span class="type-band-sep"> — </span>
-        <span class="type-band-item">Studio</span><span class="type-band-sep"> — </span>
-        <span class="type-band-item">Collection</span><span class="type-band-sep"> — </span>
-        <span class="type-band-item">Objects</span><span class="type-band-sep"> — </span>
-        <span class="type-band-item">Furniture</span><span class="type-band-sep"> — </span>
-        <span class="type-band-item">Studio</span><span class="type-band-sep"> — </span>
-        <span class="type-band-item">Collection</span><span class="type-band-sep"> — </span>
-      </div>
-    </div>
+    
 
     <!-- Editorial -->
     <section class="editorial-strip">
@@ -217,8 +231,8 @@
         </ul>
       </div>
       <div class="footer-bottom">
-        <p>© 2024 Waka Waka — All rights reserved</p>
-        <p>Los Angeles, CA</p>
+        <p>© 2020 ANVIL — All rights reserved</p>
+        <p>Cambridgeshire, UK</p>
       </div>
     </footer>
 
@@ -248,14 +262,54 @@
     tick();
     setInterval(tick, 60000);
 
-    /* ── Hero frame: hide when user scrolls past the hero ── */
-    const heroFrame    = document.getElementById('hero-frame');
+    /* ── Hero frame + border lines on scroll ── */
+    const heroFrame     = document.getElementById('hero-frame');
+    const heroBorderL   = document.getElementById('hero-border-left');
+    const heroBorderR   = document.getElementById('hero-border-right');
     const scrollWrapper = document.querySelector('.scroll-wrapper');
     window.addEventListener('scroll', () => {
-      const below = scrollWrapper.getBoundingClientRect().bottom <= 0;
-      heroFrame.style.opacity      = below ? '0' : '';
+      const rect  = scrollWrapper.getBoundingClientRect();
+      const below = rect.bottom <= 0;
+      heroFrame.style.opacity       = below ? '0' : '';
       heroFrame.style.pointerEvents = below ? 'none' : '';
+      const lineH = Math.max(0, rect.bottom) + 'px';
+      heroBorderL.style.height = lineH;
+      heroBorderR.style.height = lineH;
     }, { passive: true });
+
+    /* ── Sidebar text: sits at bottom-left, pushed up by marquee, then fades ── */
+    const heroSidebar = document.getElementById('hero-sidebar-text');
+    const marqueeEl   = document.querySelector('.marquee-strip');
+    let sidebarActive = false;
+
+    function updateSidebar() {
+      if (!sidebarActive) return;
+      const sHeight  = heroSidebar.offsetHeight;
+      const mTop     = marqueeEl.getBoundingClientRect().top;
+      const baseline = window.innerHeight - sHeight - 48; /* resting position: bottom-left */
+      const top      = Math.min(baseline, mTop - sHeight - 8); /* push up when marquee approaches */
+      heroSidebar.style.top = top + 'px';
+      /* let CSS transition handle fade-in; only override when marquee passes */
+      heroSidebar.style.opacity = mTop <= 0 ? '0' : '';
+    }
+
+    window.addEventListener('scroll', updateSidebar, { passive: true });
+
+    new MutationObserver((_, obs) => {
+      if (heroFrame.classList.contains('is-revealed')) {
+        sidebarActive = true;
+        updateSidebar();                          /* set initial top before fade-in */
+        heroSidebar.classList.add('is-revealed'); /* trigger CSS opacity transition */
+        obs.disconnect();
+      }
+    }).observe(heroFrame, { attributes: true, attributeFilter: ['class'] });
+
+    document.querySelector('.replay-btn').addEventListener('click', () => {
+      sidebarActive = false;
+      heroSidebar.classList.remove('is-revealed');
+      heroSidebar.style.top     = '';
+      heroSidebar.style.opacity = '';
+    });
 
     /* ── Scroll reveal for below-fold content ── */
     const observer = new IntersectionObserver(entries => {
