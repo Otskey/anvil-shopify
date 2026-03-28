@@ -72,19 +72,12 @@
       onComplete: onAnimationComplete,
     });
 
-    // Phase 1 — top heading fades in
-    tl.to(wakaTop, {
+    // Phase 1 — both headings fade in together
+    tl.to([wakaTop, wakaBottom], {
       opacity: 1,
       duration: 0.55,
       ease: 'power2.out',
     });
-
-    // Phase 2 — bottom heading fades in (overlaps slightly with phase 1)
-    tl.to(wakaBottom, {
-      opacity: 1,
-      duration: 0.55,
-      ease: 'power2.out',
-    }, '-=0.25');
 
     // Phase 3 — magazine cover unfurls between the headings
     tl.to(gridWrapper, {
