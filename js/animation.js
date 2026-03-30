@@ -1,5 +1,5 @@
 /**
- * Waka Waka — Homepage intro animation
+ * ANVIL — Homepage intro animation
  *
  * Sequence:
  *  1. Measure the container's natural height and calculate the scale that

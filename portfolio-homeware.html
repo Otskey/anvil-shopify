@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Homeware — ANVIL</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,700&family=Space+Mono:wght@400;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+
+  <!-- ─── CUSTOM CURSOR ──────────────────────────────────────────── -->
+  <div class="cursor" id="cursor"></div>
+
+  <!-- ─── NAV ─────────────────────────────────────────────────────── -->
+  <nav class="site-nav" id="site-nav">
+    <ul class="nav-links">
+      <li><a href="portfolio-homeware.html">Homeware</a></li>
+      <li><a href="portfolio-objects.html">Objects</a></li>
+    </ul>
+    <a href="index.html" class="nav-logo">ANVIL</a>
+    <div class="nav-right">
+      <p class="hero-issue">Issue No. 001 |</p>
+      <span id="clock"></span>
+    </div>
+  </nav>
+
+  <!-- ─── PORTFOLIO PAGE ───────────────────────────────────────────── -->
+  <main class="portfolio-page">
+
+    <!-- Header -->
+    <header class="portfolio-header reveal">
+      <p class="portfolio-breadcrumb">
+        <a href="index.html">Portfolio</a> / Homeware
+      </p>
+      <div class="portfolio-header-inner">
+        <h1 class="portfolio-title">Homeware</h1>
+        <div class="portfolio-meta">
+          <span class="portfolio-meta-count">12 Works</span>
+          <p class="portfolio-meta-desc">Steel homeware designed for everyday life — shelving, tables, storage and light, all made by hand in the UK.</p>
+        </div>
+      </div>
+    </header>
+
+    <!-- Filter bar -->
+    <div class="portfolio-filter">
+      <button class="filter-tag active" data-filter="all">All</button>
+      <button class="filter-tag" data-filter="shelving">Shelving</button>
+      <button class="filter-tag" data-filter="tables">Tables</button>
+      <button class="filter-tag" data-filter="lighting">Lighting</button>
+      <button class="filter-tag" data-filter="storage">Storage</button>
+      <button class="filter-tag" data-filter="hooks">Hooks &amp; Rails</button>
+    </div>
+
+    <!-- Featured hero -->
+    <div class="portfolio-hero reveal">
+      <div class="img-placeholder" style="background-color: #8c837b;"></div>
+      <div class="portfolio-hero__overlay">
+        <span class="portfolio-hero__number">001 — Featured</span>
+        <h2 class="portfolio-hero__title">Floating Wall Shelving System</h2>
+        <div class="portfolio-hero__tags">
+          <span>Steel</span>
+          <span>Powder Coat</span>
+          <span>2025</span>
+          <span>Bespoke</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Grid -->
+    <div class="portfolio-grid">
+
+      <!-- Row 1: wide left + narrow right -->
+      <div class="portfolio-grid-row portfolio-grid-row--wide-left">
+
+        <div class="portfolio-card portfolio-card--landscape" data-category="shelving">
+          <div class="img-placeholder" style="background-color: #84745c;"></div>
+          <div class="portfolio-card__overlay">
+            <span class="portfolio-card__number">002</span>
+            <h3 class="portfolio-card__name">Industrial Pipe Shelving</h3>
+            <div class="portfolio-card__meta">
+              <span>Steel Pipe</span>
+              <span>2024</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="portfolio-card portfolio-card--portrait" data-category="tables">
+          <div class="img-placeholder" style="background-color: #6e6058;"></div>
+          <div class="portfolio-card__overlay">
+            <span class="portfolio-card__number">003</span>
+            <h3 class="portfolio-card__name">Hairpin Side Table</h3>
+            <div class="portfolio-card__meta">
+              <span>Steel &amp; Oak</span>
+              <span>2025</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Row 2: three equal -->
+      <div class="portfolio-grid-row portfolio-grid-row--three">
+
+        <div class="portfolio-card portfolio-card--portrait" data-category="hooks">
+          <div class="img-placeholder" style="background-color: #9a8e85;"></div>
+          <div class="portfolio-card__overlay">
+            <span class="portfolio-card__number">004</span>
+            <h3 class="portfolio-card__name">Kitchen Hook Rail</h3>
+            <div class="portfolio-card__meta">
+              <span>Mild Steel</span>
+              <span>2024</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="portfolio-card portfolio-card--portrait" data-category="lighting">
+          <div class="img-placeholder" style="background-color: #7a6e64;"></div>
+          <div class="portfolio-card__overlay">
+            <span class="portfolio-card__number">005</span>
+            <h3 class="portfolio-card__name">Forged Wall Sconce</h3>
+            <div class="portfolio-card__meta">
+              <span>Blackened Steel</span>
+              <span>2025</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="portfolio-card portfolio-card--portrait" data-category="storage">
+          <div class="img-placeholder" style="background-color: #8c837b;"></div>
+          <div class="portfolio-card__overlay">
+            <span class="portfolio-card__number">006</span>
+            <h3 class="portfolio-card__name">Magazine Rack</h3>
+            <div class="portfolio-card__meta">
+              <span>Flat Bar Steel</span>
+              <span>2024</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Row 3: narrow left + wide right -->
+      <div class="portfolio-grid-row portfolio-grid-row--wide-right">
+
+        <div class="portfolio-card portfolio-card--portrait" data-category="storage">
+          <div class="img-placeholder" style="background-color: #6e6058;"></div>
+          <div class="portfolio-card__overlay">
+            <span class="portfolio-card__number">007</span>
+            <h3 class="portfolio-card__name">Wine Rack</h3>
+            <div class="portfolio-card__meta">
+              <span>Round Bar</span>
+              <span>2025</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="portfolio-card portfolio-card--landscape" data-category="shelving">
+          <div class="img-placeholder" style="background-color: #84745c;"></div>
+          <div class="portfolio-card__overlay">
+            <span class="portfolio-card__number">008</span>
+            <h3 class="portfolio-card__name">Corner Bracket Shelving</h3>
+            <div class="portfolio-card__meta">
+              <span>Angle Iron</span>
+              <span>2024</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Row 4: two equal -->
+      <div class="portfolio-grid-row portfolio-grid-row--two">
+
+        <div class="portfolio-card portfolio-card--landscape" data-category="lighting">
+          <div class="img-placeholder" style="background-color: #9a8e85;"></div>
+          <div class="portfolio-card__overlay">
+            <span class="portfolio-card__number">009</span>
+            <h3 class="portfolio-card__name">Pendant Ceiling Light</h3>
+            <div class="portfolio-card__meta">
+              <span>Spun Steel</span>
+              <span>2025</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="portfolio-card portfolio-card--landscape" data-category="hooks">
+          <div class="img-placeholder" style="background-color: #7a6e64;"></div>
+          <div class="portfolio-card__overlay">
+            <span class="portfolio-card__number">010</span>
+            <h3 class="portfolio-card__name">Towel Rail</h3>
+            <div class="portfolio-card__meta">
+              <span>Brushed Steel</span>
+              <span>2024</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Row 5: three equal -->
+      <div class="portfolio-grid-row portfolio-grid-row--three">
+
+        <div class="portfolio-card portfolio-card--portrait" data-category="storage">
+          <div class="img-placeholder" style="background-color: #8c837b;"></div>
+          <div class="portfolio-card__overlay">
+            <span class="portfolio-card__number">011</span>
+            <h3 class="portfolio-card__name">Blanket Ladder</h3>
+            <div class="portfolio-card__meta">
+              <span>Round Bar</span>
+              <span>2025</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="portfolio-card portfolio-card--portrait" data-category="hooks">
+          <div class="img-placeholder" style="background-color: #6e6058;"></div>
+          <div class="portfolio-card__overlay">
+            <span class="portfolio-card__number">012</span>
+            <h3 class="portfolio-card__name">Coat Stand</h3>
+            <div class="portfolio-card__meta">
+              <span>Box Section</span>
+              <span>2024</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="portfolio-card portfolio-card--portrait" data-category="tables">
+          <div class="img-placeholder" style="background-color: #84745c;"></div>
+          <div class="portfolio-card__overlay">
+            <span class="portfolio-card__number">013</span>
+            <h3 class="portfolio-card__name">Plant Stand</h3>
+            <div class="portfolio-card__meta">
+              <span>Steel &amp; Weld</span>
+              <span>2025</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- Marquee strip -->
+    <div class="marquee-strip" aria-hidden="true">
+      <div class="marquee-track">
+        <span class="marquee-item">Handcrafted in the UK</span>
+        <span class="marquee-item">Steel Homeware</span>
+        <span class="marquee-item">Made to Order</span>
+        <span class="marquee-item">Designed for Life</span>
+        <span class="marquee-item">Handcrafted in the UK</span>
+        <span class="marquee-item">Steel Homeware</span>
+        <span class="marquee-item">Made to Order</span>
+        <span class="marquee-item">Designed for Life</span>
+        <span class="marquee-item">Handcrafted in the UK</span>
+        <span class="marquee-item">Steel Homeware</span>
+        <span class="marquee-item">Made to Order</span>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="portfolio-footer">
+      <a href="index.html" class="portfolio-footer-logo">ANVIL</a>
+      <ul class="portfolio-footer-nav">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="portfolio-homeware.html">Homeware</a></li>
+        <li><a href="portfolio-objects.html">Objects</a></li>
+      </ul>
+      <button class="portfolio-back-top" onclick="window.scrollTo({top:0,behavior:'smooth'})">Back to top ↑</button>
+    </footer>
+
+  </main>
+
+  <script src="js/portfolio.js"></script>
+</body>
+</html>
