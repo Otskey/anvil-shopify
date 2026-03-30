@@ -9,15 +9,9 @@
 function anvilHeroInit() {
   'use strict';
 
-  /* ─── Find Fluid theme header ─────────────────────────── */
-  var themeHeader = document.getElementById('header-component') ||
-                    document.querySelector('[id^="shopify-section-header"]') ||
-                    document.querySelector('header.site-header');
-
   /* ─── GSAP guard ──────────────────────────────────────── */
   if (typeof gsap === 'undefined') {
     console.warn('[ANVIL] GSAP not loaded — animation skipped. Upload gsap.min.js to Shopify assets.');
-    /* Fluid header stays visible; ANVIL nav stays hidden. No interference. */
     return;
   }
 
@@ -39,14 +33,6 @@ function anvilHeroInit() {
     console.warn('[ANVIL] Hero elements not found — skipping.');
     return;
   }
-
-  /* ─── Hide Fluid header during hero ──────────────────── */
-  if (themeHeader) {
-    themeHeader.style.display = 'none';
-    themeHeader.dataset.anvilHidden = 'true';
-  }
-
-  document.body.classList.add('anvil-hero-active');
 
   /* ─── Scale calculation ───────────────────────────────── */
   function getInitialScale() {
@@ -101,25 +87,11 @@ function anvilHeroInit() {
 
   if (replayBtn) replayBtn.addEventListener('click', replay);
 
-  /* ─── Scroll: restore Fluid header when past hero ─────── */
+  /* ─── Scroll ──────────────────────────────────────────── */
   window.addEventListener('scroll', function () {
     if (!scrollWrapper) return;
     var rect  = scrollWrapper.getBoundingClientRect();
     var below = rect.bottom <= 0;
-
-    if (below) {
-      nav.style.opacity       = '0';
-      nav.style.pointerEvents = 'none';
-      if (themeHeader && themeHeader.dataset.anvilHidden) {
-        themeHeader.style.display = '';
-        delete themeHeader.dataset.anvilHidden;
-      }
-    } else {
-      if (nav.classList.contains('is-visible')) {
-        nav.style.opacity       = '';
-        nav.style.pointerEvents = '';
-      }
-    }
 
     heroFrame.style.opacity       = below ? '0' : '';
     heroFrame.style.pointerEvents = below ? 'none' : '';

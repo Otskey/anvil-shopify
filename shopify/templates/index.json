@@ -1,13 +1,26 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */{
+{
   "sections": {
+    "anvil_hero_NyHh9i": {
+      "type": "anvil-hero",
+      "settings": {
+        "brand_name": "ANVIL",
+        "nav_link_1_label": "Home",
+        "nav_link_1_url": "/",
+        "nav_link_2_label": "Catalogue",
+        "nav_link_2_url": "/collections/all",
+        "collection_label": "Collection 2026",
+        "tagline": "Homeware and functional objects, wood and steel, designed and handcrafted in the UK.",
+        "featured_alt": "Featured product",
+        "featured_bg": "#8c837b",
+        "featured_link": "/collections/all",
+        "panel_bg": "#8c837b",
+        "cta_label": "Our Collection",
+        "cta_heading": "Visit our shop to see our wares.",
+        "cta_button": "Explore the collection \u2192",
+        "cta_link": "/collections/all",
+        "marquee_text": "Handcrafted Homeware,Functional Objects,Made by Hand,Limited Edition"
+      }
+    },
     "hero_jVaWmY": {
       "type": "hero",
       "blocks": {
@@ -284,6 +297,7 @@
     }
   },
   "order": [
+    "anvil_hero_NyHh9i",
     "hero_jVaWmY",
     "product_list_fa6P9H"
   ]

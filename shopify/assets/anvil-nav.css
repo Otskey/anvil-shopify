@@ -15,6 +15,16 @@
   --font-body:    'Libre Baskerville', Georgia, serif;
 }
 
+/* ─── Hide Fluid theme header globally ───────────────────── */
+header-component {
+  display: none !important;
+}
+
+/* ─── Hide global ANVIL nav on homepage (hero has its own) ── */
+body.anvil-hero-active .anvil-global-nav {
+  display: none !important;
+}
+
 /* ─── Header wrapper ─────────────────────────────────────── */
 .header-wrapper,
 .header {

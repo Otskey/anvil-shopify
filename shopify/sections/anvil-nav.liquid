@@ -1,0 +1,70 @@
+{{ 'anvil-hero.css' | asset_url | stylesheet_tag }}
+
+<nav class="anvil-nav is-visible" aria-label="Main navigation">
+  <ul class="anvil-nav__links">
+    {% if section.settings.nav_link_1_label != blank %}
+      <li><a href="{{ section.settings.nav_link_1_url }}">{{ section.settings.nav_link_1_label }}</a></li>
+    {% endif %}
+    {% if section.settings.nav_link_2_label != blank %}
+      <li><a href="{{ section.settings.nav_link_2_url }}">{{ section.settings.nav_link_2_label }}</a></li>
+    {% endif %}
+  </ul>
+
+  <a href="{{ routes.root_url }}" class="anvil-nav__logo">
+    {{ section.settings.brand_name | default: 'ANVIL' }}
+  </a>
+
+  <div class="anvil-nav__right">
+    <a href="/search" class="anvil-nav__action">Search</a>
+    <a href="{{ routes.account_url }}" class="anvil-nav__action">Account</a>
+    <a href="{{ routes.cart_url }}" class="anvil-nav__action">
+      Cart
+      {%- if cart.item_count > 0 -%}
+        <span class="anvil-nav__cart-count">{{ cart.item_count }}</span>
+      {%- endif -%}
+    </a>
+  </div>
+</nav>
+
+{% schema %}
+{
+  "name": "ANVIL Nav",
+  "tag": "div",
+  "class": "anvil-global-nav",
+  "settings": [
+    {
+      "type": "text",
+      "id": "brand_name",
+      "label": "Brand name",
+      "default": "ANVIL"
+    },
+    {
+      "type": "text",
+      "id": "nav_link_1_label",
+      "label": "Nav link 1 label",
+      "default": "Home"
+    },
+    {
+      "type": "url",
+      "id": "nav_link_1_url",
+      "label": "Nav link 1 URL"
+    },
+    {
+      "type": "text",
+      "id": "nav_link_2_label",
+      "label": "Nav link 2 label",
+      "default": "Catalogue"
+    },
+    {
+      "type": "url",
+      "id": "nav_link_2_url",
+      "label": "Nav link 2 URL"
+    }
+  ],
+  "presets": [
+    {
+      "name": "ANVIL Nav"
+    }
+  ]
+}
+{% endschema %}

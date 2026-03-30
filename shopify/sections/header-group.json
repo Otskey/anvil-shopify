@@ -2,25 +2,14 @@
   "type": "header",
   "name": "Header",
   "sections": {
-    "anvil_hero_NyHh9i": {
-      "type": "anvil-hero",
+    "anvil_nav_global": {
+      "type": "anvil-nav",
       "settings": {
         "brand_name": "ANVIL",
         "nav_link_1_label": "Home",
         "nav_link_1_url": "/",
         "nav_link_2_label": "Catalogue",
-        "nav_link_2_url": "/collections/all",
-        "collection_label": "Collection 2026",
-        "tagline": "Homeware and functional objects, wood and steel, designed and handcrafted in the UK.",
-        "featured_alt": "Featured product",
-        "featured_bg": "#8c837b",
-        "featured_link": "/collections/all",
-        "panel_bg": "#8c837b",
-        "cta_label": "Our Collection",
-        "cta_heading": "Visit our shop to see our wares.",
-        "cta_button": "Explore the collection \u2192",
-        "cta_link": "/collections/all",
-        "marquee_text": "Handcrafted Homeware,Functional Objects,Made by Hand,Limited Edition"
+        "nav_link_2_url": "/collections/all"
       }
     },
     "header_announcements_9jGBFp": {
@@ -124,7 +113,7 @@
     }
   },
   "order": [
-    "anvil_hero_NyHh9i",
+    "anvil_nav_global",
     "header_announcements_9jGBFp",
     "header_section"
   ]
