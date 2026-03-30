@@ -1,0 +1,370 @@
+{% comment %}
+  ANVIL — Magazine Hero Section
+  File: sections/anvil-hero.liquid
+
+  HOW TO INSTALL:
+  1. Shopify Admin → Online Store → Themes → Edit Code
+  2. Sections → Add new file → name it: anvil-hero.liquid
+  3. Paste this entire file
+  4. Go to your home page template (templates/index.json) and add
+     "anvil-hero" as a section via the theme Customize editor,
+     or drag it to the top of the homepage sections list.
+  5. Upload anvil-hero.css and anvil-hero.js to Assets.
+  6. In theme.liquid, before </head> add:
+       {{ 'anvil-hero.css' | asset_url | stylesheet_tag }}
+     Before </body> add:
+       <script src="{{ 'anvil-hero.js' | asset_url }}" defer></script>
+{% endcomment %}
+
+{{ 'anvil-hero.css' | asset_url | stylesheet_tag }}
+
+<!-- ─── CUSTOM CURSOR ─────────────────────────────────────── -->
+<div class="anvil-cursor" id="anvil-cursor"></div>
+
+<!-- ─── NAV ──────────────────────────────────────────────── -->
+<nav class="anvil-nav" id="anvil-nav">
+  <ul class="anvil-nav__links">
+    {% if section.settings.nav_link_1_label != blank %}
+      <li><a href="{{ section.settings.nav_link_1_url }}">{{ section.settings.nav_link_1_label }}</a></li>
+    {% endif %}
+    {% if section.settings.nav_link_2_label != blank %}
+      <li><a href="{{ section.settings.nav_link_2_url }}">{{ section.settings.nav_link_2_label }}</a></li>
+    {% endif %}
+    {% if section.settings.nav_link_3_label != blank %}
+      <li><a href="{{ section.settings.nav_link_3_url }}">{{ section.settings.nav_link_3_label }}</a></li>
+    {% endif %}
+  </ul>
+
+  <a href="{{ routes.root_url }}" class="anvil-nav__logo">
+    {{ section.settings.brand_name | default: 'ANVIL' }}
+  </a>
+
+  <div class="anvil-nav__right">
+    <p class="anvil-nav__issue">{{ section.settings.issue_label | default: 'Issue No. 001' }} |</p>
+    <span id="anvil-clock"></span>
+    <a href="{{ routes.cart_url }}" class="anvil-nav__cart">
+      Cart
+      {%- if cart.item_count > 0 -%}
+        <span class="anvil-nav__cart-count">{{ cart.item_count }}</span>
+      {%- endif -%}
+    </a>
+  </div>
+</nav>
+
+<!-- ─── HERO BORDER LINES ─────────────────────────────────── -->
+<div class="anvil-border-left"  id="anvil-border-left"></div>
+<div class="anvil-border-right" id="anvil-border-right"></div>
+
+<!-- ─── HERO SIDEBAR TEXT ────────────────────────────────── -->
+<div class="anvil-sidebar-text" id="anvil-sidebar-text">
+  <span class="anvil-sidebar__label">{{ section.settings.collection_label | default: 'Collection 2026' }}</span>
+  <p class="anvil-sidebar__tagline">{{ section.settings.tagline | default: 'Homeware and functional objects, wood and steel, designed and handcrafted in the UK.' }}</p>
+</div>
+
+<!-- ─── HERO FRAME ────────────────────────────────────────── -->
+<div class="anvil-hero-frame" id="anvil-hero-frame">
+  <div class="anvil-hero-frame__left"></div>
+  <div class="anvil-hero-frame__right">
+    <div class="anvil-scroll-hint">
+      <div class="anvil-scroll-arrow"></div>
+      <span>Scroll</span>
+    </div>
+  </div>
+</div>
+
+<!-- ─── ANIMATION WRAPPER ─────────────────────────────────── -->
+<div class="anvil-scroll-wrapper" id="anvil-scroll-wrapper">
+  <div class="anvil-container" id="anvil-container">
+
+    <h2 class="anvil-waka">{{ section.settings.brand_name | default: 'ANVIL' }}</h2>
+
+    <div class="anvil-grid__animation-wrapper">
+      <div class="anvil-grid">
+
+        <!-- Featured image (left, large) -->
+        <a href="{{ section.settings.featured_link | default: routes.collections_url }}"
+           class="anvil-grid__item anvil-grid__item--featured"
+           aria-label="{{ section.settings.featured_alt | default: 'Featured product' }}">
+          <div class="anvil-grid__item-image">
+            <div class="anvil-responsive-image" style="background-color: {{ section.settings.featured_bg | default: '#8c837b' }};">
+              {%- if section.settings.featured_image -%}
+                <img
+                  src="{{ section.settings.featured_image | image_url: width: 1600 }}"
+                  srcset="
+                    {{ section.settings.featured_image | image_url: width: 800 }} 800w,
+                    {{ section.settings.featured_image | image_url: width: 1200 }} 1200w,
+                    {{ section.settings.featured_image | image_url: width: 1600 }} 1600w"
+                  alt="{{ section.settings.featured_image.alt | default: section.settings.featured_alt }}"
+                  loading="eager"
+                  width="{{ section.settings.featured_image.width }}"
+                  height="{{ section.settings.featured_image.height }}"
+                >
+              {%- else -%}
+                <div class="anvil-img-placeholder" style="background: #8c837b;"></div>
+              {%- endif -%}
+            </div>
+          </div>
+        </a>
+
+        <!-- Side column (right, stacked) -->
+        <div class="anvil-grid__item anvil-grid__item--side">
+
+          <!-- Top panel: CTA / workshop image -->
+          <div class="anvil-grid__item-panel">
+            <div class="anvil-responsive-image" style="background-color: {{ section.settings.panel_top_bg | default: '#8c837b' }};">
+              {%- if section.settings.panel_top_image -%}
+                <img
+                  src="{{ section.settings.panel_top_image | image_url: width: 800 }}"
+                  alt="{{ section.settings.panel_top_image.alt | default: 'Workshop' }}"
+                  loading="eager"
+                  width="{{ section.settings.panel_top_image.width }}"
+                  height="{{ section.settings.panel_top_image.height }}"
+                >
+              {%- else -%}
+                <div class="anvil-img-placeholder" style="background: #7a7268;"></div>
+              {%- endif -%}
+            </div>
+            <div class="anvil-grid__cta-overlay">
+              <span class="anvil-grid__cta-label">{{ section.settings.cta_label | default: 'Our Collection' }}</span>
+              <h3 class="anvil-grid__cta-heading">{{ section.settings.cta_heading | default: 'Visit our shop to see our wares.' }}</h3>
+              <a href="{{ section.settings.cta_link | default: routes.collections_url }}" class="anvil-grid__cta-btn">
+                {{ section.settings.cta_button | default: 'Explore the collection →' }}
+              </a>
+            </div>
+          </div>
+
+          <!-- Bottom panel: second product image -->
+          <div class="anvil-grid__item-panel">
+            <div class="anvil-responsive-image" style="background-color: {{ section.settings.panel_bottom_bg | default: '#84745c' }};">
+              {%- if section.settings.panel_bottom_image -%}
+                <img
+                  src="{{ section.settings.panel_bottom_image | image_url: width: 800 }}"
+                  alt="{{ section.settings.panel_bottom_image.alt | default: 'Product detail' }}"
+                  loading="eager"
+                  width="{{ section.settings.panel_bottom_image.width }}"
+                  height="{{ section.settings.panel_bottom_image.height }}"
+                >
+              {%- else -%}
+                <div class="anvil-img-placeholder" style="background: #84745c;"></div>
+              {%- endif -%}
+            </div>
+          </div>
+
+        </div><!-- /.anvil-grid__item--side -->
+      </div><!-- /.anvil-grid -->
+    </div><!-- /.anvil-grid__animation-wrapper -->
+
+    <h2 class="anvil-waka anvil-waka--bottom">{{ section.settings.brand_name | default: 'ANVIL' }}</h2>
+
+  </div><!-- /.anvil-container -->
+</div><!-- /.anvil-scroll-wrapper -->
+
+<button class="anvil-replay-btn" id="anvil-replay-btn" aria-label="Replay animation">&#8635; Replay</button>
+
+<!-- ─── MARQUEE (appears at top of page content below hero) ── -->
+<div class="anvil-marquee-strip" aria-hidden="true" id="anvil-marquee">
+  <div class="anvil-marquee-track">
+    {%- assign marquee_items = section.settings.marquee_text | split: ',' -%}
+    {%- if marquee_items.size < 2 -%}
+      {%- assign marquee_items = 'Handcrafted Homeware,Functional Objects,Made by Hand,Limited Edition' | split: ',' -%}
+    {%- endif -%}
+    {%- comment -%}Duplicate for seamless loop{%- endcomment -%}
+    {%- for item in marquee_items -%}
+      <span class="anvil-marquee-item">{{ item | strip }}</span>
+    {%- endfor -%}
+    {%- for item in marquee_items -%}
+      <span class="anvil-marquee-item">{{ item | strip }}</span>
+    {%- endfor -%}
+  </div>
+</div>
+
+<script src="{{ 'gsap.min.js' | asset_url }}" onload="anvilHeroInit()"></script>
+<script>
+  /* Pass Liquid settings to JS safely */
+  window.anvilHeroSettings = {
+    brandName: {{ section.settings.brand_name | default: 'ANVIL' | json }},
+  };
+
+  /* Fallback: if GSAP loads from CDN instead */
+  if (typeof anvilHeroInit === 'undefined') {
+    var _gsapScript = document.createElement('script');
+    _gsapScript.src = 'https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js';
+    _gsapScript.onload = function () {
+      if (typeof anvilHeroInit === 'function') anvilHeroInit();
+    };
+    document.head.appendChild(_gsapScript);
+  }
+</script>
+
+{% schema %}
+{
+  "name": "ANVIL Hero",
+  "tag": "div",
+  "class": "anvil-hero-section",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Brand"
+    },
+    {
+      "type": "text",
+      "id": "brand_name",
+      "label": "Brand name",
+      "default": "ANVIL"
+    },
+    {
+      "type": "text",
+      "id": "issue_label",
+      "label": "Issue label",
+      "default": "Issue No. 001"
+    },
+    {
+      "type": "header",
+      "content": "Navigation"
+    },
+    {
+      "type": "text",
+      "id": "nav_link_1_label",
+      "label": "Nav link 1 label",
+      "default": "Store"
+    },
+    {
+      "type": "url",
+      "id": "nav_link_1_url",
+      "label": "Nav link 1 URL"
+    },
+    {
+      "type": "text",
+      "id": "nav_link_2_label",
+      "label": "Nav link 2 label",
+      "default": "Homeware"
+    },
+    {
+      "type": "url",
+      "id": "nav_link_2_url",
+      "label": "Nav link 2 URL"
+    },
+    {
+      "type": "text",
+      "id": "nav_link_3_label",
+      "label": "Nav link 3 label",
+      "default": "Objects"
+    },
+    {
+      "type": "url",
+      "id": "nav_link_3_url",
+      "label": "Nav link 3 URL"
+    },
+    {
+      "type": "header",
+      "content": "Hero sidebar"
+    },
+    {
+      "type": "text",
+      "id": "collection_label",
+      "label": "Collection label",
+      "default": "Collection 2026"
+    },
+    {
+      "type": "textarea",
+      "id": "tagline",
+      "label": "Tagline",
+      "default": "Homeware and functional objects, wood and steel, designed and handcrafted in the UK."
+    },
+    {
+      "type": "header",
+      "content": "Featured image (left panel)"
+    },
+    {
+      "type": "image_picker",
+      "id": "featured_image",
+      "label": "Featured image"
+    },
+    {
+      "type": "text",
+      "id": "featured_alt",
+      "label": "Featured image alt text",
+      "default": "Featured product"
+    },
+    {
+      "type": "color",
+      "id": "featured_bg",
+      "label": "Featured image placeholder colour",
+      "default": "#8c837b"
+    },
+    {
+      "type": "url",
+      "id": "featured_link",
+      "label": "Featured image link"
+    },
+    {
+      "type": "header",
+      "content": "Right column — top panel (CTA)"
+    },
+    {
+      "type": "image_picker",
+      "id": "panel_top_image",
+      "label": "Top panel image"
+    },
+    {
+      "type": "color",
+      "id": "panel_top_bg",
+      "label": "Top panel placeholder colour",
+      "default": "#8c837b"
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "CTA eyebrow label",
+      "default": "Our Collection"
+    },
+    {
+      "type": "text",
+      "id": "cta_heading",
+      "label": "CTA heading",
+      "default": "Visit our shop to see our wares."
+    },
+    {
+      "type": "text",
+      "id": "cta_button",
+      "label": "CTA button text",
+      "default": "Explore the collection →"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "CTA button link"
+    },
+    {
+      "type": "header",
+      "content": "Right column — bottom panel"
+    },
+    {
+      "type": "image_picker",
+      "id": "panel_bottom_image",
+      "label": "Bottom panel image"
+    },
+    {
+      "type": "color",
+      "id": "panel_bottom_bg",
+      "label": "Bottom panel placeholder colour",
+      "default": "#84745c"
+    },
+    {
+      "type": "header",
+      "content": "Marquee strip"
+    },
+    {
+      "type": "text",
+      "id": "marquee_text",
+      "label": "Marquee items (comma-separated)",
+      "default": "Handcrafted Homeware,Functional Objects,Made by Hand,Limited Edition"
+    }
+  ],
+  "presets": [
+    {
+      "name": "ANVIL Hero"
+    }
+  ]
+}
+{% endschema %}
