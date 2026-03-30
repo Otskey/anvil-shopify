@@ -1,0 +1,145 @@
+<style>
+/* ── ANVIL Footer — exact copy of css/styles.css footer rules ── */
+.anvil-footer {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  border-top: 1px solid rgba(14,13,11,.12);
+  padding: 4rem 2.5rem 3rem;
+  background: #edeae4;
+  font-family: 'Libre Baskerville', Georgia, serif;
+  color: #0e0d0b;
+}
+
+.anvil-footer__brand {
+  padding-right: 4rem;
+}
+
+.anvil-footer__logo {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-weight: 700;
+  font-style: italic;
+  font-size: 2rem;
+  line-height: 1;
+  margin-bottom: 1.5rem;
+  color: #0e0d0b;
+  text-decoration: none;
+  display: block;
+}
+
+.anvil-footer__desc {
+  font-size: .85rem;
+  line-height: 1.8;
+  color: #7a7268;
+  max-width: 300px;
+}
+
+.anvil-footer__col h4 {
+  font-family: 'Space Mono', monospace;
+  font-size: .55rem;
+  letter-spacing: .3em;
+  text-transform: uppercase;
+  color: #7a7268;
+  margin-bottom: 1.5rem;
+}
+
+.anvil-footer__col ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.anvil-footer__col ul li {
+  margin-bottom: .75rem;
+}
+
+.anvil-footer__col ul a {
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-size: .85rem;
+  color: #0e0d0b;
+  text-decoration: none;
+  transition: color .2s ease;
+}
+
+.anvil-footer__col ul a:hover {
+  color: #7a7268;
+}
+
+.anvil-footer__bottom {
+  border-top: 1px solid rgba(14,13,11,.08);
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  grid-column: 1 / -1;
+}
+
+.anvil-footer__bottom p {
+  font-family: 'Space Mono', monospace;
+  font-size: .55rem;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  color: #7a7268;
+  margin: 0;
+}
+
+@media (max-width: 900px) {
+  .anvil-footer {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+  .anvil-footer__brand {
+    padding-right: 0;
+  }
+}
+
+@media (max-width: 600px) {
+  .anvil-footer {
+    padding: 2.5rem 1.2rem 2rem;
+  }
+}
+</style>
+
+<footer class="anvil-footer">
+
+  <div class="anvil-footer__brand">
+    <a href="{{ routes.root_url }}" class="anvil-footer__logo">ANVIL</a>
+    <p class="anvil-footer__desc">A Cambridgeshire operated steel fabrication workshop focusing on handcrafted homeware and functional objects. Designed and built by hand using steel and wood sourced in the UK.</p>
+  </div>
+
+  <div class="anvil-footer__col">
+    <h4>Navigate</h4>
+    <ul>
+      <li><a href="#">Homeware</a></li>
+      <li><a href="#">Objects</a></li>
+      <li><a href="#">Workshop</a></li>
+    </ul>
+  </div>
+
+  <div class="anvil-footer__col">
+    <h4>Contact</h4>
+    <ul>
+      <li><a href="#">Instagram</a></li>
+      <li><a href="#">Contact</a></li>
+      <li><a href="#">Stockists</a></li>
+    </ul>
+  </div>
+
+  <div class="anvil-footer__bottom">
+    <p>© 2020 ANVIL — All rights reserved</p>
+    <p>Cambridgeshire, UK</p>
+  </div>
+
+</footer>
+
+{% schema %}
+{
+  "name": "ANVIL Footer",
+  "tag": "div",
+  "settings": [],
+  "presets": [
+    {
+      "name": "ANVIL Footer"
+    }
+  ]
+}
+{% endschema %}

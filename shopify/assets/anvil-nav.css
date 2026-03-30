@@ -16,8 +16,17 @@
 }
 
 /* ─── Hide Fluid theme header globally ───────────────────── */
+/* Visibility only — keeps element in DOM so Fluid JS still runs */
 header-component {
-  display: none !important;
+  visibility: hidden !important;
+  height: 0 !important;
+  overflow: hidden !important;
+  position: absolute !important;
+}
+
+/* ─── Offset page content to clear ANVIL fixed nav ──────── */
+body:not(.anvil-hero-active) #MainContent {
+  padding-top: 4rem !important;
 }
 
 /* ─── Hide global ANVIL nav on homepage (hero has its own) ── */
