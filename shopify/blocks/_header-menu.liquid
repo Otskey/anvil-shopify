@@ -159,7 +159,7 @@
         <nav
           class="menu-list"
           aria-label="{{ 'accessibility.header_navigation_label' | t }}"
-          style="{% render 'menu-font-styles', settings: block_settings %}"
+          style="{% render 'menu-font-styles', settings: block_settings, menu_type: 'mega_menu' %}"
         >
           {% assign class = 'overflow-menu' | append: color_scheme_classes %}
           {% render 'overflow-list',
@@ -286,6 +286,20 @@
     cursor: pointer;
     height: 100%;
     margin-block: 0;
+
+    &::after {
+      content: '';
+      position: absolute;
+      display: none;
+      top: var(--header-padding);
+      height: var(--box-height);
+      left: 0;
+      right: 0;
+    }
+
+    &[data-safety-box='true']::after {
+      display: block;
+    }
 
     &:hover,
     &:focus {

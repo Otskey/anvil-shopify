@@ -1,19 +1,7 @@
 /* ============================================================
    ANVIL — Nav styles
-   File: assets/anvil-nav.css
-
-   This file ONLY reskins Fluid's existing header.
-   It does not replace any Shopify functionality.
+   Reskins Fluid's existing header to match the main site.
    All selectors target Fluid's real header classes.
-
-   HOW TO INSTALL:
-   1. Upload this file to Assets
-   2. In Layout → theme.liquid, paste just before </head>:
-
-      <link rel="preconnect" href="https://fonts.googleapis.com">
-      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-      <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,700&family=Space+Mono:wght@400;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-      {{ 'anvil-nav.css' | asset_url | stylesheet_tag }}
    ============================================================ */
 
 /* ─── Tokens ─────────────────────────────────────────────── */
@@ -35,13 +23,7 @@
   box-shadow: none !important;
 }
 
-/* ─── Logo — restyle to match ANVIL wordmark ─────────────── */
-/*
-  Fluid renders the logo as either an image or a text link.
-  We style the text version to match the marketing site:
-  Playfair Display italic, same size and weight.
-  If you use an image logo this has no effect on the image itself.
-*/
+/* ─── Logo ───────────────────────────────────────────────── */
 .header__heading-link,
 .header__heading {
   font-family: var(--font-display) !important;
@@ -65,7 +47,6 @@
   position: relative;
 }
 
-/* Underline hover — same as marketing site */
 .header__menu-item > a::after {
   content: '';
   position: absolute;
@@ -77,10 +58,6 @@
 .header__menu-item > a:hover::after { width: 100%; }
 
 /* ─── Icon buttons (search, account, cart) ───────────────── */
-/*
-  These stay exactly as Shopify renders them.
-  We just match the colour so they sit on the new background.
-*/
 .header__icon,
 .header__icon svg {
   color: var(--anvil-ink) !important;
@@ -118,40 +95,7 @@
   color: var(--anvil-ink) !important;
 }
 
-/* ─── Back link ──────────────────────────────────────────── */
-/*
-  Injected via the anvil-nav-back snippet.
-  Sits at the far left of the header.
-*/
-.anvil-back-link {
-  display: flex;
-  align-items: center;
-  gap: .4rem;
-  font-family: var(--font-mono);
-  font-size: .6rem;
-  letter-spacing: .2em;
-  text-transform: uppercase;
-  text-decoration: none;
-  color: var(--anvil-muted);
-  white-space: nowrap;
-  transition: color .25s ease;
-  /* Push it to the far left before the logo/menu */
-  order: -1;
-  margin-right: auto;
-  padding-right: 2rem;
-}
-
-.anvil-back-link:hover {
-  color: var(--anvil-ink);
-}
-
-.anvil-back-link__arrow {
-  font-size: .7rem;
-  line-height: 1;
-}
-
 /* ─── Mobile nav drawer ──────────────────────────────────── */
-.mobile-facets__wrapper,
 .menu-drawer,
 .menu-drawer__navigation {
   background: var(--anvil-bg) !important;
@@ -165,7 +109,7 @@
   color: var(--anvil-ink) !important;
 }
 
-/* ─── Announcement bar (if used) ────────────────────────── */
+/* ─── Announcement bar ───────────────────────────────────── */
 .announcement-bar {
   background: var(--anvil-ink) !important;
   color: var(--anvil-bg) !important;
@@ -177,11 +121,4 @@
   letter-spacing: .2em !important;
   text-transform: uppercase !important;
   color: var(--anvil-bg) !important;
-}
-
-/* ─── Responsive ─────────────────────────────────────────── */
-@media (max-width: 749px) {
-  /* Hide back link text on smallest screens, keep arrow */
-  .anvil-back-link__label { display: none; }
-  .anvil-back-link { padding-right: 1rem; }
 }

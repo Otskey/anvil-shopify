@@ -1,9 +1,6 @@
 /* ============================================================
    ANVIL Hero — Shopify Asset CSS
-   File: assets/anvil-hero.css
-
-   All selectors are scoped with .anvil- prefix so they never
-   conflict with Fluid theme styles.
+   All selectors are scoped with .anvil- prefix.
    ============================================================ */
 
 /* ─── Tokens ─────────────────────────────────────────────── */
@@ -12,7 +9,6 @@
   --anvil-ink:    #0e0d0b;
   --anvil-muted:  #7a7268;
   --anvil-border: rgba(14, 13, 11, .2);
-
   --font-display: 'Playfair Display', Georgia, serif;
   --font-mono:    'Space Mono', monospace;
   --font-body:    'Libre Baskerville', Georgia, serif;
@@ -54,7 +50,6 @@ body.anvil-hero-active {
   padding: 1.25rem 1rem 1.25rem 2.5rem;
   opacity: 0;
   transition: opacity .5s ease;
-  /* Prevent ANVIL nav overlapping Fluid theme nav */
   pointer-events: none;
 }
 
@@ -108,36 +103,34 @@ body.anvil-hero-active {
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  gap: .75rem;
+  gap: 1.25rem;
 }
 
-.anvil-nav__issue {
-  font-family: var(--font-mono);
-  font-size: .6rem;
-  letter-spacing: .25em;
-  text-transform: uppercase;
-  color: var(--anvil-muted);
-  margin: 0;
-}
-
-#anvil-clock {
-  font-family: var(--font-mono);
-  font-size: .6rem;
-  letter-spacing: .15em;
-  color: var(--anvil-muted);
-}
-
-.anvil-nav__cart {
+/* Search, account, cart links */
+.anvil-nav__action {
   font-family: var(--font-mono);
   font-size: .6rem;
   letter-spacing: .2em;
   text-transform: uppercase;
   text-decoration: none;
   color: var(--anvil-ink);
+  position: relative;
+  cursor: none;
   display: flex;
   align-items: center;
   gap: .4rem;
 }
+
+.anvil-nav__action::after {
+  content: '';
+  position: absolute;
+  bottom: -2px; left: 0;
+  width: 0; height: 1px;
+  background: var(--anvil-ink);
+  transition: width .3s ease;
+}
+
+.anvil-nav__action:hover::after { width: 100%; }
 
 .anvil-nav__cart-count {
   background: var(--anvil-ink);
@@ -192,7 +185,6 @@ body.anvil-hero-active {
   transform: rotate(180deg);
   margin-bottom: 1.5rem;
   align-self: flex-start;
-  opacity: 1;
 }
 
 .anvil-sidebar__tagline {
@@ -201,7 +193,6 @@ body.anvil-hero-active {
   line-height: 1.75;
   color: var(--anvil-muted);
   max-width: 160px;
-  opacity: 1;
 }
 
 /* ─── Hero frame ─────────────────────────────────────────── */
@@ -294,22 +285,20 @@ body.anvil-hero-active {
   background: var(--anvil-bg);
 }
 
-/* ─── WAKA headings ──────────────────────────────────────── */
+/* ─── WAKA headings — Libre Baskerville matches main site ── */
 .anvil-waka {
-  font-family: var(--font-display);
+  font-family: var(--font-body);
   font-size: 23vw;
   line-height: 0.8;
   letter-spacing: -0.09em;
   font-weight: 700;
   font-style: italic;
-
   position: absolute;
   left: 0;
   right: 0;
   top: 1vw;
   text-align: center;
   color: #1a1a1a;
-
   pointer-events: none;
   user-select: none;
   white-space: nowrap;
@@ -354,10 +343,9 @@ body.anvil-hero-active {
   flex: 0 0 calc(33vw - 0.5vw);
   display: flex;
   flex-direction: column;
-  gap: 1vw;
 }
 
-/* ─── Side panels ────────────────────────────────────────── */
+/* ─── Side panel ─────────────────────────────────────────── */
 .anvil-grid__item-panel {
   flex: 1;
   position: relative;
@@ -529,20 +517,12 @@ body.anvil-hero-active {
   }
 
   .anvil-nav__links {
-    display: none; /* use Shopify's mobile nav instead */
-  }
-
-  .anvil-nav__issue {
     display: none;
   }
 }
 
 @media (max-width: 600px) {
   .anvil-nav__right {
-    gap: .5rem;
-  }
-
-  #anvil-clock {
-    display: none;
+    gap: .75rem;
   }
 }

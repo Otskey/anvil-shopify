@@ -1,27 +1,9 @@
-{% comment %}
-  ANVIL — Magazine Hero Section
-  File: sections/anvil-hero.liquid
-
-  HOW TO INSTALL:
-  1. Shopify Admin → Online Store → Themes → Edit Code
-  2. Sections → Add new file → name it: anvil-hero.liquid
-  3. Paste this entire file
-  4. Go to your home page template (templates/index.json) and add
-     "anvil-hero" as a section via the theme Customize editor,
-     or drag it to the top of the homepage sections list.
-  5. Upload anvil-hero.css and anvil-hero.js to Assets.
-  6. In theme.liquid, before </head> add:
-       {{ 'anvil-hero.css' | asset_url | stylesheet_tag }}
-     Before </body> add:
-       <script src="{{ 'anvil-hero.js' | asset_url }}" defer></script>
-{% endcomment %}
-
 {{ 'anvil-hero.css' | asset_url | stylesheet_tag }}
 
-<!-- ─── CUSTOM CURSOR ─────────────────────────────────────── -->
+<!-- ─── CUSTOM CURSOR ─────────────────────────────────────────── -->
 <div class="anvil-cursor" id="anvil-cursor"></div>
 
-<!-- ─── NAV ──────────────────────────────────────────────── -->
+<!-- ─── NAV ──────────────────────────────────────────────────── -->
 <nav class="anvil-nav" id="anvil-nav">
   <ul class="anvil-nav__links">
     {% if section.settings.nav_link_1_label != blank %}
@@ -30,9 +12,6 @@
     {% if section.settings.nav_link_2_label != blank %}
       <li><a href="{{ section.settings.nav_link_2_url }}">{{ section.settings.nav_link_2_label }}</a></li>
     {% endif %}
-    {% if section.settings.nav_link_3_label != blank %}
-      <li><a href="{{ section.settings.nav_link_3_url }}">{{ section.settings.nav_link_3_label }}</a></li>
-    {% endif %}
   </ul>
 
   <a href="{{ routes.root_url }}" class="anvil-nav__logo">
@@ -40,9 +19,9 @@
   </a>
 
   <div class="anvil-nav__right">
-    <p class="anvil-nav__issue">{{ section.settings.issue_label | default: 'Issue No. 001' }} |</p>
-    <span id="anvil-clock"></span>
-    <a href="{{ routes.cart_url }}" class="anvil-nav__cart">
+    <a href="/search" class="anvil-nav__action">Search</a>
+    <a href="{{ routes.account_url }}" class="anvil-nav__action">Account</a>
+    <a href="{{ routes.cart_url }}" class="anvil-nav__action">
       Cart
       {%- if cart.item_count > 0 -%}
         <span class="anvil-nav__cart-count">{{ cart.item_count }}</span>
@@ -51,17 +30,17 @@
   </div>
 </nav>
 
-<!-- ─── HERO BORDER LINES ─────────────────────────────────── -->
+<!-- ─── HERO BORDER LINES ─────────────────────────────────────── -->
 <div class="anvil-border-left"  id="anvil-border-left"></div>
 <div class="anvil-border-right" id="anvil-border-right"></div>
 
-<!-- ─── HERO SIDEBAR TEXT ────────────────────────────────── -->
+<!-- ─── HERO SIDEBAR TEXT ────────────────────────────────────── -->
 <div class="anvil-sidebar-text" id="anvil-sidebar-text">
   <span class="anvil-sidebar__label">{{ section.settings.collection_label | default: 'Collection 2026' }}</span>
   <p class="anvil-sidebar__tagline">{{ section.settings.tagline | default: 'Homeware and functional objects, wood and steel, designed and handcrafted in the UK.' }}</p>
 </div>
 
-<!-- ─── HERO FRAME ────────────────────────────────────────── -->
+<!-- ─── HERO FRAME ────────────────────────────────────────────── -->
 <div class="anvil-hero-frame" id="anvil-hero-frame">
   <div class="anvil-hero-frame__left"></div>
   <div class="anvil-hero-frame__right">
@@ -72,7 +51,7 @@
   </div>
 </div>
 
-<!-- ─── ANIMATION WRAPPER ─────────────────────────────────── -->
+<!-- ─── ANIMATION WRAPPER ─────────────────────────────────────── -->
 <div class="anvil-scroll-wrapper" id="anvil-scroll-wrapper">
   <div class="anvil-container" id="anvil-container">
 
@@ -81,7 +60,7 @@
     <div class="anvil-grid__animation-wrapper">
       <div class="anvil-grid">
 
-        <!-- Featured image (left, large) -->
+        <!-- Left image (large) -->
         <a href="{{ section.settings.featured_link | default: routes.collections_url }}"
            class="anvil-grid__item anvil-grid__item--featured"
            aria-label="{{ section.settings.featured_alt | default: 'Featured product' }}">
@@ -106,19 +85,17 @@
           </div>
         </a>
 
-        <!-- Side column (right, stacked) -->
+        <!-- Right image (single panel with CTA) -->
         <div class="anvil-grid__item anvil-grid__item--side">
-
-          <!-- Top panel: CTA / workshop image -->
           <div class="anvil-grid__item-panel">
-            <div class="anvil-responsive-image" style="background-color: {{ section.settings.panel_top_bg | default: '#8c837b' }};">
-              {%- if section.settings.panel_top_image -%}
+            <div class="anvil-responsive-image" style="background-color: {{ section.settings.panel_bg | default: '#8c837b' }};">
+              {%- if section.settings.panel_image -%}
                 <img
-                  src="{{ section.settings.panel_top_image | image_url: width: 800 }}"
-                  alt="{{ section.settings.panel_top_image.alt | default: 'Workshop' }}"
+                  src="{{ section.settings.panel_image | image_url: width: 800 }}"
+                  alt="{{ section.settings.panel_image.alt | default: 'Collection' }}"
                   loading="eager"
-                  width="{{ section.settings.panel_top_image.width }}"
-                  height="{{ section.settings.panel_top_image.height }}"
+                  width="{{ section.settings.panel_image.width }}"
+                  height="{{ section.settings.panel_image.height }}"
                 >
               {%- else -%}
                 <div class="anvil-img-placeholder" style="background: #7a7268;"></div>
@@ -132,43 +109,25 @@
               </a>
             </div>
           </div>
+        </div>
 
-          <!-- Bottom panel: second product image -->
-          <div class="anvil-grid__item-panel">
-            <div class="anvil-responsive-image" style="background-color: {{ section.settings.panel_bottom_bg | default: '#84745c' }};">
-              {%- if section.settings.panel_bottom_image -%}
-                <img
-                  src="{{ section.settings.panel_bottom_image | image_url: width: 800 }}"
-                  alt="{{ section.settings.panel_bottom_image.alt | default: 'Product detail' }}"
-                  loading="eager"
-                  width="{{ section.settings.panel_bottom_image.width }}"
-                  height="{{ section.settings.panel_bottom_image.height }}"
-                >
-              {%- else -%}
-                <div class="anvil-img-placeholder" style="background: #84745c;"></div>
-              {%- endif -%}
-            </div>
-          </div>
-
-        </div><!-- /.anvil-grid__item--side -->
-      </div><!-- /.anvil-grid -->
-    </div><!-- /.anvil-grid__animation-wrapper -->
+      </div>
+    </div>
 
     <h2 class="anvil-waka anvil-waka--bottom">{{ section.settings.brand_name | default: 'ANVIL' }}</h2>
 
-  </div><!-- /.anvil-container -->
-</div><!-- /.anvil-scroll-wrapper -->
+  </div>
+</div>
 
 <button class="anvil-replay-btn" id="anvil-replay-btn" aria-label="Replay animation">&#8635; Replay</button>
 
-<!-- ─── MARQUEE (appears at top of page content below hero) ── -->
+<!-- ─── MARQUEE ────────────────────────────────────────────────── -->
 <div class="anvil-marquee-strip" aria-hidden="true" id="anvil-marquee">
   <div class="anvil-marquee-track">
     {%- assign marquee_items = section.settings.marquee_text | split: ',' -%}
     {%- if marquee_items.size < 2 -%}
       {%- assign marquee_items = 'Handcrafted Homeware,Functional Objects,Made by Hand,Limited Edition' | split: ',' -%}
     {%- endif -%}
-    {%- comment -%}Duplicate for seamless loop{%- endcomment -%}
     {%- for item in marquee_items -%}
       <span class="anvil-marquee-item">{{ item | strip }}</span>
     {%- endfor -%}
@@ -178,22 +137,16 @@
   </div>
 </div>
 
-<script src="{{ 'gsap.min.js' | asset_url }}" onload="anvilHeroInit()"></script>
+<!-- ─── INIT ──────────────────────────────────────────────────── -->
+<script src="{{ 'anvil-hero.js' | asset_url }}"></script>
 <script>
-  /* Pass Liquid settings to JS safely */
-  window.anvilHeroSettings = {
-    brandName: {{ section.settings.brand_name | default: 'ANVIL' | json }},
-  };
-
-  /* Fallback: if GSAP loads from CDN instead */
-  if (typeof anvilHeroInit === 'undefined') {
-    var _gsapScript = document.createElement('script');
-    _gsapScript.src = 'https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js';
-    _gsapScript.onload = function () {
-      if (typeof anvilHeroInit === 'function') anvilHeroInit();
-    };
-    document.head.appendChild(_gsapScript);
-  }
+  /* GSAP is loaded at end of <body> in theme.liquid.
+     Wait for window.load so it is guaranteed available. */
+  window.addEventListener('load', function () {
+    if (typeof anvilHeroInit === 'function') {
+      anvilHeroInit();
+    }
+  });
 </script>
 
 {% schema %}
@@ -213,12 +166,6 @@
       "default": "ANVIL"
     },
     {
-      "type": "text",
-      "id": "issue_label",
-      "label": "Issue label",
-      "default": "Issue No. 001"
-    },
-    {
       "type": "header",
       "content": "Navigation"
     },
@@ -226,7 +173,7 @@
       "type": "text",
       "id": "nav_link_1_label",
       "label": "Nav link 1 label",
-      "default": "Store"
+      "default": "Home"
     },
     {
       "type": "url",
@@ -237,23 +184,12 @@
       "type": "text",
       "id": "nav_link_2_label",
       "label": "Nav link 2 label",
-      "default": "Homeware"
+      "default": "Catalogue"
     },
     {
       "type": "url",
       "id": "nav_link_2_url",
       "label": "Nav link 2 URL"
-    },
-    {
-      "type": "text",
-      "id": "nav_link_3_label",
-      "label": "Nav link 3 label",
-      "default": "Objects"
-    },
-    {
-      "type": "url",
-      "id": "nav_link_3_url",
-      "label": "Nav link 3 URL"
     },
     {
       "type": "header",
@@ -273,43 +209,43 @@
     },
     {
       "type": "header",
-      "content": "Featured image (left panel)"
+      "content": "Left image"
     },
     {
       "type": "image_picker",
       "id": "featured_image",
-      "label": "Featured image"
+      "label": "Left image"
     },
     {
       "type": "text",
       "id": "featured_alt",
-      "label": "Featured image alt text",
+      "label": "Left image alt text",
       "default": "Featured product"
     },
     {
       "type": "color",
       "id": "featured_bg",
-      "label": "Featured image placeholder colour",
+      "label": "Left image placeholder colour",
       "default": "#8c837b"
     },
     {
       "type": "url",
       "id": "featured_link",
-      "label": "Featured image link"
+      "label": "Left image link"
     },
     {
       "type": "header",
-      "content": "Right column — top panel (CTA)"
+      "content": "Right image"
     },
     {
       "type": "image_picker",
-      "id": "panel_top_image",
-      "label": "Top panel image"
+      "id": "panel_image",
+      "label": "Right image"
     },
     {
       "type": "color",
-      "id": "panel_top_bg",
-      "label": "Top panel placeholder colour",
+      "id": "panel_bg",
+      "label": "Right image placeholder colour",
       "default": "#8c837b"
     },
     {
@@ -337,22 +273,7 @@
     },
     {
       "type": "header",
-      "content": "Right column — bottom panel"
-    },
-    {
-      "type": "image_picker",
-      "id": "panel_bottom_image",
-      "label": "Bottom panel image"
-    },
-    {
-      "type": "color",
-      "id": "panel_bottom_bg",
-      "label": "Bottom panel placeholder colour",
-      "default": "#84745c"
-    },
-    {
-      "type": "header",
-      "content": "Marquee strip"
+      "content": "Marquee"
     },
     {
       "type": "text",

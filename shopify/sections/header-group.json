@@ -1,16 +1,28 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
   "type": "header",
   "name": "Header",
   "sections": {
+    "anvil_hero_NyHh9i": {
+      "type": "anvil-hero",
+      "settings": {
+        "brand_name": "ANVIL",
+        "nav_link_1_label": "Home",
+        "nav_link_1_url": "/",
+        "nav_link_2_label": "Catalogue",
+        "nav_link_2_url": "/collections/all",
+        "collection_label": "Collection 2026",
+        "tagline": "Homeware and functional objects, wood and steel, designed and handcrafted in the UK.",
+        "featured_alt": "Featured product",
+        "featured_bg": "#8c837b",
+        "featured_link": "/collections/all",
+        "panel_bg": "#8c837b",
+        "cta_label": "Our Collection",
+        "cta_heading": "Visit our shop to see our wares.",
+        "cta_button": "Explore the collection \u2192",
+        "cta_link": "/collections/all",
+        "marquee_text": "Handcrafted Homeware,Functional Objects,Made by Hand,Limited Edition"
+      }
+    },
     "header_announcements_9jGBFp": {
       "type": "header-announcements",
       "blocks": {
@@ -31,7 +43,6 @@
       "block_order": [
         "announcement_BxgCk9"
       ],
-      "disabled": true,
       "name": "t:names.announcement_bar",
       "settings": {
         "speed": 5,
@@ -82,9 +93,8 @@
       },
       "settings": {
         "logo_position": "left",
-        "menu_position": "center",
+        "menu_position": "left",
         "menu_row": "top",
-        "customer_account_menu": "customer-account-main-menu",
         "show_search": true,
         "search_position": "right",
         "search_row": "top",
@@ -92,19 +102,15 @@
         "country_selector_style": false,
         "show_language": true,
         "localization_font": "heading",
-        "localization_font_size": "1.125rem",
+        "localization_font_size": "0.875rem",
         "localization_position": "right",
         "localization_row": "top",
-        "section_width": "full-width",
+        "section_width": "page-width",
         "section_height": "standard",
         "enable_sticky_header": "always",
         "divider_width": 0,
         "divider_size": "page-width",
         "border_width": 0,
-        "actions_display_style": "icon",
-        "actions_font_size": "0.875rem",
-        "actions_font": "body",
-        "actions_text_case": "none",
         "color_scheme_top": "scheme-1",
         "color_scheme_bottom": "",
         "color_scheme_transparent": "scheme-6",
@@ -115,37 +121,11 @@
         "enable_transparent_header_collection": false,
         "collection_color_scheme": "default"
       }
-    },
-    "anvil_hero_NyHh9i": {
-      "type": "anvil-hero",
-      "name": "ANVIL Hero",
-      "settings": {
-        "brand_name": "ANVIL",
-        "issue_label": "Issue No. 001",
-        "nav_link_1_label": "Store",
-        "nav_link_1_url": "",
-        "nav_link_2_label": "Homeware",
-        "nav_link_2_url": "",
-        "nav_link_3_label": "Objects",
-        "nav_link_3_url": "",
-        "collection_label": "Collection 2026",
-        "tagline": "Homeware and functional objects, wood and steel, designed and handcrafted in the UK.",
-        "featured_alt": "Featured product",
-        "featured_bg": "#8c837b",
-        "featured_link": "",
-        "panel_top_bg": "#8c837b",
-        "cta_label": "Our Collection",
-        "cta_heading": "Visit our shop to see our wares.",
-        "cta_button": "Explore the collection →",
-        "cta_link": "",
-        "panel_bottom_bg": "#84745c",
-        "marquee_text": "Handcrafted Homeware,Functional Objects,Made by Hand,Limited Edition"
-      }
     }
   },
   "order": [
+    "anvil_hero_NyHh9i",
     "header_announcements_9jGBFp",
-    "header_section",
-    "anvil_hero_NyHh9i"
+    "header_section"
   ]
 }
