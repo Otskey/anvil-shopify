@@ -14,9 +14,9 @@
   --font-body:    'Libre Baskerville', Georgia, serif;
 }
 
-/* ─── Override body cursor while hero is active ──────────── */
-body.anvil-hero-active {
-  cursor: none;
+/* ─── Hide native cursor site-wide (custom cursor always active) ── */
+body {
+  cursor: none !important;
 }
 
 /* ─── Custom cursor ──────────────────────────────────────── */
@@ -40,6 +40,14 @@ body.anvil-hero-active {
 }
 
 /* ─── Navigation ─────────────────────────────────────────── */
+
+/* Section wrapper — kill Horizon's white colour scheme background */
+.anvil-global-nav {
+  background: var(--anvil-bg) !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
 .anvil-nav {
   position: fixed;
   top: 0; left: 0; right: 0;
@@ -51,6 +59,8 @@ body.anvil-hero-active {
   opacity: 0;
   transition: opacity .5s ease;
   pointer-events: none;
+  background: var(--anvil-bg);
+  border-bottom: 1px solid var(--anvil-border);
 }
 
 .anvil-nav.is-visible {

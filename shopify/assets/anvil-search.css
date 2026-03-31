@@ -1,0 +1,368 @@
+/* ============================================================
+   ANVIL — Search (modal + predictive + results page)
+   Overrides Horizon's default search styles to match the
+   ANVIL brand: warm bg, flat corners, editorial typography.
+   ============================================================ */
+
+/* ─── Tokens (mirrors anvil-nav.css / anvil-products.css) ── */
+:root {
+  --anvil-bg:     #edeae4;
+  --anvil-ink:    #0e0d0b;
+  --anvil-muted:  #7a7268;
+  --anvil-border: rgba(14, 13, 11, .12);
+  --font-display: 'Playfair Display', Georgia, serif;
+  --font-mono:    'Space Mono', monospace;
+  --font-body:    'Libre Baskerville', Georgia, serif;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   SEARCH MODAL SHELL
+   ═══════════════════════════════════════════════════════════ */
+
+/* Pipe ANVIL colours into Horizon's CSS-variable system */
+predictive-search-component,
+.search-modal__content,
+.predictive-search-form__header,
+.predictive-search-form__header-inner,
+.predictive-search-form__content,
+.predictive-search-form__content-wrapper {
+  --color-background:     #edeae4 !important;
+  --color-background-rgb: 237, 234, 228 !important;
+  --color-foreground:     #0e0d0b !important;
+  --color-foreground-rgb: 14, 13, 11 !important;
+  --color-border:         rgba(14, 13, 11, .12) !important;
+  --color-input-background: #edeae4 !important;
+}
+
+/* Flatten all corners in the modal */
+.dialog-modal[open].search-modal__content,
+.search-modal__content,
+.predictive-search-form__header,
+.predictive-search-form__header-inner,
+.predictive-search-form__content-wrapper,
+.predictive-search-dropdown {
+  border-radius: 0 !important;
+}
+
+/* Explicit background fill for modal panels */
+.search-modal__content,
+.predictive-search-form__header,
+.predictive-search-form__content {
+  background-color: var(--anvil-bg) !important;
+}
+
+/* Modal border colour */
+.search-modal__content {
+  border-color: var(--anvil-border) !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   SEARCH INPUT
+   ═══════════════════════════════════════════════════════════ */
+
+input.search-input {
+  font-family: var(--font-body) !important;
+  font-size: 1rem !important;
+  color: var(--anvil-ink) !important;
+  background: transparent !important;
+}
+
+input.search-input::placeholder {
+  font-family: var(--font-mono) !important;
+  font-size: 0.6rem !important;
+  letter-spacing: 0.18em !important;
+  text-transform: uppercase !important;
+  color: var(--anvil-muted) !important;
+  opacity: 1 !important;
+}
+
+/* Search icon colour */
+.predictive-search__icon svg,
+.predictive-search__icon {
+  color: var(--anvil-ink) !important;
+  fill: var(--anvil-ink) !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   CLOSE BUTTON
+   ═══════════════════════════════════════════════════════════ */
+
+.predictive-search__close-modal-button,
+.predictive-search__close-modal-button svg {
+  color: var(--anvil-ink) !important;
+  fill: var(--anvil-ink) !important;
+}
+
+.predictive-search__close-modal-button:hover {
+  --button-color: var(--anvil-muted) !important;
+  opacity: 0.7 !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   PREDICTIVE RESULTS — SECTION LABELS
+   ═══════════════════════════════════════════════════════════ */
+
+.predictive-search-results__title {
+  font-family: var(--font-mono) !important;
+  font-size: 0.6rem !important;
+  font-weight: 400 !important;
+  letter-spacing: 0.2em !important;
+  text-transform: uppercase !important;
+  color: var(--anvil-muted) !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   PREDICTIVE RESULTS — PRODUCT CARDS
+   ═══════════════════════════════════════════════════════════ */
+
+.predictive-search-results__wrapper-products {
+  background: var(--anvil-bg) !important;
+  padding-inline: 1rem !important;
+}
+
+/* Product title inside predictive dropdown */
+.predictive-search-results__wrapper-products [role="heading"],
+.predictive-search-results__wrapper-products p[role="heading"],
+.predictive-search-results__wrapper-products .resource-card__title,
+.predictive-search-results__wrapper-products .card-title {
+  font-family: var(--font-display) !important;
+  font-weight: 700 !important;
+  font-style: normal !important;
+  font-size: 0.9rem !important;
+  color: var(--anvil-ink) !important;
+  letter-spacing: -0.01em !important;
+}
+
+/* Price inside predictive dropdown */
+.predictive-search-results__wrapper-products product-price,
+.predictive-search-results__wrapper-products product-price * {
+  font-family: var(--font-mono) !important;
+  font-size: 0.65rem !important;
+  letter-spacing: 0.08em !important;
+  color: var(--anvil-ink) !important;
+  font-weight: 400 !important;
+}
+
+/* Flat hover — no rounded bg balloon */
+.predictive-search-results__card--product:hover,
+.recently-viewed-wrapper .predictive-search-results__card--product:hover {
+  background-color: rgba(14, 13, 11, .05) !important;
+  border-radius: 0 !important;
+}
+
+/* Non-product resource cards (collections, pages) */
+.predictive-search-results__card:not(.predictive-search-results__card--product) {
+  border-radius: 0 !important;
+  background: var(--anvil-bg) !important;
+  border-color: var(--anvil-border) !important;
+}
+
+/* Query/suggestion pills */
+.predictive-search-results__pill {
+  border-radius: 0 !important;
+  font-family: var(--font-mono) !important;
+  font-size: 0.6rem !important;
+  letter-spacing: 0.1em !important;
+  color: var(--anvil-ink) !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   "VIEW ALL RESULTS" BUTTON
+   ═══════════════════════════════════════════════════════════ */
+
+.predictive-search__search-button {
+  font-family: var(--font-mono) !important;
+  font-size: 0.6rem !important;
+  letter-spacing: 0.2em !important;
+  text-transform: uppercase !important;
+  background: var(--anvil-ink) !important;
+  color: var(--anvil-bg) !important;
+  border: none !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  padding: 0.75rem 1.5rem !important;
+}
+
+.predictive-search__search-button:hover {
+  opacity: 0.85 !important;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   FOOTER GRADIENT — MATCH ANVIL BG
+   ═══════════════════════════════════════════════════════════ */
+
+.predictive-search-form__footer {
+  --to-top-gradient-background: linear-gradient(
+    to top,
+    rgba(237, 234, 228, 0.95),
+    rgba(237, 234, 228, 0.80),
+    rgba(237, 234, 228, 0.40),
+    transparent
+  ) !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   SEARCH RESULTS PAGE (/search)
+   ═══════════════════════════════════════════════════════════ */
+
+/* Page background */
+.shopify-section:has(.search-page__header) {
+  background: var(--anvil-bg) !important;
+}
+
+/* Results section background — complements anvil-products.css */
+.shopify-section:has(.product-grid-container.section) {
+  background: var(--anvil-bg) !important;
+}
+
+/* Search page heading */
+.search-page__header h3,
+.search-page__header h2 {
+  font-family: var(--font-display) !important;
+  font-weight: 400 !important;
+  font-style: italic !important;
+  font-size: clamp(2rem, 5vw, 4rem) !important;
+  letter-spacing: -0.02em !important;
+  color: var(--anvil-ink) !important;
+  line-height: 1 !important;
+}
+
+/* Search input on the full results page */
+.search-page__header input[type="search"],
+.search-page__header input[type="text"] {
+  font-family: var(--font-body) !important;
+  font-size: 1rem !important;
+  color: var(--anvil-ink) !important;
+  background: transparent !important;
+  border-color: var(--anvil-border) !important;
+  border-radius: 0 !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   SEARCH RESULTS PAGE — PRODUCT GRID CARDS
+   The search page uses .product-grid-container (not .section-resource-list)
+   so anvil-products.css rules don't fire here — we re-apply them.
+   ═══════════════════════════════════════════════════════════ */
+
+/* "Products" sub-heading label */
+h4.main-collection-grid__title {
+  font-family: var(--font-mono) !important;
+  font-size: 0.6rem !important;
+  font-weight: 400 !important;
+  font-style: normal !important;
+  letter-spacing: 0.2em !important;
+  text-transform: uppercase !important;
+  color: var(--anvil-muted) !important;
+  margin-block: 2rem 1rem !important;
+}
+
+/* Card wrapper */
+.product-grid-container .product-card__content.product-grid__card {
+  display: flex !important;
+  flex-direction: column !important;
+  padding: 0 !important;
+  gap: 0 !important;
+  background: var(--anvil-bg) !important;
+}
+
+/* Image: force 3/4 portrait aspect ratio */
+.product-grid-container .product-card__content .card-gallery,
+.product-grid-container .resource-card__media {
+  aspect-ratio: 3 / 4 !important;
+  width: 100% !important;
+  overflow: hidden !important;
+  flex-shrink: 0 !important;
+  position: relative !important;
+  background: #c8c3bb !important;
+  display: block !important;
+}
+
+.product-grid-container .product-card__content .card-gallery img,
+.product-grid-container .resource-card__media img {
+  position: absolute !important;
+  inset: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  object-position: center top !important;
+  display: block !important;
+  transition: transform .8s cubic-bezier(.16,1,.3,1) !important;
+}
+
+.product-grid-container .product-card:hover .card-gallery img,
+.product-grid-container .resource-card:hover .resource-card__media img {
+  transform: scale(1.04) !important;
+}
+
+/* Product title — Playfair Display 700 */
+.product-grid-container [role="heading"],
+.product-grid-container p[role="heading"],
+.product-grid-container .resource-card__title {
+  font-family: var(--font-display) !important;
+  font-size: 1.05rem !important;
+  font-weight: 700 !important;
+  font-style: normal !important;
+  line-height: 1.25 !important;
+  letter-spacing: -0.01em !important;
+  color: var(--anvil-ink) !important;
+  margin: 0 !important;
+}
+
+/* Title link */
+.product-grid-container a:has([role="heading"]),
+.product-grid-container a.contents {
+  text-decoration: none !important;
+  color: inherit !important;
+  padding: 0.85rem 0 0 !important;
+  display: block !important;
+}
+
+/* Price — Space Mono */
+.product-grid-container product-price,
+.product-grid-container product-price * {
+  font-family: var(--font-mono) !important;
+  font-size: 0.7rem !important;
+  letter-spacing: 0.08em !important;
+  color: var(--anvil-ink) !important;
+  font-weight: 400 !important;
+  font-style: normal !important;
+}
+
+.product-grid-container product-price {
+  display: block !important;
+  padding: 0.3rem 0 0.85rem !important;
+}
+
+/* Compare-at price */
+.product-grid-container product-price s,
+.product-grid-container product-price [class*="compare"] {
+  color: var(--anvil-muted) !important;
+}
+
+/* Grid gaps */
+.product-grid-container .product-grid {
+  gap: 1.5rem !important;
+  background: var(--anvil-bg) !important;
+}
+
+.product-grid-container .product-grid__item {
+  border: none !important;
+  background: var(--anvil-bg) !important;
+}
+
+/* ═══════════════════════════════════════════════════════════
+   MOBILE ADJUSTMENTS
+   ═══════════════════════════════════════════════════════════ */
+
+@media screen and (max-width: 749px) {
+  .dialog-modal[open].search-modal__content {
+    border-radius: 0 !important;
+  }
+
+  .predictive-search__search-button {
+    font-size: 0.55rem !important;
+    padding: 0.65rem 1.25rem !important;
+  }
+}

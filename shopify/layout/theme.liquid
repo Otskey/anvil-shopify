@@ -42,6 +42,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,700&family=Space+Mono:wght@400;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
     {{ 'anvil-nav.css' | asset_url | stylesheet_tag }}
     {{ 'anvil-products.css' | asset_url | stylesheet_tag }}
+    {{ 'anvil-search.css' | asset_url | stylesheet_tag }}
   </head>
 
   <body class="page-width-{{ settings.page_width }} card-hover-effect-{{ settings.card_hover_effect }}">
@@ -140,5 +141,22 @@
     {% endif %}
 
     <script src="{{ 'gsap.min.js' | asset_url }}"></script>
+
+    <!-- ─── ANVIL global cursor ───────────────────────────────── -->
+    <div class="anvil-cursor" id="anvil-cursor"></div>
+    <script>
+      (function () {
+        var c = document.getElementById('anvil-cursor');
+        if (!c) return;
+        document.addEventListener('mousemove', function (e) {
+          c.style.left = e.clientX + 'px';
+          c.style.top  = e.clientY + 'px';
+        });
+        document.querySelectorAll('a, button').forEach(function (el) {
+          el.addEventListener('mouseenter', function () { c.classList.add('hover'); });
+          el.addEventListener('mouseleave', function () { c.classList.remove('hover'); });
+        });
+      })();
+    </script>
   </body>
 </html>

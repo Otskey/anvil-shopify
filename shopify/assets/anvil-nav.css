@@ -29,6 +29,14 @@ body:not(.anvil-hero-active) #MainContent {
   padding-top: 4rem !important;
 }
 
+/* ─── Kill Shopify section wrapper white background on ANVIL nav ── */
+.shopify-section:has(.anvil-global-nav),
+.anvil-global-nav {
+  background: var(--anvil-bg) !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
 /* ─── Hide global ANVIL nav on homepage (hero has its own) ── */
 body.anvil-hero-active .anvil-global-nav {
   display: none !important;
