@@ -101,13 +101,6 @@
                 <div class="anvil-img-placeholder" style="background: #7a7268;"></div>
               {%- endif -%}
             </div>
-            <div class="anvil-grid__cta-overlay">
-              <span class="anvil-grid__cta-label">{{ section.settings.cta_label | default: 'Our Collection' }}</span>
-              <h3 class="anvil-grid__cta-heading">{{ section.settings.cta_heading | default: 'Visit our shop to see our wares.' }}</h3>
-              <a href="{{ section.settings.cta_link | default: routes.collections_url }}" class="anvil-grid__cta-btn">
-                {{ section.settings.cta_button | default: 'Explore the collection →' }}
-              </a>
-            </div>
           </div>
         </div>
 
