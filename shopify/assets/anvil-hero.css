@@ -40,14 +40,6 @@ body {
 }
 
 /* ─── Navigation ─────────────────────────────────────────── */
-
-/* Section wrapper — kill Horizon's white colour scheme background */
-.anvil-global-nav {
-  background: var(--anvil-bg) !important;
-  padding: 0 !important;
-  margin: 0 !important;
-}
-
 .anvil-nav {
   position: fixed;
   top: 0; left: 0; right: 0;
@@ -59,6 +51,11 @@ body {
   opacity: 0;
   transition: opacity .5s ease;
   pointer-events: none;
+  /* No background here — hero nav must be transparent */
+}
+
+/* Non-hero pages: nav sits over page content and needs a solid fill */
+.anvil-global-nav .anvil-nav {
   background: var(--anvil-bg);
   border-bottom: 1px solid var(--anvil-border);
 }
