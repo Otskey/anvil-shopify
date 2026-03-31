@@ -1,0 +1,334 @@
+/* ============================================================
+   ANVIL — Cart Page
+   Brand typography applied to the Fluid theme cart page.
+   Playfair Display = headings/product titles.
+   Space Mono = labels, prices, buttons.
+   Libre Baskerville = body/notes.
+   Checkout CTA (.cart__checkout-button) intentionally unstyled.
+   ============================================================ */
+
+/* ─── Page background ────────────────────────────────────── */
+.shopify-section:has(.cart-page) {
+  background: var(--anvil-bg) !important;
+}
+
+/* ─── Cart title ─────────────────────────────────────────── */
+.cart-title h1,
+.cart-title h2,
+.cart-title h3,
+.cart-title h4,
+.cart-title h5,
+.cart-title h6 {
+  font-family: var(--font-display) !important;
+  font-style: italic !important;
+  font-weight: 400 !important;
+  font-size: clamp(1.8rem, 4vw, 3.2rem) !important;
+  letter-spacing: -.02em !important;
+  color: var(--anvil-ink) !important;
+  line-height: 1 !important;
+}
+
+/* ─── Count bubble in title ──────────────────────────────── */
+.cart-title .cart-bubble {
+  font-family: var(--font-mono) !important;
+  font-size: .5rem !important;
+  letter-spacing: .1em !important;
+  background: var(--anvil-ink) !important;
+  color: var(--anvil-bg) !important;
+  border-radius: 0 !important;
+}
+
+.cart-title .cart-bubble .cart-bubble__background {
+  background: var(--anvil-ink) !important;
+}
+
+.cart-title .cart-bubble__text {
+  color: var(--anvil-bg) !important;
+  font-family: var(--font-mono) !important;
+  font-size: .5rem !important;
+  letter-spacing: .05em !important;
+}
+
+/* ─── Product thumbnail ──────────────────────────────────── */
+.cart-items__media-image {
+  border-radius: 0 !important;
+  object-fit: cover !important;
+  object-position: center top !important;
+}
+
+/* ─── Product title link ─────────────────────────────────── */
+.cart-items__title {
+  font-family: var(--font-display) !important;
+  font-weight: 700 !important;
+  font-size: 1.05rem !important;
+  font-style: normal !important;
+  letter-spacing: -.01em !important;
+  color: var(--anvil-ink) !important;
+  text-decoration: none !important;
+  line-height: 1.25 !important;
+}
+
+.cart-items__title:hover {
+  color: var(--anvil-muted) !important;
+}
+
+/* ─── Variant options & custom properties ────────────────── */
+.cart-items__variant dd,
+.cart-items__variant dt,
+.cart-items__property dt,
+.cart-items__property dd,
+.cart-items__bundle li {
+  font-family: var(--font-mono) !important;
+  font-size: .58rem !important;
+  letter-spacing: .15em !important;
+  text-transform: uppercase !important;
+  color: var(--anvil-muted) !important;
+}
+
+/* ─── Unit price (per-item price in details column) ──────── */
+.cart-items__unit-price-wrapper,
+.cart-items__unit-price-wrapper * {
+  font-family: var(--font-mono) !important;
+  font-size: .68rem !important;
+  letter-spacing: .08em !important;
+  color: var(--anvil-ink) !important;
+}
+
+/* ─── Compare-at (strikethrough) price ───────────────────── */
+.cart-items__unit-price-wrapper .compare-at-price,
+.cart-items__price .compare-at-price {
+  color: var(--anvil-muted) !important;
+}
+
+/* ─── Line total price (right column) ───────────────────── */
+.cart-items__price,
+.cart-items__price * {
+  font-family: var(--font-mono) !important;
+  font-size: .7rem !important;
+  letter-spacing: .08em !important;
+  color: var(--anvil-ink) !important;
+}
+
+/* ─── Row dividers ───────────────────────────────────────── */
+.cart-items--dividers .cart-items__table-row {
+  border-bottom: 1px solid var(--anvil-border) !important;
+}
+
+/* First row top border */
+.cart-items--dividers .cart-items__table-row:first-child {
+  border-top: 1px solid var(--anvil-border) !important;
+}
+
+/* ─── Quantity selector ──────────────────────────────────── */
+quantity-selector,
+.quantity-selector {
+  background: transparent !important;
+  border: 1px solid var(--anvil-border) !important;
+  border-radius: 0 !important;
+}
+
+.quantity-selector__button {
+  background: transparent !important;
+  color: var(--anvil-ink) !important;
+  border: none !important;
+}
+
+.quantity-selector__button svg {
+  fill: var(--anvil-ink) !important;
+  color: var(--anvil-ink) !important;
+}
+
+.quantity-selector__button:hover {
+  color: var(--anvil-muted) !important;
+}
+
+.quantity-selector__input {
+  font-family: var(--font-mono) !important;
+  font-size: .68rem !important;
+  letter-spacing: .1em !important;
+  color: var(--anvil-ink) !important;
+  background: transparent !important;
+}
+
+/* ─── Remove button ──────────────────────────────────────── */
+.cart-items__remove {
+  background: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  color: var(--anvil-muted) !important;
+}
+
+.cart-items__remove svg {
+  fill: var(--anvil-muted) !important;
+  color: var(--anvil-muted) !important;
+  transition: fill .2s ease !important;
+}
+
+.cart-items__remove:hover svg {
+  fill: var(--anvil-ink) !important;
+  color: var(--anvil-ink) !important;
+}
+
+/* ─── Cart actions divider ───────────────────────────────── */
+.cart-actions__divider {
+  border: none !important;
+  border-top: 1px solid var(--anvil-border) !important;
+  margin: 0 !important;
+}
+
+/* ─── Discount & note accordion summaries ────────────────── */
+.cart-discount__summary,
+.cart-note__summary {
+  display: flex !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  border-top: 1px solid var(--anvil-border) !important;
+  padding: .85rem 0 !important;
+}
+
+.cart-discount__label,
+.cart-note__label {
+  font-family: var(--font-mono) !important;
+  font-size: .6rem !important;
+  letter-spacing: .2em !important;
+  text-transform: uppercase !important;
+  color: var(--anvil-ink) !important;
+}
+
+/* ─── Discount input ─────────────────────────────────────── */
+.cart-discount__input {
+  font-family: var(--font-mono) !important;
+  font-size: .65rem !important;
+  letter-spacing: .1em !important;
+  color: var(--anvil-ink) !important;
+  background: transparent !important;
+  border: 1px solid var(--anvil-border) !important;
+  border-radius: 0 !important;
+  padding: .6rem .8rem !important;
+}
+
+.cart-discount__input::placeholder {
+  color: var(--anvil-muted) !important;
+  text-transform: uppercase !important;
+}
+
+/* ─── Discount apply button ──────────────────────────────── */
+.cart-discount__button {
+  font-family: var(--font-mono) !important;
+  font-size: .6rem !important;
+  letter-spacing: .2em !important;
+  text-transform: uppercase !important;
+  color: var(--anvil-ink) !important;
+  background: transparent !important;
+  border: 1px solid var(--anvil-ink) !important;
+  border-radius: 0 !important;
+  padding: .6rem 1.2rem !important;
+  transition: background .2s ease, color .2s ease !important;
+}
+
+.cart-discount__button:hover {
+  background: var(--anvil-ink) !important;
+  color: var(--anvil-bg) !important;
+}
+
+/* ─── Applied discount pills ─────────────────────────────── */
+.cart-discount__pill {
+  font-family: var(--font-mono) !important;
+  font-size: .58rem !important;
+  letter-spacing: .12em !important;
+  text-transform: uppercase !important;
+  border: 1px solid var(--anvil-border) !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  color: var(--anvil-ink) !important;
+}
+
+.cart-discount__pill-code {
+  font-family: var(--font-mono) !important;
+  color: var(--anvil-ink) !important;
+}
+
+/* ─── Cart note textarea ─────────────────────────────────── */
+.cart-note__instructions {
+  font-family: var(--font-body) !important;
+  font-size: .85rem !important;
+  color: var(--anvil-ink) !important;
+  background: transparent !important;
+  border: 1px solid var(--anvil-border) !important;
+  border-radius: 0 !important;
+  padding: .75rem !important;
+  line-height: 1.5 !important;
+}
+
+/* ─── Subtotal & discount rows ───────────────────────────── */
+.cart-totals__original-label,
+.cart-totals__original-value,
+.cart-discounts__label,
+.cart-discounts__value {
+  font-family: var(--font-mono) !important;
+  font-size: .65rem !important;
+  letter-spacing: .1em !important;
+  text-transform: uppercase !important;
+  color: var(--anvil-ink) !important;
+}
+
+.cart-discounts__label {
+  color: var(--anvil-muted) !important;
+}
+
+/* ─── Estimated total label & value ──────────────────────── */
+.cart-totals__total-label {
+  font-family: var(--font-mono) !important;
+  font-size: .72rem !important;
+  letter-spacing: .15em !important;
+  text-transform: uppercase !important;
+  color: var(--anvil-ink) !important;
+}
+
+.cart-totals__total-value {
+  font-family: var(--font-mono) !important;
+  font-size: .72rem !important;
+  letter-spacing: .08em !important;
+  color: var(--anvil-ink) !important;
+}
+
+/* ─── Tax / duties note ──────────────────────────────────── */
+.cart-totals__tax-note,
+.cart-totals__tax-note * {
+  font-family: var(--font-body) !important;
+  font-size: .75rem !important;
+  color: var(--anvil-muted) !important;
+  line-height: 1.5 !important;
+}
+
+/* ─── Empty cart — "Continue shopping" CTA ───────────────── */
+.cart-items__empty-button {
+  font-family: var(--font-mono) !important;
+  font-size: .62rem !important;
+  letter-spacing: .2em !important;
+  text-transform: uppercase !important;
+  background: var(--anvil-ink) !important;
+  color: var(--anvil-bg) !important;
+  border: none !important;
+  border-radius: 0 !important;
+  padding: .85rem 2.5rem !important;
+  text-decoration: none !important;
+  display: inline-block !important;
+  transition: background .2s ease, color .2s ease !important;
+}
+
+.cart-items__empty-button:hover {
+  background: var(--anvil-muted) !important;
+  color: var(--anvil-bg) !important;
+}
+
+/* ─── Responsive ─────────────────────────────────────────── */
+@media (max-width: 749px) {
+  .cart-title h1,
+  .cart-title h2,
+  .cart-title h3,
+  .cart-title h4 {
+    font-size: clamp(1.5rem, 7vw, 2.4rem) !important;
+  }
+}
