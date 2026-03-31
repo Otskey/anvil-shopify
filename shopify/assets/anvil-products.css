@@ -20,6 +20,27 @@
   background: var(--anvil-bg);
 }
 
+/* ─── Collection page background ─────────────────────────── */
+/* The Fluid theme renders a .section-background div per section that
+   carries the color-scheme background. Override it to Anvil beige
+   on all collection pages (body gets .template-collection from Shopify). */
+.template-collection .section-background {
+  background-color: var(--anvil-bg) !important;
+}
+
+/* Collection heading title — Playfair italic */
+.template-collection .shopify-section.section-wrapper h1,
+.template-collection .shopify-section.section-wrapper h2 {
+  font-family: var(--font-display) !important;
+  font-weight: 400 !important;
+  font-style: italic !important;
+  font-size: clamp(2rem, 5vw, 4rem) !important;
+  letter-spacing: -.02em !important;
+  color: var(--anvil-ink) !important;
+  line-height: 1 !important;
+  margin: 0 !important;
+}
+
 /* ─── Section header ─────────────────────────────────────── */
 .section-resource-list__header {
   display: flex !important;
