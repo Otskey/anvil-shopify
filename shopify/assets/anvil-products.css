@@ -89,6 +89,29 @@
   display: block !important;
 }
 
+/* ─── Anchor slideshow absolutely so it fills the card ──────── */
+/* height: 100% chains are unreliable across mixed flex/block    */
+/* containers. position: absolute + inset: 0 is guaranteed.      */
+.product-card__content .card-gallery slideshow-component {
+  position: absolute !important;
+  inset: 0 !important;
+}
+
+/* Everything inside the absolutely-anchored slideshow fills down */
+.product-card__content .card-gallery slideshow-container,
+.product-card__content .card-gallery slideshow-slides,
+.product-card__content .card-gallery slideshow-slide {
+  height: 100% !important;
+  max-height: none !important;
+}
+
+/* Remove the inherited aspect-ratio that fights our card height */
+.product-card__content .card-gallery .product-media-container {
+  aspect-ratio: unset !important;
+  width: 100% !important;
+}
+
+/* ─── Image fills its container ─────────────────────────────── */
 .product-card__content .card-gallery img {
   position: absolute !important;
   inset: 0 !important;
