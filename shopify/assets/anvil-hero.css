@@ -15,7 +15,8 @@
 }
 
 /* ─── Hide native cursor site-wide (custom cursor always active) ── */
-body {
+/* Universal selector beats all specific cursor: pointer rules in base.css */
+*, *::before, *::after {
   cursor: none !important;
 }
 
