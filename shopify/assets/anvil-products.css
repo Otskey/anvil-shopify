@@ -210,6 +210,124 @@
   color: var(--anvil-muted) !important;
 }
 
+/* ============================================================
+   ANVIL — Product Detail Page
+   Scoped to .template-product (body class Shopify adds).
+   ============================================================ */
+
+/* ─── Page background ────────────────────────────────────── */
+/* Override the body and the --color-background token so every
+   element using var(--color-background) inherits beige. */
+body.template-product {
+  background-color: var(--anvil-bg) !important;
+  --color-background: var(--anvil-bg);
+}
+
+.template-product .section-background {
+  background-color: var(--anvil-bg) !important;
+}
+
+.template-product .product-information {
+  background: var(--anvil-bg) !important;
+  --color-background: var(--anvil-bg);
+}
+
+/* ─── Media gallery — strip white backgrounds ───────────── */
+.template-product .product-information__media,
+.template-product media-gallery,
+.template-product .media-gallery__slideshow,
+.template-product slideshow-component,
+.template-product slideshow-container,
+.template-product slideshow-slides,
+.template-product slideshow-slide,
+.template-product .product-media-container,
+.template-product .product-media-container__media {
+  background: var(--anvil-bg) !important;
+  --color-background: var(--anvil-bg);
+}
+
+/* ─── Product title — Playfair Display ──────────────────── */
+/* Covers: p[role="heading"] from product-title block,
+   .text-block.h1/h2/h3 > * from text presets,
+   and any direct child of a heading-preset text-block.      */
+.template-product .product-details [role="heading"],
+.template-product .product-details p[role="heading"],
+.template-product .product-details .text-block.h1 > *,
+.template-product .product-details .text-block.h2 > *,
+.template-product .product-details .text-block.h3 > *,
+.template-product .product-details .text-block.h4 > * {
+  font-family: var(--font-display) !important;
+  font-weight: 700 !important;
+  font-style: normal !important;
+  font-size: clamp(1.8rem, 3.5vw, 2.8rem) !important;
+  letter-spacing: -.02em !important;
+  line-height: 1.1 !important;
+  color: var(--anvil-ink) !important;
+  margin: 0 !important;
+}
+
+/* ─── Price — Space Mono ─────────────────────────────────── */
+.template-product .product-details product-price,
+.template-product .product-details product-price * {
+  font-family: var(--font-mono) !important;
+  font-size: .8rem !important;
+  letter-spacing: .06em !important;
+  color: var(--anvil-ink) !important;
+  font-weight: 400 !important;
+  font-style: normal !important;
+}
+
+.template-product .product-details product-price s,
+.template-product .product-details product-price [class*="compare"] {
+  color: var(--anvil-muted) !important;
+}
+
+/* ─── Description / RTE — Libre Baskerville ──────────────── */
+.template-product .product-details .rte,
+.template-product .product-details .rte p,
+.template-product .product-details .rte li {
+  font-family: var(--font-body) !important;
+  font-size: .9rem !important;
+  line-height: 1.75 !important;
+  color: var(--anvil-ink) !important;
+}
+
+/* ─── RTE bold labels (e.g. "Details") ──────────────────── */
+.template-product .product-details .rte strong {
+  font-family: var(--font-display) !important;
+  font-weight: 700 !important;
+  font-style: normal !important;
+  font-size: .75rem !important;
+  letter-spacing: .1em !important;
+  text-transform: uppercase !important;
+  color: var(--anvil-ink) !important;
+}
+
+/* ─── Quantity input — Space Mono ────────────────────────── */
+.template-product .product-details quantity-selector,
+.template-product .product-details quantity-selector *,
+.template-product .product-details .quantity-selector,
+.template-product .product-details .quantity-selector * {
+  font-family: var(--font-mono) !important;
+  font-size: .75rem !important;
+  letter-spacing: .05em !important;
+  color: var(--anvil-ink) !important;
+}
+
+/* ─── Add to cart / Buy it now buttons — Space Mono ────────── */
+/* .add-to-cart-button = Fluid theme's ATC button             */
+/* .shopify-payment-button__button = Shopify dynamic checkout  */
+.template-product .product-details .add-to-cart-button,
+.template-product .product-details .add-to-cart-button *,
+.template-product .shopify-payment-button__button,
+.template-product .shopify-payment-button__button span {
+  font-family: var(--font-mono) !important;
+  letter-spacing: .12em !important;
+  text-transform: uppercase !important;
+  font-size: .65rem !important;
+  font-weight: 400 !important;
+}
+
 /* ─── Responsive ─────────────────────────────────────────── */
 @media (max-width: 900px) {
   .resource-list--grid {
