@@ -19,6 +19,7 @@ function anvilHeroInit() {
   var container     = document.getElementById('anvil-container');
   var wakaEls       = document.querySelectorAll('.anvil-waka');
   var gridWrapper   = document.querySelector('.anvil-grid__animation-wrapper');
+  var stripeBg      = document.getElementById('anvil-stripe-bg');
   var scrollWrapper = document.getElementById('anvil-scroll-wrapper');
   var nav           = document.getElementById('anvil-nav');
   var heroFrame     = document.getElementById('anvil-hero-frame');
@@ -45,6 +46,7 @@ function anvilHeroInit() {
 
     gsap.set(container, { scale: scale, transformOrigin: 'top center' });
     gsap.set(gridWrapper, { clipPath: 'inset(0 0 100% 0)' });
+    if (stripeBg) gsap.set(stripeBg, { clipPath: 'inset(0 0 100% 0)' });
     gsap.set(wakaEls, { opacity: 0 });
 
     var tl = gsap.timeline({ delay: 0.4, onComplete: onComplete });
@@ -52,8 +54,9 @@ function anvilHeroInit() {
     /* Phase 1 — headings fade in */
     tl.to(wakaEls, { opacity: 1, duration: 0.55, ease: 'power2.out' });
 
-    /* Phase 2 — grid unfurls */
+    /* Phase 2 — grid unfurls; stripe background paints in simultaneously */
     tl.to(gridWrapper, { clipPath: 'inset(0 0 0% 0)', duration: 1.3, ease: 'power3.out' }, '+=0.25');
+    if (stripeBg) tl.to(stripeBg, { clipPath: 'inset(0 0 0% 0)', duration: 1.3, ease: 'power3.out' }, '<');
 
     /* Phase 3 — zoom in */
     tl.to(container, { scale: 1, duration: 1.9, ease: 'power3.inOut' }, '+=0.45');
