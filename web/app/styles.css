@@ -19,10 +19,15 @@ html, body {
 }
 
 /* ── Font & base colour ─────────────────────────────────────── */
+/* ── Force cursor none on every element (beats browser/framework cursor: pointer rules) ── */
+*, *::before, *::after {
+  cursor: none !important;
+}
+
 body {
   font-family: 'Libre Baskerville', Georgia, serif;
   color: #0e0d0b;
-  cursor: none;          /* hide default cursor — custom dot used instead */
+  cursor: none;
   /*
     Original uses "Waka Sans" (proprietary) for the .waka headings.
     Swap that declaration once you have the real font files.

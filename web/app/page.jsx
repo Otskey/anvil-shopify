@@ -233,7 +233,11 @@ export default function HomePage() {
       <div className="hero-frame" id="hero-frame">
         <div className="hero-frame-left"></div>
         <div className="hero-frame-right">
-          <div className="hero-scroll-hint">
+          <div
+            className="hero-scroll-hint"
+            onClick={() => document.getElementById('below-marquee')?.scrollIntoView({ behavior: 'smooth' })}
+            style={{ cursor: 'pointer' }}
+          >
             <div className="scroll-arrow"></div>
             <span>Scroll</span>
           </div>
@@ -324,7 +328,7 @@ export default function HomePage() {
         </div>
 
         {/* Section header */}
-        <div className="section-header reveal">
+        <div id="below-marquee" className="section-header reveal">
           <h2 className="section-title">The Collection</h2>
           <span className="section-count">03 Objects</span>
         </div>
