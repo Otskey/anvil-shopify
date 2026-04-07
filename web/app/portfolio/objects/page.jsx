@@ -2,6 +2,7 @@
 
 import { useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function ObjectsPage() {
   useEffect(() => {
@@ -158,10 +159,17 @@ export default function ObjectsPage() {
 
         {/* Featured hero */}
         <div className="portfolio-hero reveal">
-          <div className="img-placeholder" style={{ backgroundColor: '#6e6058' }}></div>
+          <Image
+            src="/images/Objects/gardengate.jpg"
+            alt="Garden Gate"
+            fill
+            style={{ objectFit: 'cover' }}
+            sizes="(max-width: 600px) 100vw, (max-width: 900px) 100vw, 100vw"
+            priority
+          />
           <div className="portfolio-hero__overlay">
             <span className="portfolio-hero__number">001 — Featured</span>
-            <h2 className="portfolio-hero__title">Forged Wall Relief</h2>
+            <h2 className="portfolio-hero__title">Garden Gate</h2>
             <div className="portfolio-hero__tags">
               <span>Mild Steel</span>
               <span>Hand Forged</span>
@@ -177,25 +185,37 @@ export default function ObjectsPage() {
           {/* Row 1: wide left + narrow right */}
           <div className="portfolio-grid-row portfolio-grid-row--wide-left">
 
-            <div className="portfolio-card portfolio-card--landscape" data-category="sculpture">
-              <div className="img-placeholder" style={{ backgroundColor: '#84745c' }}></div>
+            <div className="portfolio-card portfolio-card--landscape" data-category="functional">
+              <Image
+                src="/images/Objects/bespokebar.jpg"
+                alt="Bespoke Bar"
+                fill
+                style={{ objectFit: 'cover' }}
+                sizes="(max-width: 600px) 100vw, (max-width: 900px) 50vw, 66vw"
+              />
               <div className="portfolio-card__overlay">
                 <span className="portfolio-card__number">002</span>
-                <h3 className="portfolio-card__name">Geometric Mobile</h3>
+                <h3 className="portfolio-card__name">Bespoke Bar</h3>
                 <div className="portfolio-card__meta">
-                  <span>Sheet Steel</span>
+                  <span>Steel</span>
                   <span>2024</span>
                 </div>
               </div>
             </div>
 
-            <div className="portfolio-card portfolio-card--portrait" data-category="architectural">
-              <div className="img-placeholder" style={{ backgroundColor: '#7a6e64' }}></div>
+            <div className="portfolio-card portfolio-card--portrait" data-category="functional">
+              <Image
+                src="/images/Objects/glassrack.jpg"
+                alt="Glass Rack"
+                fill
+                style={{ objectFit: 'cover' }}
+                sizes="(max-width: 600px) 100vw, (max-width: 900px) 50vw, 33vw"
+              />
               <div className="portfolio-card__overlay">
                 <span className="portfolio-card__number">003</span>
-                <h3 className="portfolio-card__name">Architectural Door Handle</h3>
+                <h3 className="portfolio-card__name">Glass Rack</h3>
                 <div className="portfolio-card__meta">
-                  <span>Solid Bar</span>
+                  <span>Flat Bar</span>
                   <span>2025</span>
                 </div>
               </div>
@@ -206,23 +226,17 @@ export default function ObjectsPage() {
           {/* Row 2: three equal */}
           <div className="portfolio-grid-row portfolio-grid-row--three">
 
-            <div className="portfolio-card portfolio-card--portrait" data-category="functional">
-              <div className="img-placeholder" style={{ backgroundColor: '#9a8e85' }}></div>
+            <div className="portfolio-card portfolio-card--portrait" data-category="decorative">
+              <Image
+                src="/images/Objects/lightfixture.jpg"
+                alt="Light Fixture"
+                fill
+                style={{ objectFit: 'cover' }}
+                sizes="(max-width: 600px) 100vw, (max-width: 900px) 50vw, 33vw"
+              />
               <div className="portfolio-card__overlay">
                 <span className="portfolio-card__number">004</span>
-                <h3 className="portfolio-card__name">Bookend Pair</h3>
-                <div className="portfolio-card__meta">
-                  <span>Flat Bar</span>
-                  <span>2024</span>
-                </div>
-              </div>
-            </div>
-
-            <div className="portfolio-card portfolio-card--portrait" data-category="decorative">
-              <div className="img-placeholder" style={{ backgroundColor: '#8c837b' }}></div>
-              <div className="portfolio-card__overlay">
-                <span className="portfolio-card__number">005</span>
-                <h3 className="portfolio-card__name">Forged Door Knocker</h3>
+                <h3 className="portfolio-card__name">Light Fixture</h3>
                 <div className="portfolio-card__meta">
                   <span>Blackened Steel</span>
                   <span>2025</span>
@@ -230,13 +244,37 @@ export default function ObjectsPage() {
               </div>
             </div>
 
-            <div className="portfolio-card portfolio-card--portrait" data-category="functional">
-              <div className="img-placeholder" style={{ backgroundColor: '#6e6058' }}></div>
+            <div className="portfolio-card portfolio-card--portrait" data-category="architectural">
+              <Image
+                src="/images/Objects/vangate.jpg"
+                alt="Van Gate"
+                fill
+                style={{ objectFit: 'cover' }}
+                sizes="(max-width: 600px) 100vw, (max-width: 900px) 50vw, 33vw"
+              />
+              <div className="portfolio-card__overlay">
+                <span className="portfolio-card__number">005</span>
+                <h3 className="portfolio-card__name">Van Gate</h3>
+                <div className="portfolio-card__meta">
+                  <span>Solid Bar</span>
+                  <span>2024</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="portfolio-card portfolio-card--portrait" data-category="architectural">
+              <Image
+                src="/images/Objects/stairwell.jpg"
+                alt="Stairwell"
+                fill
+                style={{ objectFit: 'cover' }}
+                sizes="(max-width: 600px) 100vw, (max-width: 900px) 50vw, 33vw"
+              />
               <div className="portfolio-card__overlay">
                 <span className="portfolio-card__number">006</span>
-                <h3 className="portfolio-card__name">Fireplace Tool Set</h3>
+                <h3 className="portfolio-card__name">Stairwell</h3>
                 <div className="portfolio-card__meta">
-                  <span>Round Bar</span>
+                  <span>Welded Steel</span>
                   <span>2024</span>
                 </div>
               </div>
@@ -247,26 +285,38 @@ export default function ObjectsPage() {
           {/* Row 3: narrow left + wide right */}
           <div className="portfolio-grid-row portfolio-grid-row--wide-right">
 
-            <div className="portfolio-card portfolio-card--portrait" data-category="decorative">
-              <div className="img-placeholder" style={{ backgroundColor: '#7a6e64' }}></div>
+            <div className="portfolio-card portfolio-card--portrait" data-category="architectural">
+              <Image
+                src="/images/Objects/securitygate.jpg"
+                alt="Security Gate"
+                fill
+                style={{ objectFit: 'cover' }}
+                sizes="(max-width: 600px) 100vw, (max-width: 900px) 50vw, 33vw"
+              />
               <div className="portfolio-card__overlay">
                 <span className="portfolio-card__number">007</span>
-                <h3 className="portfolio-card__name">Industrial Clock</h3>
+                <h3 className="portfolio-card__name">Security Gate</h3>
                 <div className="portfolio-card__meta">
-                  <span>Laser Cut</span>
+                  <span>Round Bar</span>
                   <span>2025</span>
                 </div>
               </div>
             </div>
 
             <div className="portfolio-card portfolio-card--landscape" data-category="architectural">
-              <div className="img-placeholder" style={{ backgroundColor: '#84745c' }}></div>
+              <Image
+                src="/images/Objects/balcony.jpg"
+                alt="Balcony"
+                fill
+                style={{ objectFit: 'cover' }}
+                sizes="(max-width: 600px) 100vw, (max-width: 900px) 50vw, 66vw"
+              />
               <div className="portfolio-card__overlay">
                 <span className="portfolio-card__number">008</span>
-                <h3 className="portfolio-card__name">Staircase Balustrade Section</h3>
+                <h3 className="portfolio-card__name">Balcony</h3>
                 <div className="portfolio-card__meta">
                   <span>Welded Steel</span>
-                  <span>2024</span>
+                  <span>2025</span>
                 </div>
               </div>
             </div>
@@ -276,23 +326,35 @@ export default function ObjectsPage() {
           {/* Row 4: two equal */}
           <div className="portfolio-grid-row portfolio-grid-row--two">
 
-            <div className="portfolio-card portfolio-card--landscape" data-category="decorative">
-              <div className="img-placeholder" style={{ backgroundColor: '#9a8e85' }}></div>
+            <div className="portfolio-card portfolio-card--landscape" data-category="architectural">
+              <Image
+                src="/images/Objects/gardengate2.jpg"
+                alt="Garden Gate II"
+                fill
+                style={{ objectFit: 'cover' }}
+                sizes="(max-width: 600px) 100vw, (max-width: 900px) 50vw, 50vw"
+              />
               <div className="portfolio-card__overlay">
                 <span className="portfolio-card__number">009</span>
-                <h3 className="portfolio-card__name">Mirror Frame</h3>
+                <h3 className="portfolio-card__name">Garden Gate II</h3>
                 <div className="portfolio-card__meta">
                   <span>Flat Bar</span>
-                  <span>2025</span>
+                  <span>2024</span>
                 </div>
               </div>
             </div>
 
-            <div className="portfolio-card portfolio-card--landscape" data-category="sculpture">
-              <div className="img-placeholder" style={{ backgroundColor: '#6e6058' }}></div>
+            <div className="portfolio-card portfolio-card--landscape" data-category="architectural">
+              <Image
+                src="/images/Objects/securitygate3.jpg"
+                alt="Security Gate III"
+                fill
+                style={{ objectFit: 'cover' }}
+                sizes="(max-width: 600px) 100vw, (max-width: 900px) 50vw, 50vw"
+              />
               <div className="portfolio-card__overlay">
                 <span className="portfolio-card__number">010</span>
-                <h3 className="portfolio-card__name">Abstract Wall Sculpture</h3>
+                <h3 className="portfolio-card__name">Security Gate III</h3>
                 <div className="portfolio-card__meta">
                   <span>Oxidised Steel</span>
                   <span>2025</span>

@@ -2,6 +2,7 @@
 
 import { useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function HomewarePage() {
   useEffect(() => {
@@ -159,10 +160,17 @@ export default function HomewarePage() {
 
         {/* Featured hero */}
         <div className="portfolio-hero reveal">
-          <div className="img-placeholder" style={{ backgroundColor: '#8c837b' }}></div>
+          <Image
+            src="/images/Homeware/houseoffice.jpg"
+            alt="House Office"
+            fill
+            style={{ objectFit: 'cover' }}
+            sizes="(max-width: 600px) 100vw, (max-width: 900px) 100vw, 100vw"
+            priority
+          />
           <div className="portfolio-hero__overlay">
             <span className="portfolio-hero__number">001 — Featured</span>
-            <h2 className="portfolio-hero__title">Floating Wall Shelving System</h2>
+            <h2 className="portfolio-hero__title">House Office</h2>
             <div className="portfolio-hero__tags">
               <span>Steel</span>
               <span>Powder Coat</span>
@@ -178,26 +186,38 @@ export default function HomewarePage() {
           {/* Row 1: wide left + narrow right */}
           <div className="portfolio-grid-row portfolio-grid-row--wide-left">
 
-            <div className="portfolio-card portfolio-card--landscape" data-category="shelving">
-              <div className="img-placeholder" style={{ backgroundColor: '#84745c' }}></div>
+            <div className="portfolio-card portfolio-card--landscape" data-category="tables">
+              <Image
+                src="/images/Homeware/xtable.jpg"
+                alt="X Table"
+                fill
+                style={{ objectFit: 'cover' }}
+                sizes="(max-width: 600px) 100vw, (max-width: 900px) 50vw, 66vw"
+              />
               <div className="portfolio-card__overlay">
                 <span className="portfolio-card__number">002</span>
-                <h3 className="portfolio-card__name">Industrial Pipe Shelving</h3>
+                <h3 className="portfolio-card__name">X Table</h3>
                 <div className="portfolio-card__meta">
-                  <span>Steel Pipe</span>
-                  <span>2024</span>
+                  <span>Steel & Oak</span>
+                  <span>2025</span>
                 </div>
               </div>
             </div>
 
             <div className="portfolio-card portfolio-card--portrait" data-category="tables">
-              <div className="img-placeholder" style={{ backgroundColor: '#6e6058' }}></div>
+              <Image
+                src="/images/Homeware/chair.jpg"
+                alt="Steel Chair"
+                fill
+                style={{ objectFit: 'cover' }}
+                sizes="(max-width: 600px) 100vw, (max-width: 900px) 50vw, 33vw"
+              />
               <div className="portfolio-card__overlay">
                 <span className="portfolio-card__number">003</span>
-                <h3 className="portfolio-card__name">Hairpin Side Table</h3>
+                <h3 className="portfolio-card__name">Steel Chair</h3>
                 <div className="portfolio-card__meta">
-                  <span>Steel & Oak</span>
-                  <span>2025</span>
+                  <span>Mild Steel</span>
+                  <span>2024</span>
                 </div>
               </div>
             </div>
@@ -208,22 +228,34 @@ export default function HomewarePage() {
           <div className="portfolio-grid-row portfolio-grid-row--three">
 
             <div className="portfolio-card portfolio-card--portrait" data-category="hooks">
-              <div className="img-placeholder" style={{ backgroundColor: '#9a8e85' }}></div>
+              <Image
+                src="/images/Homeware/kitchenaid.jpg"
+                alt="Kitchen Aid Stand"
+                fill
+                style={{ objectFit: 'cover' }}
+                sizes="(max-width: 600px) 100vw, (max-width: 900px) 50vw, 33vw"
+              />
               <div className="portfolio-card__overlay">
                 <span className="portfolio-card__number">004</span>
-                <h3 className="portfolio-card__name">Kitchen Hook Rail</h3>
+                <h3 className="portfolio-card__name">Kitchen Aid Stand</h3>
                 <div className="portfolio-card__meta">
-                  <span>Mild Steel</span>
+                  <span>Flat Bar Steel</span>
                   <span>2024</span>
                 </div>
               </div>
             </div>
 
-            <div className="portfolio-card portfolio-card--portrait" data-category="lighting">
-              <div className="img-placeholder" style={{ backgroundColor: '#7a6e64' }}></div>
+            <div className="portfolio-card portfolio-card--portrait" data-category="storage">
+              <Image
+                src="/images/Homeware/fireplace.jpg"
+                alt="Fireplace Surround"
+                fill
+                style={{ objectFit: 'cover' }}
+                sizes="(max-width: 600px) 100vw, (max-width: 900px) 50vw, 33vw"
+              />
               <div className="portfolio-card__overlay">
                 <span className="portfolio-card__number">005</span>
-                <h3 className="portfolio-card__name">Forged Wall Sconce</h3>
+                <h3 className="portfolio-card__name">Fireplace Surround</h3>
                 <div className="portfolio-card__meta">
                   <span>Blackened Steel</span>
                   <span>2025</span>
@@ -232,12 +264,18 @@ export default function HomewarePage() {
             </div>
 
             <div className="portfolio-card portfolio-card--portrait" data-category="storage">
-              <div className="img-placeholder" style={{ backgroundColor: '#8c837b' }}></div>
+              <Image
+                src="/images/Homeware/logstorage.jpg"
+                alt="Log Storage"
+                fill
+                style={{ objectFit: 'cover' }}
+                sizes="(max-width: 600px) 100vw, (max-width: 900px) 50vw, 33vw"
+              />
               <div className="portfolio-card__overlay">
                 <span className="portfolio-card__number">006</span>
-                <h3 className="portfolio-card__name">Magazine Rack</h3>
+                <h3 className="portfolio-card__name">Log Storage</h3>
                 <div className="portfolio-card__meta">
-                  <span>Flat Bar Steel</span>
+                  <span>Round Bar</span>
                   <span>2024</span>
                 </div>
               </div>
@@ -249,24 +287,36 @@ export default function HomewarePage() {
           <div className="portfolio-grid-row portfolio-grid-row--wide-right">
 
             <div className="portfolio-card portfolio-card--portrait" data-category="storage">
-              <div className="img-placeholder" style={{ backgroundColor: '#6e6058' }}></div>
+              <Image
+                src="/images/Homeware/homebar.jpg"
+                alt="Home Bar"
+                fill
+                style={{ objectFit: 'cover' }}
+                sizes="(max-width: 600px) 100vw, (max-width: 900px) 50vw, 33vw"
+              />
               <div className="portfolio-card__overlay">
                 <span className="portfolio-card__number">007</span>
-                <h3 className="portfolio-card__name">Wine Rack</h3>
+                <h3 className="portfolio-card__name">Home Bar</h3>
                 <div className="portfolio-card__meta">
-                  <span>Round Bar</span>
+                  <span>Steel & Weld</span>
                   <span>2025</span>
                 </div>
               </div>
             </div>
 
-            <div className="portfolio-card portfolio-card--landscape" data-category="shelving">
-              <div className="img-placeholder" style={{ backgroundColor: '#84745c' }}></div>
+            <div className="portfolio-card portfolio-card--landscape" data-category="tables">
+              <Image
+                src="/images/Homeware/officedesk.jpg"
+                alt="Office Desk"
+                fill
+                style={{ objectFit: 'cover' }}
+                sizes="(max-width: 600px) 100vw, (max-width: 900px) 50vw, 66vw"
+              />
               <div className="portfolio-card__overlay">
                 <span className="portfolio-card__number">008</span>
-                <h3 className="portfolio-card__name">Corner Bracket Shelving</h3>
+                <h3 className="portfolio-card__name">Office Desk</h3>
                 <div className="portfolio-card__meta">
-                  <span>Angle Iron</span>
+                  <span>Steel & Oak</span>
                   <span>2024</span>
                 </div>
               </div>
@@ -290,12 +340,18 @@ export default function HomewarePage() {
             </div>
 
             <div className="portfolio-card portfolio-card--landscape" data-category="hooks">
-              <div className="img-placeholder" style={{ backgroundColor: '#7a6e64' }}></div>
+              <Image
+                src="/images/Homeware/drain.jpg"
+                alt="Utility Drain"
+                fill
+                style={{ objectFit: 'cover' }}
+                sizes="(max-width: 600px) 100vw, (max-width: 900px) 50vw, 50vw"
+              />
               <div className="portfolio-card__overlay">
                 <span className="portfolio-card__number">010</span>
-                <h3 className="portfolio-card__name">Towel Rail</h3>
+                <h3 className="portfolio-card__name">Utility Drain</h3>
                 <div className="portfolio-card__meta">
-                  <span>Brushed Steel</span>
+                  <span>Mild Steel</span>
                   <span>2024</span>
                 </div>
               </div>
@@ -307,37 +363,55 @@ export default function HomewarePage() {
           <div className="portfolio-grid-row portfolio-grid-row--three">
 
             <div className="portfolio-card portfolio-card--portrait" data-category="storage">
-              <div className="img-placeholder" style={{ backgroundColor: '#8c837b' }}></div>
+              <Image
+                src="/images/Homeware/choppingboard.jpg"
+                alt="Chopping Board"
+                fill
+                style={{ objectFit: 'cover' }}
+                sizes="(max-width: 600px) 100vw, (max-width: 900px) 50vw, 33vw"
+              />
               <div className="portfolio-card__overlay">
                 <span className="portfolio-card__number">011</span>
-                <h3 className="portfolio-card__name">Blanket Ladder</h3>
+                <h3 className="portfolio-card__name">Chopping Board</h3>
                 <div className="portfolio-card__meta">
-                  <span>Round Bar</span>
+                  <span>Steel & Wood</span>
                   <span>2025</span>
                 </div>
               </div>
             </div>
 
-            <div className="portfolio-card portfolio-card--portrait" data-category="hooks">
-              <div className="img-placeholder" style={{ backgroundColor: '#6e6058' }}></div>
+            <div className="portfolio-card portfolio-card--portrait" data-category="storage">
+              <Image
+                src="/images/Homeware/choppingboard2.jpg"
+                alt="Chopping Board II"
+                fill
+                style={{ objectFit: 'cover' }}
+                sizes="(max-width: 600px) 100vw, (max-width: 900px) 50vw, 33vw"
+              />
               <div className="portfolio-card__overlay">
                 <span className="portfolio-card__number">012</span>
-                <h3 className="portfolio-card__name">Coat Stand</h3>
+                <h3 className="portfolio-card__name">Chopping Board II</h3>
                 <div className="portfolio-card__meta">
-                  <span>Box Section</span>
+                  <span>Steel & Wood</span>
                   <span>2024</span>
                 </div>
               </div>
             </div>
 
             <div className="portfolio-card portfolio-card--portrait" data-category="tables">
-              <div className="img-placeholder" style={{ backgroundColor: '#84745c' }}></div>
+              <Image
+                src="/images/Homeware/xtable2.jpg"
+                alt="X Table II"
+                fill
+                style={{ objectFit: 'cover' }}
+                sizes="(max-width: 600px) 100vw, (max-width: 900px) 50vw, 33vw"
+              />
               <div className="portfolio-card__overlay">
                 <span className="portfolio-card__number">013</span>
-                <h3 className="portfolio-card__name">Plant Stand</h3>
+                <h3 className="portfolio-card__name">X Table II</h3>
                 <div className="portfolio-card__meta">
-                  <span>Steel & Weld</span>
-                  <span>2025</span>
+                  <span>Steel & Oak</span>
+                  <span>2024</span>
                 </div>
               </div>
             </div>
