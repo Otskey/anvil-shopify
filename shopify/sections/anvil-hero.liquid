@@ -55,7 +55,7 @@
 
     <div class="anvil-stripe-bg" id="anvil-stripe-bg"></div>
 
-    <h2 class="anvil-waka">{{ section.settings.brand_name | default: 'ANVIL' }}</h2>
+    <h2 class="anvil-waka">{{ section.settings.waka_top | default: 'FOREVER' }}</h2>
 
     <div class="anvil-grid__animation-wrapper">
       <div class="anvil-grid">
@@ -107,7 +107,7 @@
       </div>
     </div>
 
-    <h2 class="anvil-waka anvil-waka--bottom">{{ section.settings.brand_name | default: 'ANVIL' }}</h2>
+    <h2 class="anvil-waka anvil-waka--bottom">{{ section.settings.waka_bottom | default: 'FLOWERS' }}</h2>
 
   </div>
 </div>
@@ -157,6 +157,18 @@
       "id": "brand_name",
       "label": "Brand name",
       "default": "ANVIL"
+    },
+    {
+      "type": "text",
+      "id": "waka_top",
+      "label": "Hero heading (top)",
+      "default": "FOREVER"
+    },
+    {
+      "type": "text",
+      "id": "waka_bottom",
+      "label": "Hero heading (bottom)",
+      "default": "FLOWERS"
     },
     {
       "type": "header",

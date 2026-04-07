@@ -327,7 +327,7 @@
 /* ─── WAKA headings — Libre Baskerville matches main site ── */
 .anvil-waka {
   font-family: var(--font-body);
-  font-size: 23vw;
+  font-size: 16vw;
   line-height: 0.8;
   letter-spacing: -0.09em;
   font-weight: 700;
@@ -351,8 +351,8 @@
 /* ─── Grid animation wrapper ─────────────────────────────── */
 .anvil-grid__animation-wrapper {
   position: absolute;
-  top: calc(23.5vw * 0.8);
-  bottom: calc(23vw * 0.8);
+  top: calc(16.5vw * 0.8);
+  bottom: calc(16vw * 0.8);
   left: 0;
   right: 0;
   overflow: hidden;
