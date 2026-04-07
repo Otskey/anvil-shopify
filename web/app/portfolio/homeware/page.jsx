@@ -3,6 +3,7 @@
 import { useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
+import MobileMenu from '../../components/MobileMenu';
 
 export default function HomewarePage() {
   useEffect(() => {
@@ -121,6 +122,13 @@ export default function HomewarePage() {
       {/* ─── NAV ── */}
       <nav className="site-nav" id="site-nav">
         <ul className="nav-links">
+          <li className="nav-mobile-trigger">
+            <button className="mobile-menu-btn" id="mobile-menu-btn" aria-label="Open menu">
+              <svg viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="6" cy="6" r="6" />
+              </svg>
+            </button>
+          </li>
           <li><Link href="/portfolio/homeware">Homeware</Link></li>
           <li><Link href="/portfolio/objects">Objects</Link></li>
         </ul>
@@ -432,6 +440,8 @@ export default function HomewarePage() {
         </footer>
 
       </main>
+
+      <MobileMenu />
     </>
   );
 }

@@ -3,6 +3,7 @@
 import { useEffect } from 'react';
 import Link from 'next/link';
 import gsap from 'gsap';
+import MobileMenu from './components/MobileMenu';
 
 export default function HomePage() {
   useEffect(() => {
@@ -185,6 +186,13 @@ export default function HomePage() {
       {/* ─── NAV — fixed, opacity 0 until animation completes ─────── */}
       <nav className="site-nav" id="site-nav">
         <ul className="nav-links">
+          <li className="nav-mobile-trigger">
+            <button className="mobile-menu-btn" id="mobile-menu-btn" aria-label="Open menu">
+              <svg viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="6" cy="6" r="6" />
+              </svg>
+            </button>
+          </li>
           <li><a href="#">Store</a></li>
           <li><Link href="/portfolio/homeware">Homeware</Link></li>
           <li><Link href="/portfolio/objects">Objects</Link></li>
@@ -400,6 +408,8 @@ export default function HomePage() {
         </footer>
 
       </div>
+
+      <MobileMenu />
     </>
   );
 }
