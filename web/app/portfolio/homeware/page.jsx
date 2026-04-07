@@ -419,24 +419,7 @@ export default function HomewarePage() {
           </div>
 
         </div>
-
-        {/* Marquee strip */}
-        <div className="marquee-strip" aria-hidden="true">
-          <div className="marquee-track">
-            <span className="marquee-item">Handcrafted in the UK</span>
-            <span className="marquee-item">Steel Homeware</span>
-            <span className="marquee-item">Made to Order</span>
-            <span className="marquee-item">Designed for Life</span>
-            <span className="marquee-item">Handcrafted in the UK</span>
-            <span className="marquee-item">Steel Homeware</span>
-            <span className="marquee-item">Made to Order</span>
-            <span className="marquee-item">Designed for Life</span>
-            <span className="marquee-item">Handcrafted in the UK</span>
-            <span className="marquee-item">Steel Homeware</span>
-            <span className="marquee-item">Made to Order</span>
-          </div>
-        </div>
-
+        
         {/* Footer */}
         <footer className="portfolio-footer">
           <Link href="/" className="portfolio-footer-logo">ANVIL</Link>

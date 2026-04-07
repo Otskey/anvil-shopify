@@ -366,23 +366,6 @@ export default function ObjectsPage() {
 
         </div>
 
-        {/* Marquee strip */}
-        <div className="marquee-strip" aria-hidden="true">
-          <div className="marquee-track">
-            <span className="marquee-item">Handcrafted in the UK</span>
-            <span className="marquee-item">Steel Objects</span>
-            <span className="marquee-item">Made to Commission</span>
-            <span className="marquee-item">Function & Form</span>
-            <span className="marquee-item">Handcrafted in the UK</span>
-            <span className="marquee-item">Steel Objects</span>
-            <span className="marquee-item">Made to Commission</span>
-            <span className="marquee-item">Function & Form</span>
-            <span className="marquee-item">Handcrafted in the UK</span>
-            <span className="marquee-item">Steel Objects</span>
-            <span className="marquee-item">Made to Commission</span>
-          </div>
-        </div>
-
         {/* Footer */}
         <footer className="portfolio-footer">
           <Link href="/" className="portfolio-footer-logo">ANVIL</Link>
