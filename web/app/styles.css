@@ -241,38 +241,6 @@ body {
   object-position: center top;    /* portrait photos: keep face/top in frame */
 }
 
-/* ── Replay button ───────────────────────────────────────────── */
-/*
-  Shown after the animation ends (added via JS).
-  Not part of the original — purely for demo convenience.
-*/
-.replay-btn {
-  position: fixed;
-  bottom: 24px;
-  right: 24px;
-  z-index: 100;
-  padding: 8px 16px;
-  background: rgba(0, 0, 0, 0.75);
-  color: #fff;
-  font-size: 13px;
-  letter-spacing: 0.05em;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  opacity: 0;                     /* revealed by JS after animation */
-  pointer-events: none;
-  transition: opacity 0.3s ease;
-}
-
-.replay-btn.is-visible {
-  opacity: 1;
-  pointer-events: auto;
-}
-
-.replay-btn:hover {
-  background: rgba(0, 0, 0, 0.9);
-}
-
 /* ============================================================
    ADDED DESIGN ELEMENTS
    Cursor · Nav · Hero frame · Page content

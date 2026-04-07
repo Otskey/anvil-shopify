@@ -11,7 +11,7 @@ export default function HomePage() {
     const wakaTop     = document.querySelector('.waka');
     const wakaBottom  = document.querySelector('.waka--bottom');
     const gridWrapper = document.querySelector('.grid__animation-wrapper');
-    const replayBtn   = document.querySelector('.replay-btn');
+   
 
     function getInitialScale() {
       const containerH = container.getBoundingClientRect().height;
@@ -64,23 +64,8 @@ export default function HomePage() {
 
       document.getElementById('site-nav').classList.add('is-visible');
       document.getElementById('hero-frame').classList.add('is-revealed');
-
-      replayBtn.classList.add('is-visible');
     }
 
-    function replay() {
-      const sw = document.querySelector('.scroll-wrapper');
-      sw.style.height   = '100vh';
-      sw.style.overflow = 'hidden';
-
-      document.getElementById('site-nav').classList.remove('is-visible');
-      document.getElementById('hero-frame').classList.remove('is-revealed');
-
-      replayBtn.classList.remove('is-visible');
-      runAnimation();
-    }
-
-    replayBtn.addEventListener('click', replay);
 
     // Wait for fonts + images so the container has its final rendered height
     if (document.readyState === 'complete') {
@@ -163,13 +148,6 @@ export default function HomePage() {
     });
     mutationObserver.observe(heroFrame, { attributes: true, attributeFilter: ['class'] });
 
-    function handleReplaySidebar() {
-      sidebarActive = false;
-      heroSidebar.classList.remove('is-revealed');
-      heroSidebar.style.top     = '';
-      heroSidebar.style.opacity = '';
-    }
-    replayBtn.addEventListener('click', handleReplaySidebar);
 
     // ─── Scroll reveal ────────────────────────────────────────────────────────
     const scrollObserver = new IntersectionObserver(entries => {
@@ -185,8 +163,6 @@ export default function HomePage() {
     // ─── Cleanup ──────────────────────────────────────────────────────────────
     return () => {
       window.removeEventListener('load', runAnimation);
-      replayBtn.removeEventListener('click', replay);
-      replayBtn.removeEventListener('click', handleReplaySidebar);
       document.removeEventListener('mousemove', handleMouseMove);
       hoverEls.forEach(el => {
         el.removeEventListener('mouseenter', handleMouseEnter);
@@ -305,7 +281,6 @@ export default function HomePage() {
       </div>
       {/* ═══════════════════════════════════════════════════════════════ */}
 
-      <button className="replay-btn" aria-label="Replay animation">{'\u21BB'} Replay</button>
 
       {/* ─── PAGE CONTENT — scrollable after animation ──────────────── */}
       <div id="page-content">
