@@ -65,6 +65,7 @@ export default function HomePage() {
 
       document.getElementById('site-nav').classList.add('is-visible');
       document.getElementById('hero-frame').classList.add('is-revealed');
+      document.getElementById('hero-bottom-row').classList.add('is-revealed');
     }
 
 
@@ -104,8 +105,22 @@ export default function HomePage() {
     tick();
     const clockId = setInterval(tick, 60000);
 
+    // ─── Nav: transparent → solid on scroll ──────────────────────────────────
+    const siteNav = document.getElementById('site-nav');
+
+    function handleNavScroll() {
+      if (window.scrollY > 20) {
+        siteNav.classList.add('is-scrolled');
+      } else {
+        siteNav.classList.remove('is-scrolled');
+      }
+    }
+
+    window.addEventListener('scroll', handleNavScroll, { passive: true });
+
     // ─── Hero frame + border lines on scroll ──────────────────────────────────
     const heroFrame     = document.getElementById('hero-frame');
+    const heroBottomRow = document.getElementById('hero-bottom-row');
     const heroBorderL   = document.getElementById('hero-border-left');
     const heroBorderR   = document.getElementById('hero-border-right');
     const scrollWrapper = document.querySelector('.scroll-wrapper');
@@ -115,6 +130,8 @@ export default function HomePage() {
       const below = rect.bottom <= 0;
       heroFrame.style.opacity       = below ? '0' : '';
       heroFrame.style.pointerEvents = below ? 'none' : '';
+      // Translate the row up by the scroll amount so it scrolls off-screen naturally
+      heroBottomRow.style.transform = `translateY(-${window.scrollY}px)`;
       const lineH = Math.max(0, rect.bottom) + 'px';
       heroBorderL.style.height = lineH;
       heroBorderR.style.height = lineH;
@@ -170,6 +187,7 @@ export default function HomePage() {
         el.removeEventListener('mouseleave', handleMouseLeave);
       });
       clearInterval(clockId);
+      window.removeEventListener('scroll', handleNavScroll);
       window.removeEventListener('scroll', handleHeroScroll);
       window.removeEventListener('scroll', updateSidebar);
       mutationObserver.disconnect();
@@ -199,7 +217,6 @@ export default function HomePage() {
         </ul>
         <Link href="/" className="nav-logo">ANVIL</Link>
         <div className="nav-right">
-          <p className="hero-issue">Issue No. 001 |</p>
           <span id="clock"></span>
         </div>
       </nav>
@@ -216,15 +233,19 @@ export default function HomePage() {
 
       <div className="hero-frame" id="hero-frame">
         <div className="hero-frame-left"></div>
-        <div className="hero-frame-right">
-          <div
-            className="hero-scroll-hint"
-            onClick={() => document.getElementById('below-marquee')?.scrollIntoView({ behavior: 'smooth' })}
-            style={{ cursor: 'pointer' }}
-          >
-            <div className="scroll-arrow"></div>
-            <span>Scroll</span>
-          </div>
+        <div className="hero-frame-right"></div>
+      </div>
+
+      {/* ─── ISSUE + SCROLL — fixed independently, unaffected by hero scroll-out ── */}
+      <div className="hero-bottom-row" id="hero-bottom-row">
+        <span className="hero-issue">Issue No. 001</span>
+        <div
+          className="hero-scroll-hint"
+          onClick={() => document.getElementById('below-marquee')?.scrollIntoView({ behavior: 'smooth' })}
+          style={{ cursor: 'pointer' }}
+        >
+          <div className="scroll-arrow"></div>
+          <span>Scroll</span>
         </div>
       </div>
 

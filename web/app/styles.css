@@ -280,17 +280,40 @@ body {
   align-items: center;
   padding: 1.25rem 1rem 1.25rem 2.5rem;
   opacity: 0;
-  transition: opacity .5s ease;
+  background: transparent;
+  transition: opacity .5s ease, background .4s ease;
 }
 
 .site-nav.is-visible {
   opacity: 1;
 }
 
-.site-nav.is-visible .hero-issue {
-  opacity: 1;
-  transform: none;
+/* Transparent state — hide nav links only; clock and mobile dot keep their default colour */
+.site-nav.is-visible:not(.is-scrolled) .nav-links a {
+  color: #edeae4;
 }
+
+.site-nav.is-visible:not(.is-scrolled) .nav-links a::after {
+  background: #edeae4;
+}
+
+/* Nav logo hidden until scrolled */
+.site-nav:not(.is-scrolled) .nav-logo {
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Scrolled state — solid background, dark colours restored */
+.site-nav.is-scrolled {
+  background: #edeae4;
+}
+
+.site-nav.is-scrolled .nav-logo {
+  opacity: 1;
+  pointer-events: auto;
+  transition: opacity .4s ease;
+}
+
 
 .nav-links {
   display: flex;
@@ -306,6 +329,7 @@ body {
   text-decoration: none;
   color: #0e0d0b;
   position: relative;
+  transition: color .4s ease;
 }
 
 .nav-links a::after {
@@ -328,6 +352,7 @@ body {
   letter-spacing: .05em;
   text-decoration: none;
   color: #0e0d0b;
+  transition: opacity .4s ease;
 }
 
 .nav-right {
@@ -342,6 +367,7 @@ body {
   font-size: .6rem;
   letter-spacing: .15em;
   color: #7a7268;
+  transition: color .4s ease;
 }
 
 /* ── Mobile menu trigger ─────────────────────────────────────── */
@@ -351,6 +377,7 @@ body {
   background: none;
   border: none;
   padding: 0;
+  transition: color .4s ease;
   width: 12px;
   height: 12px;
   color: #0e0d0b;
@@ -521,26 +548,41 @@ body {
 }
 
 .hero-frame-right {
+  width: 22vw;
+  justify-content: flex-start;
+}
+
+/* ── Issue No. + Scroll row — fixed independently of hero-frame ── */
+.hero-bottom-row {
+  position: fixed;
+  top: 5rem;         /* vertical position from top — tune this to reposition */
+  right: 0;
+  width: 22vw;       /* mirrors hero-frame-right: 11vw each side of border */
+  display: flex;
+  align-items: center;
   justify-content: space-between;
-  padding-top: 5rem; /* clear the nav */
-  padding-left: 2rem;
-  padding-right: 1rem;
+  padding-left: 2.5vw;  /* gap: Issue No. ↔ border */
+  padding-right: 2.5vw; /* gap: border ↔ Scroll */
+  z-index: 10;
+  pointer-events: auto;
+  opacity: 0;
+  transition: opacity .55s ease .05s;
+}
+
+.hero-bottom-row.is-revealed {
+  opacity: 1;
 }
 
 /* Text content — hidden until animation completes */
 .hero-label,
-.hero-tagline,
-.hero-issue,
-.hero-scroll-hint {
+.hero-tagline {
   opacity: 0;
   transform: translateY(6px);
   transition: opacity .55s ease, transform .55s ease;
 }
 
-.hero-frame.is-revealed .hero-label      { opacity: 1; transform: none; transition-delay: .0s; }
-.hero-frame.is-revealed .hero-tagline    { opacity: 1; transform: none; transition-delay: .1s; }
-.hero-frame.is-revealed .hero-issue      { opacity: 1; transform: none; transition-delay: .05s; }
-.hero-frame.is-revealed .hero-scroll-hint { opacity: 1; transform: none; transition-delay: .2s; }
+.hero-frame.is-revealed .hero-label   { opacity: 1; transform: none; transition-delay: .0s; }
+.hero-frame.is-revealed .hero-tagline { opacity: 1; transform: none; transition-delay: .1s; }
 
 .hero-label {
   font-family: 'Space Mono', monospace;
@@ -569,10 +611,11 @@ body {
 
 .hero-issue {
   font-family: 'Space Mono', monospace;
-  font-size: .6rem;
+  font-size: .55rem;
   letter-spacing: .25em;
   text-transform: uppercase;
   color: #7a7268;
+  white-space: nowrap;
 }
 
 .hero-scroll-hint {
@@ -584,7 +627,6 @@ body {
   letter-spacing: .2em;
   text-transform: uppercase;
   color: #7a7268;
-  margin-bottom: 3rem;
 }
 
 .scroll-arrow {
@@ -921,9 +963,9 @@ footer {
   /* Reduce margin columns so sidebar text has room and borders don't crowd nav */
   .hero-border-left  { left: 8vw; }
   .hero-border-right { right: 8vw; }
-  .hero-frame-left,
-  .hero-frame-right  { width: 8vw; padding: 1rem; }
-  .hero-frame-right  { padding-top: 4rem; padding-left: 1.25rem; }
+  .hero-frame-left   { width: 8vw; padding: 1rem; }
+  .hero-frame-right  { width: 16vw; }
+  .hero-bottom-row   { width: 16vw; padding-left: 1.5vw; padding-right: 1.5vw; }
 
   /* Pull nav links closer to left edge — more breathing room before the border */
   .site-nav          { padding: 1.25rem 1rem 1.25rem 1.5rem; }
@@ -939,6 +981,7 @@ footer {
   .hero-border-right { display: none; }
   .hero-frame-left,
   .hero-frame-right  { display: none; }
+  .hero-bottom-row   { display: none; }
   .hero-sidebar-text { display: none; }
   /* Nav: collapse to dot (left) + ANVIL (right) */
   .site-nav          { grid-template-columns: auto 1fr; padding: 1.25rem 1rem; }
