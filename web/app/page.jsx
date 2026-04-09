@@ -417,9 +417,16 @@ export default function HomePage() {
           <div className="footer-col reveal">
             <h4>Contact</h4>
             <ul>
-              <li><a href="#">Instagram</a></li>
               <li><a href="#">Contact</a></li>
               <li><a href="#">Stockists</a></li>
+            </ul>
+          </div>
+          <div className="footer-col reveal">
+            <h4>Follow</h4>
+            <ul>
+              <li><a href="https://www.instagram.com/anvil_fabrication" target="_blank" rel="noopener noreferrer">Instagram</a></li>
+              <li><a href="https://www.tiktok.com/@anvil_fabrication" target="_blank" rel="noopener noreferrer">TikTok</a></li>
+              <li><a href="https://www.facebook.com/anvildesignandfabrication" target="_blank" rel="noopener noreferrer">Facebook</a></li>
             </ul>
           </div>
           <div className="footer-bottom">
