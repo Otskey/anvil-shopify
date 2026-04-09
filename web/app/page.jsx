@@ -417,7 +417,7 @@ export default function HomePage() {
           <div className="footer-col reveal">
             <h4>Contact</h4>
             <ul>
-              <li><a href="#">Contact</a></li>
+              <li><a href="/contact">Contact</a></li>
               <li><a href="#">Stockists</a></li>
             </ul>
           </div>
