@@ -1,15 +1,53 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import MobileMenu from '../../components/MobileMenu';
+import { meta, filters, featured, items } from '../../data/homeware';
+
+// ─── Layout helpers ───────────────────────────────────────────────────────────
+// Row patterns cycle: wide-left (2 items), three-col (3 items),
+// wide-right (2 items), two-col (2 items), then repeat.
+const ROW_PATTERNS   = ['wide-left', 'three', 'wide-right', 'two'];
+const ROW_ITEM_COUNT = { 'wide-left': 2, 'three': 3, 'wide-right': 2, 'two': 2 };
+
+function groupIntoRows(portfolioItems) {
+  const rows = [];
+  let itemIndex    = 0;
+  let patternIndex = 0;
+  while (itemIndex < portfolioItems.length) {
+    const rowType    = ROW_PATTERNS[patternIndex % ROW_PATTERNS.length];
+    const itemsInRow = portfolioItems.slice(itemIndex, itemIndex + ROW_ITEM_COUNT[rowType]);
+    rows.push({ rowType, itemsInRow });
+    itemIndex    += ROW_ITEM_COUNT[rowType];
+    patternIndex += 1;
+  }
+  return rows;
+}
 
 export default function HomewarePage() {
+  const [activeFilter, setActiveFilter] = useState('all');
+
+  // Derive the visible items and grid layout from the active filter.
+  // The count in the header always reflects the full catalogue total.
+  const filteredItems = activeFilter === 'all'
+    ? items
+    : items.filter(item => item.category === activeFilter);
+
+  // When a subcategory is active, the first matching item becomes the hero;
+  // the remaining items fill the grid. For 'all', use the dedicated featured object.
+  const heroItem  = activeFilter === 'all' ? featured : filteredItems[0];
+  const heroTags  = activeFilter === 'all' ? featured.tags : [heroItem?.material, heroItem?.year].filter(Boolean);
+  const gridItems = activeFilter === 'all' ? items : filteredItems.slice(1);
+
+  const totalCount = items.length + 1; // +1 for the featured hero
+  const gridRows   = groupIntoRows(gridItems);
+
+  // ─── Cursor, clock, nav — run once on mount ─────────────────────────────────
   useEffect(() => {
     document.title = 'Homeware — ANVIL';
 
-    // ─── Custom cursor ────────────────────────────────────────────────────────
     const cursor = document.getElementById('cursor');
 
     function handleMouseMove(e) {
@@ -27,8 +65,8 @@ export default function HomewarePage() {
       el.addEventListener('mouseleave', handleMouseLeave);
     });
 
-    // ─── Clock ───────────────────────────────────────────────────────────────
     const clockEl = document.getElementById('clock');
+    var clockId;
     if (clockEl) {
       function updateClock() {
         const now = new Date();
@@ -38,67 +76,14 @@ export default function HomewarePage() {
         clockEl.textContent = h + ':' + m + ':' + s;
       }
       updateClock();
-      var clockId = setInterval(updateClock, 1000);
+      clockId = setInterval(updateClock, 1000);
     }
 
-    // ─── Nav visible immediately (no animation on portfolio pages) ───────────
     const nav = document.getElementById('site-nav');
     if (nav) {
       nav.classList.add('is-visible');
     }
 
-    // ─── Filter system ────────────────────────────────────────────────────────
-    const filterTags = document.querySelectorAll('.filter-tag');
-    const cards      = document.querySelectorAll('.portfolio-card');
-
-    function handleFilterClick() {
-      filterTags.forEach(function (t) { t.classList.remove('active'); });
-      this.classList.add('active');
-
-      const selected = this.dataset.filter;
-
-      cards.forEach(function (card) {
-        if (selected === 'all' || card.dataset.category === selected) {
-          card.classList.remove('is-hidden');
-        } else {
-          card.classList.add('is-hidden');
-        }
-      });
-    }
-
-    filterTags.forEach(function (tag) {
-      tag.addEventListener('click', handleFilterClick);
-    });
-
-    // ─── Scroll reveal ────────────────────────────────────────────────────────
-    const revealEls = document.querySelectorAll('.reveal, .reveal-stagger');
-
-    const observer = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('in-view');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.1 });
-
-    revealEls.forEach(function (el) { observer.observe(el); });
-
-    // ─── Portfolio grid stagger reveal ───────────────────────────────────────
-    const gridRows = document.querySelectorAll('.portfolio-grid-row');
-
-    const rowObserver = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('in-view');
-          rowObserver.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.08 });
-
-    gridRows.forEach(function (row) { rowObserver.observe(row); });
-
-    // ─── Cleanup ──────────────────────────────────────────────────────────────
     return () => {
       clearInterval(clockId);
       document.removeEventListener('mousemove', handleMouseMove);
@@ -106,13 +91,52 @@ export default function HomewarePage() {
         el.removeEventListener('mouseenter', handleMouseEnter);
         el.removeEventListener('mouseleave', handleMouseLeave);
       });
-      filterTags.forEach(function (tag) {
-        tag.removeEventListener('click', handleFilterClick);
-      });
-      observer.disconnect();
-      rowObserver.disconnect();
     };
   }, []);
+
+  // ─── Scroll reveal for header/hero — run once on mount ──────────────────────
+  useEffect(() => {
+    const revealEls = document.querySelectorAll('.reveal, .reveal-stagger');
+
+    const revealObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    revealEls.forEach(function (el) { revealObserver.observe(el); });
+
+    return () => { revealObserver.disconnect(); };
+  }, []);
+
+  // ─── Grid stagger — re-run after filter changes so new rows animate in ───────
+  // On initial load the observer triggers as the user scrolls.
+  // After a filter change we add in-view immediately so there is no flash.
+  useEffect(() => {
+    const gridRowEls = document.querySelectorAll('.portfolio-grid-row');
+
+    if (activeFilter === 'all') {
+      // Initial / reset: use IntersectionObserver for scroll-triggered stagger
+      const rowObserver = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('in-view');
+            rowObserver.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.08 });
+
+      gridRowEls.forEach(function (row) { rowObserver.observe(row); });
+
+      return () => { rowObserver.disconnect(); };
+    } else {
+      // Filtered view: show all rows immediately, no stagger delay
+      gridRowEls.forEach(function (row) { row.classList.add('in-view'); });
+    }
+  }, [activeFilter]);
 
   return (
     <>
@@ -145,289 +169,98 @@ export default function HomewarePage() {
         {/* Header */}
         <header className="portfolio-header reveal">
           <p className="portfolio-breadcrumb">
-            <Link href="/">Portfolio</Link> / Homeware
+            <Link href="/">Portfolio</Link> / {meta.title}
           </p>
           <div className="portfolio-header-inner">
-            <h1 className="portfolio-title">Homeware</h1>
+            <h1 className="portfolio-title">{meta.title}</h1>
             <div className="portfolio-meta">
-              <span className="portfolio-meta-count">12 Works</span>
-              <p className="portfolio-meta-desc">Steel homeware designed for everyday life — shelving, tables, storage and light, all made by hand in the UK.</p>
+              <span className="portfolio-meta-count">{totalCount} Works</span>
+              <p className="portfolio-meta-desc">{meta.description}</p>
             </div>
           </div>
         </header>
 
-        {/* Filter bar */}
+        {/* Filter bar — category values here must match item.category in data/homeware.js */}
         <div className="portfolio-filter">
-          <button className="filter-tag active" data-filter="all">All</button>
-          <button className="filter-tag" data-filter="shelving">Shelving</button>
-          <button className="filter-tag" data-filter="tables">Tables</button>
-          <button className="filter-tag" data-filter="lighting">Lighting</button>
-          <button className="filter-tag" data-filter="storage">Storage</button>
-          <button className="filter-tag" data-filter="hooks">Hooks & Rails</button>
+          {filters.map((filter) => (
+            <button
+              key={filter.value}
+              className={`filter-tag${activeFilter === filter.value ? ' active' : ''}`}
+              data-filter={filter.value}
+              onClick={() => setActiveFilter(filter.value)}
+            >
+              {filter.label}
+            </button>
+          ))}
         </div>
 
-        {/* Featured hero */}
-        <div className="portfolio-hero reveal">
-          <Image
-            src="/images/Homeware/houseoffice.jpg"
-            alt="House Office"
-            fill
-            style={{ objectFit: 'cover' }}
-            sizes="(max-width: 600px) 100vw, (max-width: 900px) 100vw, 100vw"
-            priority
-          />
-          <div className="portfolio-hero__overlay">
-            <span className="portfolio-hero__number">001 — Featured</span>
-            <h2 className="portfolio-hero__title">House Office</h2>
-            <div className="portfolio-hero__tags">
-              <span>Steel</span>
-              <span>Powder Coat</span>
-              <span>2025</span>
-              <span>Bespoke</span>
+        {/* Featured hero — item 001, updates when a subcategory filter is active */}
+        {heroItem && (
+          <div className="portfolio-hero reveal">
+            <Image
+              src={heroItem.src}
+              alt={heroItem.alt}
+              fill
+              style={{ objectFit: 'cover' }}
+              sizes="(max-width: 600px) 100vw, (max-width: 900px) 100vw, 100vw"
+              priority
+            />
+            <div className="portfolio-hero__overlay">
+              <span className="portfolio-hero__number">001 — Featured</span>
+              <h2 className="portfolio-hero__title">{heroItem.title}</h2>
+              <div className="portfolio-hero__tags">
+                {heroTags.map((tag) => (
+                  <span key={tag}>{tag}</span>
+                ))}
+              </div>
             </div>
           </div>
-        </div>
+        )}
 
-        {/* Grid */}
+        {/* Grid — re-renders automatically when activeFilter changes */}
         <div className="portfolio-grid">
+          {gridRows.map((row, rowIndex) => (
+            <div
+              key={rowIndex}
+              className={`portfolio-grid-row portfolio-grid-row--${row.rowType}`}
+            >
+              {row.itemsInRow.map((item, positionInRow) => {
+                // Calculate the global item number across all rows
+                const globalItemNumber = gridRows
+                  .slice(0, rowIndex)
+                  .reduce((count, previousRow) => count + previousRow.itemsInRow.length, 0)
+                  + positionInRow + 2; // +2 because featured hero is 001
 
-          {/* Row 1: wide left + narrow right */}
-          <div className="portfolio-grid-row portfolio-grid-row--wide-left">
-
-            <div className="portfolio-card portfolio-card--landscape" data-category="tables">
-              <Image
-                src="/images/Homeware/xtable.jpg"
-                alt="X Table"
-                fill
-                style={{ objectFit: 'cover' }}
-                sizes="(max-width: 600px) 100vw, (max-width: 900px) 50vw, 66vw"
-              />
-              <div className="portfolio-card__overlay">
-                <span className="portfolio-card__number">002</span>
-                <h3 className="portfolio-card__name">X Table</h3>
-                <div className="portfolio-card__meta">
-                  <span>Steel & Oak</span>
-                  <span>2025</span>
-                </div>
-              </div>
+                return (
+                  <div
+                    key={item.src}
+                    className={`portfolio-card portfolio-card--${item.aspect}`}
+                    data-category={item.category}
+                  >
+                    <Image
+                      src={item.src}
+                      alt={item.alt}
+                      fill
+                      style={{ objectFit: 'cover' }}
+                      sizes="(max-width: 600px) 100vw, (max-width: 900px) 50vw, 50vw"
+                    />
+                    <div className="portfolio-card__overlay">
+                      <span className="portfolio-card__number">
+                        {String(globalItemNumber).padStart(3, '0')}
+                      </span>
+                      <h3 className="portfolio-card__name">{item.title}</h3>
+                      <div className="portfolio-card__meta">
+                        <span>{item.material}</span>
+                        <span>{item.year}</span>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
-
-            <div className="portfolio-card portfolio-card--portrait" data-category="tables">
-              <Image
-                src="/images/Homeware/chair.jpg"
-                alt="Steel Chair"
-                fill
-                style={{ objectFit: 'cover' }}
-                sizes="(max-width: 600px) 100vw, (max-width: 900px) 50vw, 33vw"
-              />
-              <div className="portfolio-card__overlay">
-                <span className="portfolio-card__number">003</span>
-                <h3 className="portfolio-card__name">Steel Chair</h3>
-                <div className="portfolio-card__meta">
-                  <span>Mild Steel</span>
-                  <span>2024</span>
-                </div>
-              </div>
-            </div>
-
-          </div>
-
-          {/* Row 2: three equal */}
-          <div className="portfolio-grid-row portfolio-grid-row--three">
-
-            <div className="portfolio-card portfolio-card--portrait" data-category="hooks">
-              <Image
-                src="/images/Homeware/kitchenaid.jpg"
-                alt="Kitchen Aid Stand"
-                fill
-                style={{ objectFit: 'cover' }}
-                sizes="(max-width: 600px) 100vw, (max-width: 900px) 50vw, 33vw"
-              />
-              <div className="portfolio-card__overlay">
-                <span className="portfolio-card__number">004</span>
-                <h3 className="portfolio-card__name">Kitchen Aid Stand</h3>
-                <div className="portfolio-card__meta">
-                  <span>Flat Bar Steel</span>
-                  <span>2024</span>
-                </div>
-              </div>
-            </div>
-
-            <div className="portfolio-card portfolio-card--portrait" data-category="storage">
-              <Image
-                src="/images/Homeware/fireplace.jpg"
-                alt="Fireplace Surround"
-                fill
-                style={{ objectFit: 'cover' }}
-                sizes="(max-width: 600px) 100vw, (max-width: 900px) 50vw, 33vw"
-              />
-              <div className="portfolio-card__overlay">
-                <span className="portfolio-card__number">005</span>
-                <h3 className="portfolio-card__name">Fireplace Surround</h3>
-                <div className="portfolio-card__meta">
-                  <span>Blackened Steel</span>
-                  <span>2025</span>
-                </div>
-              </div>
-            </div>
-
-            <div className="portfolio-card portfolio-card--portrait" data-category="storage">
-              <Image
-                src="/images/Homeware/logstorage.jpg"
-                alt="Log Storage"
-                fill
-                style={{ objectFit: 'cover' }}
-                sizes="(max-width: 600px) 100vw, (max-width: 900px) 50vw, 33vw"
-              />
-              <div className="portfolio-card__overlay">
-                <span className="portfolio-card__number">006</span>
-                <h3 className="portfolio-card__name">Log Storage</h3>
-                <div className="portfolio-card__meta">
-                  <span>Round Bar</span>
-                  <span>2024</span>
-                </div>
-              </div>
-            </div>
-
-          </div>
-
-          {/* Row 3: narrow left + wide right */}
-          <div className="portfolio-grid-row portfolio-grid-row--wide-right">
-
-            <div className="portfolio-card portfolio-card--portrait" data-category="storage">
-              <Image
-                src="/images/Homeware/homebar.jpg"
-                alt="Home Bar"
-                fill
-                style={{ objectFit: 'cover' }}
-                sizes="(max-width: 600px) 100vw, (max-width: 900px) 50vw, 33vw"
-              />
-              <div className="portfolio-card__overlay">
-                <span className="portfolio-card__number">007</span>
-                <h3 className="portfolio-card__name">Home Bar</h3>
-                <div className="portfolio-card__meta">
-                  <span>Steel & Weld</span>
-                  <span>2025</span>
-                </div>
-              </div>
-            </div>
-
-            <div className="portfolio-card portfolio-card--landscape" data-category="tables">
-              <Image
-                src="/images/Homeware/officedesk.jpg"
-                alt="Office Desk"
-                fill
-                style={{ objectFit: 'cover' }}
-                sizes="(max-width: 600px) 100vw, (max-width: 900px) 50vw, 66vw"
-              />
-              <div className="portfolio-card__overlay">
-                <span className="portfolio-card__number">008</span>
-                <h3 className="portfolio-card__name">Office Desk</h3>
-                <div className="portfolio-card__meta">
-                  <span>Steel & Oak</span>
-                  <span>2024</span>
-                </div>
-              </div>
-            </div>
-
-          </div>
-
-          {/* Row 4: two equal */}
-          <div className="portfolio-grid-row portfolio-grid-row--two">
-
-            <div className="portfolio-card portfolio-card--landscape" data-category="lighting">
-              <div className="img-placeholder" style={{ backgroundColor: '#9a8e85' }}></div>
-              <div className="portfolio-card__overlay">
-                <span className="portfolio-card__number">009</span>
-                <h3 className="portfolio-card__name">Pendant Ceiling Light</h3>
-                <div className="portfolio-card__meta">
-                  <span>Spun Steel</span>
-                  <span>2025</span>
-                </div>
-              </div>
-            </div>
-
-            <div className="portfolio-card portfolio-card--landscape" data-category="hooks">
-              <Image
-                src="/images/Homeware/drain.jpg"
-                alt="Utility Drain"
-                fill
-                style={{ objectFit: 'cover' }}
-                sizes="(max-width: 600px) 100vw, (max-width: 900px) 50vw, 50vw"
-              />
-              <div className="portfolio-card__overlay">
-                <span className="portfolio-card__number">010</span>
-                <h3 className="portfolio-card__name">Utility Drain</h3>
-                <div className="portfolio-card__meta">
-                  <span>Mild Steel</span>
-                  <span>2024</span>
-                </div>
-              </div>
-            </div>
-
-          </div>
-
-          {/* Row 5: three equal */}
-          <div className="portfolio-grid-row portfolio-grid-row--three">
-
-            <div className="portfolio-card portfolio-card--portrait" data-category="storage">
-              <Image
-                src="/images/Homeware/choppingboard.jpg"
-                alt="Chopping Board"
-                fill
-                style={{ objectFit: 'cover' }}
-                sizes="(max-width: 600px) 100vw, (max-width: 900px) 50vw, 33vw"
-              />
-              <div className="portfolio-card__overlay">
-                <span className="portfolio-card__number">011</span>
-                <h3 className="portfolio-card__name">Chopping Board</h3>
-                <div className="portfolio-card__meta">
-                  <span>Steel & Wood</span>
-                  <span>2025</span>
-                </div>
-              </div>
-            </div>
-
-            <div className="portfolio-card portfolio-card--portrait" data-category="storage">
-              <Image
-                src="/images/Homeware/choppingboard2.jpg"
-                alt="Chopping Board II"
-                fill
-                style={{ objectFit: 'cover' }}
-                sizes="(max-width: 600px) 100vw, (max-width: 900px) 50vw, 33vw"
-              />
-              <div className="portfolio-card__overlay">
-                <span className="portfolio-card__number">012</span>
-                <h3 className="portfolio-card__name">Chopping Board II</h3>
-                <div className="portfolio-card__meta">
-                  <span>Steel & Wood</span>
-                  <span>2024</span>
-                </div>
-              </div>
-            </div>
-
-            <div className="portfolio-card portfolio-card--portrait" data-category="tables">
-              <Image
-                src="/images/Homeware/xtable2.jpg"
-                alt="X Table II"
-                fill
-                style={{ objectFit: 'cover' }}
-                sizes="(max-width: 600px) 100vw, (max-width: 900px) 50vw, 33vw"
-              />
-              <div className="portfolio-card__overlay">
-                <span className="portfolio-card__number">013</span>
-                <h3 className="portfolio-card__name">X Table II</h3>
-                <div className="portfolio-card__meta">
-                  <span>Steel & Oak</span>
-                  <span>2024</span>
-                </div>
-              </div>
-            </div>
-
-          </div>
-
+          ))}
         </div>
-        
+
         {/* Footer */}
         <footer className="portfolio-footer">
           <Link href="/" className="portfolio-footer-logo">ANVIL</Link>
