@@ -362,7 +362,7 @@ body {
   gap: 0.75rem;
 }
 
-#clock {
+#date-display {
   font-family: 'Space Mono', monospace;
   font-size: .6rem;
   letter-spacing: .15em;

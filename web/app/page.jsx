@@ -1,11 +1,13 @@
 'use client';
 
-import { useEffect } from 'react';
-import Link from 'next/link';
+import { useEffect, useState } from 'react';
 import gsap from 'gsap';
 import MobileMenu from './components/MobileMenu';
+import SiteNav from './components/SiteNav';
 
 export default function HomePage() {
+  const [navVisible, setNavVisible] = useState(false);
+
   useEffect(() => {
     // ─── GSAP Animation (from animation.js) ──────────────────────────────────
     const container   = document.querySelector('.container');
@@ -63,7 +65,7 @@ export default function HomePage() {
       sw.style.height   = 'auto';
       sw.style.overflow = 'visible';
 
-      document.getElementById('site-nav').classList.add('is-visible');
+      setNavVisible(true);
       document.getElementById('hero-frame').classList.add('is-revealed');
       document.getElementById('hero-bottom-row').classList.add('is-revealed');
     }
@@ -94,29 +96,6 @@ export default function HomePage() {
       el.addEventListener('mouseenter', handleMouseEnter);
       el.addEventListener('mouseleave', handleMouseLeave);
     });
-
-    // ─── Live date ────────────────────────────────────────────────────────────
-    function tick() {
-      const d = new Date();
-      const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-      document.getElementById('clock').textContent =
-        String(d.getDate()).padStart(2,'0') + ' ' + months[d.getMonth()] + ' ' + d.getFullYear();
-    }
-    tick();
-    const clockId = setInterval(tick, 60000);
-
-    // ─── Nav: transparent → solid on scroll ──────────────────────────────────
-    const siteNav = document.getElementById('site-nav');
-
-    function handleNavScroll() {
-      if (window.scrollY > 20) {
-        siteNav.classList.add('is-scrolled');
-      } else {
-        siteNav.classList.remove('is-scrolled');
-      }
-    }
-
-    window.addEventListener('scroll', handleNavScroll, { passive: true });
 
     // ─── Hero frame + border lines on scroll ──────────────────────────────────
     const heroFrame     = document.getElementById('hero-frame');
@@ -186,8 +165,6 @@ export default function HomePage() {
         el.removeEventListener('mouseenter', handleMouseEnter);
         el.removeEventListener('mouseleave', handleMouseLeave);
       });
-      clearInterval(clockId);
-      window.removeEventListener('scroll', handleNavScroll);
       window.removeEventListener('scroll', handleHeroScroll);
       window.removeEventListener('scroll', updateSidebar);
       mutationObserver.disconnect();
@@ -201,25 +178,8 @@ export default function HomePage() {
       {/* ─── CUSTOM CURSOR ──────────────────────────────────────────── */}
       <div className="cursor" id="cursor"></div>
 
-      {/* ─── NAV — fixed, opacity 0 until animation completes ─────── */}
-      <nav className="site-nav" id="site-nav">
-        <ul className="nav-links">
-          <li className="nav-mobile-trigger">
-            <button className="mobile-menu-btn" id="mobile-menu-btn" aria-label="Open menu">
-              <svg viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="6" cy="6" r="6" />
-              </svg>
-            </button>
-          </li>
-          <li><a href="#">Store</a></li>
-          <li><Link href="/portfolio/homeware">Homeware</Link></li>
-          <li><Link href="/portfolio/objects">Objects</Link></li>
-        </ul>
-        <Link href="/" className="nav-logo">ANVIL</Link>
-        <div className="nav-right">
-          <span id="clock"></span>
-        </div>
-      </nav>
+      {/* ─── NAV — hidden until GSAP animation completes ─────── */}
+      <SiteNav variant="home" visible={navVisible} />
 
       {/* ─── HERO BORDER LINES ── */}
       <div className="hero-border-left"  id="hero-border-left"></div>

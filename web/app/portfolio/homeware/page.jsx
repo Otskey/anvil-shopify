@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import MobileMenu from '../../components/MobileMenu';
+import SiteNav from '../../components/SiteNav';
 import { meta, filters, items } from '../../data/homeware';
 import dimensions from '../../data/image-dimensions.json';
 
@@ -37,27 +38,7 @@ export default function HomewarePage() {
       el.addEventListener('mouseleave', handleMouseLeave);
     });
 
-    const clockEl = document.getElementById('clock');
-    var clockId;
-    if (clockEl) {
-      function updateClock() {
-        const now = new Date();
-        const h   = String(now.getHours()).padStart(2, '0');
-        const m   = String(now.getMinutes()).padStart(2, '0');
-        const s   = String(now.getSeconds()).padStart(2, '0');
-        clockEl.textContent = h + ':' + m + ':' + s;
-      }
-      updateClock();
-      clockId = setInterval(updateClock, 1000);
-    }
-
-    const nav = document.getElementById('site-nav');
-    if (nav) {
-      nav.classList.add('is-visible');
-    }
-
     return () => {
-      clearInterval(clockId);
       document.removeEventListener('mousemove', handleMouseMove);
       document.querySelectorAll('a, button, .masonry-item, .filter-tag').forEach(function (el) {
         el.removeEventListener('mouseenter', handleMouseEnter);
@@ -108,24 +89,7 @@ export default function HomewarePage() {
       <div className="cursor" id="cursor"></div>
 
       {/* ─── NAV ── */}
-      <nav className="site-nav" id="site-nav">
-        <ul className="nav-links">
-          <li className="nav-mobile-trigger">
-            <button className="mobile-menu-btn" id="mobile-menu-btn" aria-label="Open menu">
-              <svg viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg">
-                <circle cx="6" cy="6" r="6" />
-              </svg>
-            </button>
-          </li>
-          <li><Link href="/portfolio/homeware">Homeware</Link></li>
-          <li><Link href="/portfolio/objects">Objects</Link></li>
-        </ul>
-        <Link href="/" className="nav-logo">ANVIL</Link>
-        <div className="nav-right">
-          <p className="hero-issue">Issue No. 001 |</p>
-          <span id="clock"></span>
-        </div>
-      </nav>
+      <SiteNav />
 
       {/* ─── PORTFOLIO PAGE ── */}
       <main className="portfolio-page">
