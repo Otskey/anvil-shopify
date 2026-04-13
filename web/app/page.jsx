@@ -1,13 +1,11 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import gsap from 'gsap';
 import MobileMenu from './components/MobileMenu';
 import SiteNav from './components/SiteNav';
 
 export default function HomePage() {
-  const [navVisible, setNavVisible] = useState(false);
-
   useEffect(() => {
     // ─── GSAP Animation (from animation.js) ──────────────────────────────────
     const container   = document.querySelector('.container');
@@ -21,6 +19,8 @@ export default function HomePage() {
       const viewportH  = window.innerHeight;
       return viewportH / containerH;
     }
+
+    let timeline;
 
     function runAnimation() {
       const initialScale = getInitialScale();
@@ -36,24 +36,24 @@ export default function HomePage() {
 
       gsap.set([wakaTop, wakaBottom], { opacity: 0 });
 
-      const tl = gsap.timeline({
+      timeline = gsap.timeline({
         delay: 0.4,
         onComplete: onAnimationComplete,
       });
 
-      tl.to([wakaTop, wakaBottom], {
+      timeline.to([wakaTop, wakaBottom], {
         opacity: 1,
         duration: 0.55,
         ease: 'power2.out',
       });
 
-      tl.to(gridWrapper, {
+      timeline.to(gridWrapper, {
         clipPath: 'inset(0 0 0% 0)',
         duration: 1.3,
         ease: 'power3.out',
       }, '+=0.25');
 
-      tl.to(container, {
+      timeline.to(container, {
         scale: 1,
         duration: 1.9,
         ease: 'power3.inOut',
@@ -65,7 +65,7 @@ export default function HomePage() {
       sw.style.height   = 'auto';
       sw.style.overflow = 'visible';
 
-      setNavVisible(true);
+      document.getElementById('site-nav').classList.add('is-visible');
       document.getElementById('hero-frame').classList.add('is-revealed');
       document.getElementById('hero-bottom-row').classList.add('is-revealed');
     }
@@ -169,7 +169,7 @@ export default function HomePage() {
       window.removeEventListener('scroll', updateSidebar);
       mutationObserver.disconnect();
       scrollObserver.disconnect();
-      gsap.killTweensOf('*');
+      if (timeline) timeline.kill();
     };
   }, []);
 
@@ -179,7 +179,7 @@ export default function HomePage() {
       <div className="cursor" id="cursor"></div>
 
       {/* ─── NAV — hidden until GSAP animation completes ─────── */}
-      <SiteNav variant="home" visible={navVisible} />
+      <SiteNav variant="home" />
 
       {/* ─── HERO BORDER LINES ── */}
       <div className="hero-border-left"  id="hero-border-left"></div>

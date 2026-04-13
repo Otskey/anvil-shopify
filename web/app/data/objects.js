@@ -131,4 +131,12 @@ export const items = [
     material: 'Mild Steel',
     year:     '2025',
   },
+  {
+    src:      '/images/Objects/stairbanister.JPG',
+    alt:      'Bespoke steel stair banister, hand-welded and fitted by Anvil',
+    title:    'Stair Banister',
+    category: 'railings-barriers',
+    material: 'Welded Steel',
+    year:     '2025',
+  },
 ];

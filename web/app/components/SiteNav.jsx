@@ -8,10 +8,9 @@ import Link from 'next/link';
  *
  * @param {"home"|"inner"} variant
  *   "inner" (default) — visible immediately with solid background.
- *   "home"  — hidden until `visible` prop becomes true; background toggles on scroll.
- * @param {boolean} visible  — controls fade-in for the "home" variant.
+ *   "home"  — hidden (display:none) until parent adds `is-visible` via DOM.
  */
-export default function SiteNav({ variant = 'inner', visible = true }) {
+export default function SiteNav({ variant = 'inner' }) {
   const navRef = useRef(null);
 
   // ─── Date display (DD Mon YYYY) ──────────────────────────────────────────────
@@ -34,25 +33,12 @@ export default function SiteNav({ variant = 'inner', visible = true }) {
     return () => clearInterval(id);
   }, []);
 
-  // ─── Visibility & scroll behaviour ───────────────────────────────────────────
+  // ─── Home variant: toggle solid background on scroll ─────────────────────────
   useEffect(() => {
+    if (variant !== 'home') return;
     const nav = navRef.current;
     if (!nav) return;
 
-    if (variant === 'inner') {
-      // Inner pages: solid background, visible immediately
-      nav.classList.add('is-visible', 'is-scrolled');
-      return;
-    }
-
-    // Home variant: visibility controlled by `visible` prop
-    if (visible) {
-      nav.classList.add('is-visible');
-    } else {
-      nav.classList.remove('is-visible');
-    }
-
-    // Toggle solid background on scroll
     function handleScroll() {
       if (window.scrollY > 20) {
         nav.classList.add('is-scrolled');
@@ -62,13 +48,19 @@ export default function SiteNav({ variant = 'inner', visible = true }) {
     }
 
     window.addEventListener('scroll', handleScroll, { passive: true });
-    handleScroll(); // set initial state
+    handleScroll();
 
     return () => window.removeEventListener('scroll', handleScroll);
-  }, [variant, visible]);
+  }, [variant]);
+
+  // Inner pages: visible + scrolled immediately via className (no useEffect delay)
+  // Home page: just "site-nav" (display:none) — parent adds is-visible when ready
+  const className = variant === 'inner'
+    ? 'site-nav is-visible is-scrolled'
+    : 'site-nav';
 
   return (
-    <nav className="site-nav" id="site-nav" ref={navRef}>
+    <nav className={className} id="site-nav" ref={navRef}>
       <ul className="nav-links">
         <li className="nav-mobile-trigger">
           <button className="mobile-menu-btn" id="mobile-menu-btn" aria-label="Open menu">
