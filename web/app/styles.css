@@ -445,6 +445,7 @@ body {
 .mobile-menu.is-open .mobile-menu__nav a:nth-child(1) { opacity: 1; transform: none; transition-delay: 0.45s; }
 .mobile-menu.is-open .mobile-menu__nav a:nth-child(2) { opacity: 1; transform: none; transition-delay: 0.52s; }
 .mobile-menu.is-open .mobile-menu__nav a:nth-child(3) { opacity: 1; transform: none; transition-delay: 0.59s; }
+.mobile-menu.is-open .mobile-menu__nav a:nth-child(4) { opacity: 1; transform: none; transition-delay: 0.66s; }
 .mobile-menu__nav a:hover { color: #7a7268; }
 
 .mobile-menu__close {
