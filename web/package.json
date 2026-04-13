@@ -3,14 +3,20 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "sync-images": "node scripts/sync-image-dimensions.js",
+    "predev": "node scripts/sync-image-dimensions.js",
+    "prebuild": "node scripts/sync-image-dimensions.js",
     "dev": "next dev",
     "build": "next build",
     "start": "next start"
   },
   "dependencies": {
+    "gsap": "^3.12.5",
     "next": "^15.0.0",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0",
-    "gsap": "^3.12.5"
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "image-size": "^2.0.2"
   }
 }

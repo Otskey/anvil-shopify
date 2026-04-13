@@ -4,45 +4,17 @@ import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import MobileMenu from '../../components/MobileMenu';
-import { meta, filters, featured, items } from '../../data/objects';
-
-// ─── Layout helpers ───────────────────────────────────────────────────────────
-// Row patterns cycle: wide-left (2 items), three-col (3 items),
-// wide-right (2 items), two-col (2 items), then repeat.
-const ROW_PATTERNS   = ['wide-left', 'three', 'wide-right', 'two'];
-const ROW_ITEM_COUNT = { 'wide-left': 2, 'three': 3, 'wide-right': 2, 'two': 2 };
-
-function groupIntoRows(portfolioItems) {
-  const rows = [];
-  let itemIndex    = 0;
-  let patternIndex = 0;
-  while (itemIndex < portfolioItems.length) {
-    const rowType    = ROW_PATTERNS[patternIndex % ROW_PATTERNS.length];
-    const itemsInRow = portfolioItems.slice(itemIndex, itemIndex + ROW_ITEM_COUNT[rowType]);
-    rows.push({ rowType, itemsInRow });
-    itemIndex    += ROW_ITEM_COUNT[rowType];
-    patternIndex += 1;
-  }
-  return rows;
-}
+import { meta, filters, items } from '../../data/objects';
+import dimensions from '../../data/image-dimensions.json';
 
 export default function ObjectsPage() {
   const [activeFilter, setActiveFilter] = useState('all');
 
-  // Derive the visible items and grid layout from the active filter.
-  // The count in the header always reflects the full catalogue total.
   const filteredItems = activeFilter === 'all'
     ? items
     : items.filter(item => item.category === activeFilter);
 
-  // When a subcategory is active, the first matching item becomes the hero;
-  // the remaining items fill the grid. For 'all', use the dedicated featured object.
-  const heroItem  = activeFilter === 'all' ? featured : filteredItems[0];
-  const heroTags  = activeFilter === 'all' ? featured.tags : [heroItem?.material, heroItem?.year].filter(Boolean);
-  const gridItems = activeFilter === 'all' ? items : filteredItems.slice(1);
-
-  const totalCount = items.length + 1; // +1 for the featured hero
-  const gridRows   = groupIntoRows(gridItems);
+  const totalCount = items.length;
 
   // ─── Cursor, clock, nav — run once on mount ─────────────────────────────────
   useEffect(() => {
@@ -60,7 +32,7 @@ export default function ObjectsPage() {
 
     document.addEventListener('mousemove', handleMouseMove);
 
-    document.querySelectorAll('a, button, .portfolio-card, .filter-tag').forEach(function (el) {
+    document.querySelectorAll('a, button, .masonry-item, .filter-tag').forEach(function (el) {
       el.addEventListener('mouseenter', handleMouseEnter);
       el.addEventListener('mouseleave', handleMouseLeave);
     });
@@ -87,16 +59,16 @@ export default function ObjectsPage() {
     return () => {
       clearInterval(clockId);
       document.removeEventListener('mousemove', handleMouseMove);
-      document.querySelectorAll('a, button, .portfolio-card, .filter-tag').forEach(function (el) {
+      document.querySelectorAll('a, button, .masonry-item, .filter-tag').forEach(function (el) {
         el.removeEventListener('mouseenter', handleMouseEnter);
         el.removeEventListener('mouseleave', handleMouseLeave);
       });
     };
   }, []);
 
-  // ─── Scroll reveal for header/hero — run once on mount ──────────────────────
+  // ─── Scroll reveal for header — run once on mount ───────────────────────────
   useEffect(() => {
-    const revealEls = document.querySelectorAll('.reveal, .reveal-stagger');
+    const revealEls = document.querySelectorAll('.reveal');
 
     const revealObserver = new IntersectionObserver(function (entries) {
       entries.forEach(function (entry) {
@@ -112,30 +84,22 @@ export default function ObjectsPage() {
     return () => { revealObserver.disconnect(); };
   }, []);
 
-  // ─── Grid stagger — re-run after filter changes so new rows animate in ───────
-  // On initial load the observer triggers as the user scrolls.
-  // After a filter change we add in-view immediately so there is no flash.
+  // ─── Masonry item stagger — re-run after filter changes ─────────────────────
   useEffect(() => {
-    const gridRowEls = document.querySelectorAll('.portfolio-grid-row');
+    const masonryItems = document.querySelectorAll('.masonry-item');
 
-    if (activeFilter === 'all') {
-      // Initial / reset: use IntersectionObserver for scroll-triggered stagger
-      const rowObserver = new IntersectionObserver(function (entries) {
-        entries.forEach(function (entry) {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('in-view');
-            rowObserver.unobserve(entry.target);
-          }
-        });
-      }, { threshold: 0.08 });
+    const itemObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+          itemObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.08 });
 
-      gridRowEls.forEach(function (row) { rowObserver.observe(row); });
+    masonryItems.forEach(function (el) { itemObserver.observe(el); });
 
-      return () => { rowObserver.disconnect(); };
-    } else {
-      // Filtered view: show all rows immediately, no stagger delay
-      gridRowEls.forEach(function (row) { row.classList.add('in-view'); });
-    }
+    return () => { itemObserver.disconnect(); };
   }, [activeFilter]);
 
   return (
@@ -180,7 +144,7 @@ export default function ObjectsPage() {
           </div>
         </header>
 
-        {/* Filter bar — category values here must match item.category in data/objects.js */}
+        {/* Filter bar */}
         <div className="portfolio-filter">
           {filters.map((filter) => (
             <button
@@ -194,71 +158,38 @@ export default function ObjectsPage() {
           ))}
         </div>
 
-        {/* Featured hero — item 001, updates when a subcategory filter is active */}
-        {heroItem && (
-          <div className="portfolio-hero reveal">
-            <Image
-              src={heroItem.src}
-              alt={heroItem.alt}
-              fill
-              style={{ objectFit: 'cover' }}
-              sizes="(max-width: 600px) 100vw, (max-width: 900px) 100vw, 100vw"
-              priority
-            />
-            <div className="portfolio-hero__overlay">
-              <span className="portfolio-hero__number">001 — Featured</span>
-              <h2 className="portfolio-hero__title">{heroItem.title}</h2>
-              <div className="portfolio-hero__tags">
-                {heroTags.map((tag) => (
-                  <span key={tag}>{tag}</span>
-                ))}
-              </div>
-            </div>
-          </div>
-        )}
-
-        {/* Grid — re-renders automatically when activeFilter changes */}
-        <div className="portfolio-grid">
-          {gridRows.map((row, rowIndex) => (
-            <div
-              key={rowIndex}
-              className={`portfolio-grid-row portfolio-grid-row--${row.rowType}`}
-            >
-              {row.itemsInRow.map((item, positionInRow) => {
-                // Calculate the global item number across all rows
-                const globalItemNumber = gridRows
-                  .slice(0, rowIndex)
-                  .reduce((count, previousRow) => count + previousRow.itemsInRow.length, 0)
-                  + positionInRow + 2; // +2 because featured hero is 001
-
-                return (
-                  <div
-                    key={item.src}
-                    className={`portfolio-card portfolio-card--${item.aspect}`}
-                    data-category={item.category}
-                  >
-                    <Image
-                      src={item.src}
-                      alt={item.alt}
-                      fill
-                      style={{ objectFit: 'cover' }}
-                      sizes="(max-width: 600px) 100vw, (max-width: 900px) 50vw, 50vw"
-                    />
-                    <div className="portfolio-card__overlay">
-                      <span className="portfolio-card__number">
-                        {String(globalItemNumber).padStart(3, '0')}
-                      </span>
-                      <h3 className="portfolio-card__name">{item.title}</h3>
-                      <div className="portfolio-card__meta">
-                        <span>{item.material}</span>
-                        <span>{item.year}</span>
-                      </div>
-                    </div>
+        {/* Masonry gallery — images display at their natural proportions */}
+        <div className="portfolio-masonry">
+          {filteredItems.map((item, index) => {
+            const dim = dimensions[item.src] || { width: 800, height: 600 };
+            return (
+              <div
+                key={item.src}
+                className="masonry-item"
+                data-category={item.category}
+              >
+                <Image
+                  src={item.src}
+                  alt={item.alt}
+                  width={dim.width}
+                  height={dim.height}
+                  style={{ width: '100%', height: 'auto' }}
+                  sizes="(max-width: 600px) 100vw, (max-width: 900px) 50vw, 33vw"
+                  priority={index < 4}
+                />
+                <div className="portfolio-card__overlay">
+                  <span className="portfolio-card__number">
+                    {String(index + 1).padStart(3, '0')}
+                  </span>
+                  <h3 className="portfolio-card__name">{item.title}</h3>
+                  <div className="portfolio-card__meta">
+                    <span>{item.material}</span>
+                    <span>{item.year}</span>
                   </div>
-                );
-              })}
-            </div>
-          ))}
+                </div>
+              </div>
+            );
+          })}
         </div>
 
         {/* Footer */}
