@@ -42,7 +42,161 @@ body.anvil-hero-active .anvil-global-nav {
   display: none !important;
 }
 
-/* ─── Header wrapper ─────────────────────────────────────── */
+/* ─── ANVIL nav bar ─────────────────────────────────────── */
+.anvil-nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 500;
+  display: none;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  padding: 1.25rem 1rem 1.25rem 2.5rem;
+  background: transparent;
+  transition: background .4s ease;
+}
+
+.anvil-nav.is-visible {
+  display: grid;
+  animation: anvil-nav-fade-in .5s ease;
+}
+
+@keyframes anvil-nav-fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* Scrolled state — solid background */
+.anvil-nav.is-scrolled {
+  background: var(--anvil-bg);
+  border-bottom: 1px solid var(--anvil-border);
+}
+
+/* Hide logo, links, and actions until scrolled */
+.anvil-nav:not(.is-scrolled) .anvil-nav__logo,
+.anvil-nav:not(.is-scrolled) .anvil-nav__links,
+.anvil-nav:not(.is-scrolled) .anvil-nav__right {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.anvil-nav.is-scrolled .anvil-nav__logo {
+  opacity: 1;
+  pointer-events: auto;
+  transition: opacity .4s ease;
+}
+
+/* Transparent state — light colours over dark hero */
+.anvil-nav.is-visible:not(.is-scrolled) .anvil-nav__links a {
+  color: #edeae4;
+}
+
+.anvil-nav.is-visible:not(.is-scrolled) .anvil-nav__links a::after {
+  background: #edeae4;
+}
+
+.anvil-nav.is-visible:not(.is-scrolled) .anvil-nav__action {
+  color: #edeae4;
+}
+
+.anvil-nav.is-visible:not(.is-scrolled) .anvil-nav__action::after {
+  background: #edeae4;
+}
+
+/* ─── Nav links (left column) ───────────────────────────── */
+.anvil-nav__links {
+  display: flex;
+  gap: 2rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.anvil-nav__links a {
+  font-family: var(--font-mono);
+  font-size: .6rem;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--anvil-ink);
+  position: relative;
+  transition: color .4s ease;
+}
+
+.anvil-nav__links a::after {
+  content: '';
+  position: absolute;
+  bottom: -0.125rem; left: 0;
+  width: 0; height: 1px;
+  background: var(--anvil-ink);
+  transition: width .3s ease;
+}
+
+.anvil-nav__links a:hover::after { width: 100%; }
+
+/* ─── Logo (centre column) ──────────────────────────────── */
+.anvil-nav__logo {
+  text-align: center;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-style: italic;
+  font-size: 1rem;
+  letter-spacing: .05em;
+  text-decoration: none;
+  color: var(--anvil-ink);
+  transition: opacity .4s ease;
+}
+
+/* ─── Right column (actions) ────────────────────────────── */
+.anvil-nav__right {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 1.5rem;
+}
+
+.anvil-nav__action {
+  font-family: var(--font-mono);
+  font-size: .6rem;
+  letter-spacing: .15em;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: var(--anvil-muted);
+  position: relative;
+  transition: color .3s ease;
+}
+
+.anvil-nav__action:hover {
+  color: var(--anvil-ink);
+}
+
+.anvil-nav__action::after {
+  content: '';
+  position: absolute;
+  bottom: -0.125rem; left: 0;
+  width: 0; height: 1px;
+  background: var(--anvil-ink);
+  transition: width .3s ease;
+}
+
+.anvil-nav__action:hover::after { width: 100%; }
+
+/* Cart count bubble */
+.anvil-nav__cart-count {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--anvil-ink);
+  color: var(--anvil-bg);
+  font-family: var(--font-mono);
+  font-size: .45rem;
+  min-width: .85rem;
+  height: .85rem;
+  border-radius: 50%;
+  margin-left: .25rem;
+  vertical-align: middle;
+}
+
+/* ─── Header wrapper (Fluid fallback) ───────────────────── */
 .header-wrapper,
 .header {
   background-color: var(--anvil-bg) !important;
@@ -50,7 +204,7 @@ body.anvil-hero-active .anvil-global-nav {
   box-shadow: none !important;
 }
 
-/* ─── Logo ───────────────────────────────────────────────── */
+/* ─── Logo (Fluid fallback) ─────────────────────────────── */
 .header__heading-link,
 .header__heading {
   font-family: var(--font-display) !important;
@@ -62,7 +216,7 @@ body.anvil-hero-active .anvil-global-nav {
   text-decoration: none !important;
 }
 
-/* ─── Nav menu links ─────────────────────────────────────── */
+/* ─── Nav menu links (Fluid fallback) ───────────────────── */
 .header__menu-item > a,
 .header__active-menu-item {
   font-family: var(--font-mono) !important;
@@ -96,7 +250,7 @@ body.anvil-hero-active .anvil-global-nav {
   fill: var(--anvil-muted) !important;
 }
 
-/* Cart count bubble */
+/* Cart count bubble (Fluid) */
 .cart-count-bubble,
 .header__cart-count-bubble {
   background: var(--anvil-ink) !important;
@@ -148,4 +302,21 @@ body.anvil-hero-active .anvil-global-nav {
   letter-spacing: .2em !important;
   text-transform: uppercase !important;
   color: var(--anvil-bg) !important;
+}
+
+/* ─── Responsive ─────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .anvil-nav {
+    grid-template-columns: auto 1fr;
+    padding: 1.25rem 1rem;
+  }
+  .anvil-nav__right { display: none; }
+  .anvil-nav__logo { text-align: right; }
+}
+
+@media (max-width: 600px) {
+  .anvil-nav {
+    padding: 1rem 1rem;
+  }
+  .anvil-nav__links { gap: 1rem; }
 }

@@ -1,6 +1,4 @@
-{{ 'anvil-hero.css' | asset_url | stylesheet_tag }}
-
-<nav class="anvil-nav is-visible" aria-label="Main navigation">
+<nav class="anvil-nav is-visible is-scrolled" aria-label="Main navigation">
   <ul class="anvil-nav__links">
     {% if section.settings.nav_link_1_label != blank %}
       <li><a href="{{ section.settings.nav_link_1_url }}">{{ section.settings.nav_link_1_label }}</a></li>
@@ -17,7 +15,7 @@
   <div class="anvil-nav__right">
     <a href="/search" class="anvil-nav__action">Search</a>
     <a href="{{ routes.account_url }}" class="anvil-nav__action">Account</a>
-    <a href="{{ routes.cart_url }}" class="anvil-nav__action">
+    <a href="{{ routes.cart_url }}" class="anvil-nav__action anvil-nav__action--cart">
       Cart
       {%- if cart.item_count > 0 -%}
         <span class="anvil-nav__cart-count">{{ cart.item_count }}</span>

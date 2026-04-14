@@ -79,6 +79,7 @@ function anvilHeroInit() {
     scrollWrapper.style.height   = '100vh';
     scrollWrapper.style.overflow = 'hidden';
     nav.classList.remove('is-visible');
+    nav.classList.remove('is-scrolled');
     heroFrame.classList.remove('is-revealed');
     replayBtn.classList.remove('is-visible');
     sidebarActive = false;
@@ -103,6 +104,15 @@ function anvilHeroInit() {
       var lineH = Math.max(0, rect.bottom) + 'px';
       borderL.style.height = lineH;
       borderR.style.height = lineH;
+    }
+
+    /* Toggle solid background on scroll — matches marketing site SiteNav */
+    if (nav) {
+      if (window.scrollY > 20) {
+        nav.classList.add('is-scrolled');
+      } else {
+        nav.classList.remove('is-scrolled');
+      }
     }
 
     updateSidebar();
