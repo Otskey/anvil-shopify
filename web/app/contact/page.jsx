@@ -112,19 +112,22 @@ export default function ContactPage() {
           <div className="contact-info reveal">
 
             <div className="contact-info__block">
-              <p className="contact-info__label">Studio</p>
+              <p className="contact-info__label">Workshop</p>
               <div className="contact-info__value">
-                <p>The Workshop</p>
-                <p>[Street Address]</p>
-                <p>Cambridgeshire</p>
+                <p>Anvil Design & Fabrication</p>
+                <p>Unit 5 Hardwick Rd Ind. Est</p>
+                <p>Hardwick Rd,</p>
+                <p>Great Gransden,</p>
+                <p>Sandy</p>
+                <p>SG19 3BJ</p>
               </div>
             </div>
 
             <div className="contact-info__block">
               <p className="contact-info__label">Enquiries</p>
               <div className="contact-info__value">
-                <p><a href="mailto:studio@anvil-fabrication.co.uk">studio@anvil-fabrication.co.uk</a></p>
-                <p><a href="tel:+44XXXXXXXXXX">+44 (0)XXXX XXXXXX</a></p>
+                <p><a href="mailto:lewisbond@anvilfabrication.com">lewisbond@anvilfabrication.com</a></p>
+                <p><a href="tel:+44XXXXXXXXXX">+44 07921 382430</a></p>
               </div>
             </div>
 
