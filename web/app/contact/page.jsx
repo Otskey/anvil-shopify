@@ -115,7 +115,7 @@ export default function ContactPage() {
               <p className="contact-info__label">Workshop</p>
               <div className="contact-info__value">
                 <p>Anvil Design & Fabrication</p>
-                <p>Unit 5 Hardwick Rd Ind. Est</p>
+                <p>Unit 6 - 7 Hardwick Rd Ind. Est</p>
                 <p>Hardwick Rd,</p>
                 <p>Great Gransden,</p>
                 <p>Sandy</p>
