@@ -367,9 +367,13 @@ export default function HomePage() {
             <p className="editorial-byline">— Studio Statement, 2024</p>
           </div>
           <div className="editorial-image">
-            <img
+            <Image
               src="https://cdn.sanity.io/images/8yrspuwy/production/84cea93a1f875612a2e2640e6b031d1ec8ed0324-2418x3021.jpg"
-              alt="Studio photography" loading="lazy" />
+              alt="Studio photography"
+              width={2418}
+              height={3021}
+              sizes="(max-width: 900px) 100vw, 50vw"
+            />
           </div>
         </section>
 
