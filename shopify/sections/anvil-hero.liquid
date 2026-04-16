@@ -3,21 +3,34 @@
 
 <!-- ─── NAV ──────────────────────────────────────────────────── -->
 <nav class="anvil-nav" id="anvil-nav">
-  <ul class="anvil-nav__links">
-    {% if section.settings.nav_link_1_label != blank %}
-      <li><a href="{{ section.settings.nav_link_1_url }}">{{ section.settings.nav_link_1_label }}</a></li>
-    {% endif %}
-    {% if section.settings.nav_link_2_label != blank %}
-      <li><a href="{{ section.settings.nav_link_2_url }}">{{ section.settings.nav_link_2_label }}</a></li>
-    {% endif %}
-  </ul>
+  <!-- LEFT: text links (desktop) + dot trigger & search icon (mobile) -->
+  <div class="anvil-nav__left">
+    <ul class="anvil-nav__links">
+      {% if section.settings.nav_link_1_label != blank %}
+        <li><a href="{{ section.settings.nav_link_1_url }}">{{ section.settings.nav_link_1_label }}</a></li>
+      {% endif %}
+      {% if section.settings.nav_link_2_label != blank %}
+        <li><a href="{{ section.settings.nav_link_2_url }}">{{ section.settings.nav_link_2_label }}</a></li>
+      {% endif %}
+    </ul>
 
+    <button class="anvil-nav__mobile-trigger" id="anvil-mobile-menu-btn" aria-label="Open menu" aria-expanded="false" aria-controls="anvil-mobile-menu" type="button">
+      <svg viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="6" cy="6" r="6"/></svg>
+    </button>
+
+    <a href="{{ routes.search_url }}" class="anvil-nav__mobile-icon" aria-label="Search">
+      {% render 'anvil-icon-search' %}
+    </a>
+  </div>
+
+  <!-- CENTRE: logo -->
   <a href="{{ routes.root_url }}" class="anvil-nav__logo">
     {{ section.settings.brand_name | default: 'ANVIL' }}
   </a>
 
+  <!-- RIGHT: text actions (desktop) + account/cart icons (mobile) -->
   <div class="anvil-nav__right">
-    <a href="/search" class="anvil-nav__action">Search</a>
+    <a href="{{ routes.search_url }}" class="anvil-nav__action">Search</a>
     <a href="{{ routes.account_url }}" class="anvil-nav__action">Account</a>
     <a href="{{ routes.cart_url }}" class="anvil-nav__action">
       Cart
@@ -25,8 +38,35 @@
         <span class="anvil-nav__cart-count">{{ cart.item_count }}</span>
       {%- endif -%}
     </a>
+
+    <a href="{{ routes.account_url }}" class="anvil-nav__mobile-icon" aria-label="Account">
+      {% render 'anvil-icon-account' %}
+    </a>
+    <a href="{{ routes.cart_url }}" class="anvil-nav__mobile-icon" aria-label="Cart">
+      {% render 'anvil-icon-cart' %}
+      {%- if cart.item_count > 0 -%}
+        <span class="anvil-nav__cart-count anvil-nav__cart-count--icon">{{ cart.item_count }}</span>
+      {%- endif -%}
+    </a>
   </div>
 </nav>
+
+<!-- ─── MOBILE MENU OVERLAY ──────────────────────────────────── -->
+<div class="anvil-mobile-menu" id="anvil-mobile-menu" aria-hidden="true">
+  <div class="anvil-mobile-menu__circle"></div>
+  <div class="anvil-mobile-menu__content">
+    <nav class="anvil-mobile-menu__nav">
+      <a href="{{ routes.root_url }}">Home</a>
+      <a href="{{ section.settings.nav_link_2_url | default: routes.collections_url }}">{{ section.settings.nav_link_2_label | default: 'Catalogue' }}</a>
+      <a href="{{ routes.search_url }}">Search</a>
+      <a href="{{ routes.account_url }}">Account</a>
+      <a href="{{ routes.cart_url }}">Cart</a>
+    </nav>
+  </div>
+  <button class="anvil-mobile-menu__close" id="anvil-mobile-menu-close" aria-label="Close menu" type="button">
+    <svg viewBox="0 0 12 12" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><circle cx="6" cy="6" r="6"/></svg>
+  </button>
+</div>
 
 <!-- ─── HERO BORDER LINES ─────────────────────────────────────── -->
 <div class="anvil-border-left"  id="anvil-border-left"></div>
