@@ -40,6 +40,12 @@
   opacity: .18;
 }
 
+/* Touch devices: no mouse, so restore native cursor and hide the custom dot */
+@media (hover: none), (pointer: coarse) {
+  *, *::before, *::after { cursor: auto !important; }
+  .anvil-cursor { display: none !important; }
+}
+
 /* ─── Border lines ───────────────────────────────────────── */
 .anvil-border-left,
 .anvil-border-right {
