@@ -110,14 +110,6 @@ export const items = [
     year:     '2025',
   },
   {
-    src:      '/images/Homeware/coasters.JPG',
-    alt:      'Steel coasters with brushed finish, handmade by Anvil in the UK',
-    title:    'Coasters',
-    category: 'accessories',
-    material: 'Mild Steel',
-    year:     '2024',
-  },
-  {
     src:      '/images/Homeware/gardenoranment.JPG',
     alt:      'Bespoke steel garden ornament, hand-forged by Anvil',
     title:    'Garden Ornament',

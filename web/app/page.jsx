@@ -339,19 +339,19 @@ export default function HomePage() {
 
           <div className="product-card">
             <Image className="img-primary"
-              src="/images/Homeware/coasterset.JPG"
-              alt="Coaster Set"
+              src="/images/Objects/accessgate3.JPG"
+              alt="Access Gate"
               fill
               sizes="(max-width: 600px) 100vw, (max-width: 900px) 50vw, 33vw" />
             <Image className="img-hover"
-              src="/images/Homeware/coasters.JPG"
-              alt="Coaster Set"
+              src="/images/Objects/gardengate3.JPG"
+              alt="Garden Gate"
               fill
               sizes="(max-width: 600px) 100vw, (max-width: 900px) 50vw, 33vw" />
             <span className="product-num">003</span>
             <div className="product-info">
-              <p className="product-category">Homeware</p>
-              <h3 className="product-name">Coaster Set</h3>
+              <p className="product-category">Objects</p>
+              <h3 className="product-name">Gates</h3>
             </div>
           </div>
 
