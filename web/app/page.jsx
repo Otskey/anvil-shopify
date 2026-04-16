@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect } from 'react';
+import Image from 'next/image';
 import gsap from 'gsap';
 import MobileMenu from './components/MobileMenu';
 import SiteNav from './components/SiteNav';
@@ -301,12 +302,16 @@ export default function HomePage() {
         <div className="product-grid reveal-stagger">
 
           <div className="product-card">
-            <img className="img-primary"
+            <Image className="img-primary"
               src="/images/Homeware/gardenoranment.JPG"
-              alt="Garden Ornament" loading="lazy" />
-            <img className="img-hover"
+              alt="Garden Ornament"
+              fill
+              sizes="(max-width: 600px) 100vw, (max-width: 900px) 50vw, 33vw" />
+            <Image className="img-hover"
               src="/images/Homeware/gardenornament3.JPG"
-              alt="Garden Ornament detail" loading="lazy" />
+              alt="Garden Ornament detail"
+              fill
+              sizes="(max-width: 600px) 100vw, (max-width: 900px) 50vw, 33vw" />
             <span className="product-num">001</span>
             <div className="product-info">
               <p className="product-category">Homeware</p>
@@ -315,12 +320,16 @@ export default function HomePage() {
           </div>
 
           <div className="product-card">
-            <img className="img-primary"
+            <Image className="img-primary"
               src="/images/Homeware/diningtable.JPG"
-              alt="Dining Table" loading="lazy" />
-            <img className="img-hover"
+              alt="Dining Table"
+              fill
+              sizes="(max-width: 600px) 100vw, (max-width: 900px) 50vw, 33vw" />
+            <Image className="img-hover"
               src="/images/Homeware/diningtable2.JPG"
-              alt="Dining Table detail" loading="lazy" />
+              alt="Dining Table detail"
+              fill
+              sizes="(max-width: 600px) 100vw, (max-width: 900px) 50vw, 33vw" />
             <span className="product-num">002</span>
             <div className="product-info">
               <p className="product-category">Homeware</p>
@@ -329,12 +338,16 @@ export default function HomePage() {
           </div>
 
           <div className="product-card">
-            <img className="img-primary"
+            <Image className="img-primary"
               src="/images/Homeware/candleholders.JPG"
-              alt="Candle Holders" loading="lazy" />
-            <img className="img-hover"
+              alt="Candle Holders"
+              fill
+              sizes="(max-width: 600px) 100vw, (max-width: 900px) 50vw, 33vw" />
+            <Image className="img-hover"
               src="/images/Homeware/coasters.JPG"
-              alt="Coasters" loading="lazy" />
+              alt="Coasters"
+              fill
+              sizes="(max-width: 600px) 100vw, (max-width: 900px) 50vw, 33vw" />
             <span className="product-num">003</span>
             <div className="product-info">
               <p className="product-category">Homeware</p>
