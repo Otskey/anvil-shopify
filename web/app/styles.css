@@ -1019,14 +1019,13 @@ footer {
   .section-header    { padding: 2rem 1.2rem 1rem; }
   footer             { padding: 2.5rem 1.2rem 2rem; }
 
-  /* Hero grid: stack vertically so each image gets full viewport width and the
-     CTA copy isn't cut off in a narrow side column. Animation (clip-path
-     unfurl + scale) is unchanged — it just reveals a taller stack now. */
-  .container               { height: max(145vw, 160vh); }
-  .grid                    { flex-direction: column; gap: 1vw; }
-  .grid__item--featured,
-  .grid__item--side        { flex: 1 1 0; width: 100%; }
-  .grid__item--side        { flex-direction: column; }
+  /* Hero: keep the 2-column magazine composition on phones. The CTA overlay
+     sits in a ~33vw column, so shrink its padding/type so it actually fits
+     without clipping. Animation (scale + clip-path unfurl) is unchanged. */
+  .grid__cta-overlay  { padding: 1rem 0.85rem; }
+  .grid__cta-label    { font-size: 0.55rem; letter-spacing: 0.15em; margin-bottom: 0.35rem; }
+  .grid__cta-heading  { font-size: 0.85rem; line-height: 1.2; max-width: none; margin-bottom: 0.75rem; }
+  .grid__cta-btn      { padding: 0.45rem 0.6rem; font-size: 0.6rem; letter-spacing: 0.05em; width: 100%; text-align: center; white-space: normal; line-height: 1.25; }
 }
 
 /* ============================================================
