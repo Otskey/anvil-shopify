@@ -58,7 +58,7 @@
 /* ─── Sidebar text ───────────────────────────────────────── */
 .anvil-sidebar-text {
   position: fixed;
-  left: 1.5rem;
+  left: 1.5vw;
   z-index: 11;
   display: flex;
   flex-direction: column;
@@ -76,7 +76,7 @@
   font-size: .55rem;
   letter-spacing: .3em;
   text-transform: uppercase;
-  color: var(--anvil-muted);
+  color: var(--anvil-bg);
   writing-mode: vertical-rl;
   transform: rotate(180deg);
   margin-bottom: 1.5rem;
@@ -87,8 +87,8 @@
   font-family: var(--font-body);
   font-size: .8rem;
   line-height: 1.75;
-  color: var(--anvil-muted);
-  max-width: 160px;
+  color: var(--anvil-bg);
+  max-width: 9vw;
 }
 
 /* ─── Hero frame ─────────────────────────────────────────── */
@@ -429,7 +429,21 @@
 }
 
 /* ─── Responsive ─────────────────────────────────────────── */
-@media (max-width: 900px) {
+/* Desktop squeeze zone: tighten margins so sidebar text has room
+   and borders don't crowd the nav. Mirrors web styles.css (1160px). */
+@media (max-width: 1160px) {
+  .anvil-border-left          { left: 8vw; }
+  .anvil-border-right         { right: 8vw; }
+  .anvil-hero-frame__left     { width: 8vw; padding: 1rem; }
+  .anvil-hero-frame__right    { width: 16vw; }
+
+  .anvil-sidebar__label       { font-size: .5rem; letter-spacing: .2em; }
+  .anvil-sidebar__tagline     { font-size: .65rem; line-height: 1.5; max-width: calc(8vw - 2rem); }
+}
+
+/* Tablet / iPad Pro and below: hide the frame + sidebar text entirely.
+   Mirrors web styles.css (1024px). */
+@media (max-width: 1024px) {
   .anvil-border-left,
   .anvil-border-right,
   .anvil-hero-frame__left,
