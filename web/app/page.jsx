@@ -294,7 +294,7 @@ export default function HomePage() {
         {/* Section header */}
         <div id="below-marquee" className="section-header reveal">
           <h2 className="section-title">The Collection</h2>
-          <span className="section-count">03 Objects</span>
+          <span className="section-count">03 Homeware</span>
         </div>
 
         {/* Product grid */}
@@ -302,43 +302,43 @@ export default function HomePage() {
 
           <div className="product-card">
             <img className="img-primary"
-              src="https://cdn.sanity.io/images/8yrspuwy/production/84cea93a1f875612a2e2640e6b031d1ec8ed0324-2418x3021.jpg"
-              alt="Cylinder Back Chair" loading="lazy" />
+              src="/images/Homeware/gardenoranment.JPG"
+              alt="Garden Ornament" loading="lazy" />
             <img className="img-hover"
-              src="https://cdn.sanity.io/images/8yrspuwy/production/413315c187fbfcdc3d3768c6f641e3426e0952ab-2422x3028.jpg"
-              alt="Cylinder Back Chair detail" loading="lazy" />
+              src="/images/Homeware/gardenornament3.JPG"
+              alt="Garden Ornament detail" loading="lazy" />
             <span className="product-num">001</span>
             <div className="product-info">
-              <p className="product-category">Object</p>
-              <h3 className="product-name">Cylinder Back</h3>
+              <p className="product-category">Homeware</p>
+              <h3 className="product-name">Garden Ornament</h3>
             </div>
           </div>
 
           <div className="product-card">
             <img className="img-primary"
-              src="https://cdn.sanity.io/images/8yrspuwy/production/f506d4ed91daf9a3101fa3bfec971720564d83c9-2434x3042.jpg"
-              alt="Double Cylinder Back" loading="lazy" />
+              src="/images/Homeware/diningtable.JPG"
+              alt="Dining Table" loading="lazy" />
             <img className="img-hover"
-              src="https://cdn.sanity.io/images/8yrspuwy/production/3b70b2d1575384c4b2ac9d7c2e81243aee7bb43a-1600x2000.jpg"
-              alt="Double Cylinder Back detail" loading="lazy" />
+              src="/images/Homeware/diningtable2.JPG"
+              alt="Dining Table detail" loading="lazy" />
             <span className="product-num">002</span>
             <div className="product-info">
-              <p className="product-category">Object</p>
-              <h3 className="product-name">Double Cylinder Back</h3>
+              <p className="product-category">Homeware</p>
+              <h3 className="product-name">Dining Table</h3>
             </div>
           </div>
 
           <div className="product-card">
             <img className="img-primary"
-              src="https://cdn.sanity.io/images/8yrspuwy/production/255b56fe5b24b2aa2039b6c7305aa88cd30cc7e1-2444x3056.jpg"
-              alt="Compartment Chair" loading="lazy" />
+              src="/images/Homeware/candleholders.JPG"
+              alt="Candle Holders" loading="lazy" />
             <img className="img-hover"
-              src="https://cdn.sanity.io/images/8yrspuwy/production/85e2d3ee172dbc24aeaa4dc1de012065aa99b871-2437x3047.jpg"
-              alt="Compartment Chair detail" loading="lazy" />
+              src="/images/Homeware/coasters.JPG"
+              alt="Coasters" loading="lazy" />
             <span className="product-num">003</span>
             <div className="product-info">
-              <p className="product-category">Object</p>
-              <h3 className="product-name">Compartment Chair</h3>
+              <p className="product-category">Homeware</p>
+              <h3 className="product-name">Stoneware</h3>
             </div>
           </div>
 
