@@ -266,6 +266,12 @@ body {
   opacity: .18;
 }
 
+/* Touch devices: no mouse, so restore native cursor and hide the custom dot */
+@media (hover: none), (pointer: coarse) {
+  *, *::before, *::after { cursor: auto !important; }
+  .cursor { display: none !important; }
+}
+
 /* ── Navigation ──────────────────────────────────────────────── */
 /*
   Sits above everything including the hero-frame.
