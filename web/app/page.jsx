@@ -368,7 +368,7 @@ export default function HomePage() {
           </div>
           <div className="editorial-image">
             <Image
-              src="https://cdn.sanity.io/images/8yrspuwy/production/84cea93a1f875612a2e2640e6b031d1ec8ed0324-2418x3021.jpg"
+              src="/images/Homeware/diningtable4.JPG"
               alt="Studio photography"
               width={2418}
               height={3021}
