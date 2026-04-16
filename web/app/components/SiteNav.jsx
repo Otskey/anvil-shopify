@@ -73,7 +73,7 @@ export default function SiteNav({ variant = 'inner' }) {
         <li><Link href="/portfolio/homeware">Homeware</Link></li>
         <li><Link href="/portfolio/objects">Objects</Link></li>
       </ul>
-      <Link href="/" className="nav-logo">ANVIL</Link>
+      <Link href="/" className="nav-logo">ANVIL DESIGN & FABRICATION</Link>
       <div className="nav-right">
         {variant !== 'home' && <p className="hero-issue">Issue No. 001 |</p>}
         <span id="date-display"></span>

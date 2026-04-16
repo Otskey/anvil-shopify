@@ -380,7 +380,7 @@ export default function HomePage() {
         {/* Footer */}
         <footer>
           <div className="footer-brand reveal">
-            <div className="footer-logo">ANVIL</div>
+            <div className="footer-logo">ANVIL DESIGN & FABRICATION</div>
             <p className="footer-desc">A Cambridgeshire operated steel fabrication workshop focusing on handcrafted homeware and functional objects. Designed and built by hand using steel and wood sourced in the UK.</p>
           </div>
           <div className="footer-col reveal">
@@ -406,7 +406,7 @@ export default function HomePage() {
             </ul>
           </div>
           <div className="footer-bottom">
-            <p>© 2020 ANVIL — All rights reserved</p>
+            <p>© 2020 ANVIL DESIGN & FABRICATION — All rights reserved</p>
             <p>Cambridgeshire, UK</p>
           </div>
         </footer>
