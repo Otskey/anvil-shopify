@@ -119,49 +119,6 @@
   padding-bottom: 3rem;
 }
 
-/* ─── Scroll hint ────────────────────────────────────────── */
-.anvil-scroll-hint {
-  display: flex;
-  align-items: center;
-  gap: .8rem;
-  font-family: var(--font-mono);
-  font-size: .55rem;
-  letter-spacing: .2em;
-  text-transform: uppercase;
-  color: var(--anvil-muted);
-  opacity: 0;
-  transform: translateY(6px);
-  transition: opacity .55s ease .2s, transform .55s ease .2s;
-}
-
-.anvil-hero-frame.is-revealed .anvil-scroll-hint {
-  opacity: 1;
-  transform: none;
-}
-
-.anvil-scroll-arrow {
-  width: 28px;
-  height: 1px;
-  background: var(--anvil-muted);
-  position: relative;
-  animation: anvil-arrow-pulse 2s ease-in-out infinite;
-}
-
-.anvil-scroll-arrow::after {
-  content: '';
-  position: absolute;
-  right: 0; top: -3px;
-  width: 6px; height: 6px;
-  border-right: 1px solid var(--anvil-muted);
-  border-bottom: 1px solid var(--anvil-muted);
-  transform: rotate(-45deg);
-}
-
-@keyframes anvil-arrow-pulse {
-  0%, 100% { width: 28px; }
-  50%       { width: 42px; }
-}
-
 /* ─── Scroll wrapper ─────────────────────────────────────── */
 .anvil-scroll-wrapper {
   position: relative;
@@ -360,35 +317,6 @@
   height: 100%;
   object-fit: cover;
   object-position: center top;
-}
-
-/* ─── Replay button ──────────────────────────────────────── */
-.anvil-replay-btn {
-  position: fixed;
-  bottom: 24px;
-  right: 24px;
-  z-index: 600;
-  padding: 8px 16px;
-  background: rgba(0, 0, 0, .75);
-  color: #fff;
-  font-family: var(--font-mono);
-  font-size: 13px;
-  letter-spacing: .05em;
-  border: none;
-  border-radius: 0;
-  cursor: pointer;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity .3s ease;
-}
-
-.anvil-replay-btn.is-visible {
-  opacity: 1;
-  pointer-events: auto;
-}
-
-.anvil-replay-btn:hover {
-  background: rgba(0, 0, 0, .9);
 }
 
 /* ─── Marquee ────────────────────────────────────────────── */

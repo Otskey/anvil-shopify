@@ -27,7 +27,6 @@ function anvilHeroInit() {
   var borderR       = document.getElementById('anvil-border-right');
   var sidebar       = document.getElementById('anvil-sidebar-text');
   var marquee       = document.getElementById('anvil-marquee');
-  var replayBtn     = document.getElementById('anvil-replay-btn');
   var cursor        = document.getElementById('anvil-cursor');
 
   if (!container || !gridWrapper) {
@@ -68,28 +67,10 @@ function anvilHeroInit() {
     scrollWrapper.style.overflow = 'visible';
     nav.classList.add('is-visible');
     heroFrame.classList.add('is-revealed');
-    replayBtn.classList.add('is-visible');
     sidebarActive = true;
     updateSidebar();
     sidebar.classList.add('is-revealed');
   }
-
-  /* ─── Replay ──────────────────────────────────────────── */
-  function replay() {
-    scrollWrapper.style.height   = '100vh';
-    scrollWrapper.style.overflow = 'hidden';
-    nav.classList.remove('is-visible');
-    nav.classList.remove('is-scrolled');
-    heroFrame.classList.remove('is-revealed');
-    replayBtn.classList.remove('is-visible');
-    sidebarActive = false;
-    sidebar.classList.remove('is-revealed');
-    sidebar.style.top     = '';
-    sidebar.style.opacity = '';
-    runAnimation();
-  }
-
-  if (replayBtn) replayBtn.addEventListener('click', replay);
 
   /* ─── Scroll ──────────────────────────────────────────── */
   window.addEventListener('scroll', function () {
