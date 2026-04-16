@@ -221,12 +221,12 @@ export default function HomePage() {
           <div className="grid__animation-wrapper">
             <div className="grid">
 
-              <a href="#" className="grid__item grid__item--featured" aria-label="Compartment Chair">
+              <a href="#" className="grid__item grid__item--featured" aria-label="Garden Ornament">
                 <div className="grid__item-image">
                   <div className="responsive-image" style={{ backgroundColor: '#8c837b' }}>
                     <img
-                      src="https://cdn.sanity.io/images/8yrspuwy/production/255b56fe5b24b2aa2039b6c7305aa88cd30cc7e1-2444x3056.jpg?w=1200&fit=max&auto=format&q=85"
-                      alt="Compartment Chair — featured view"
+                      src="/images/Homeware/gardenoranment.JPG"
+                      alt="Garden Ornament — featured view"
                       loading="eager"
                     />
                   </div>
@@ -253,8 +253,8 @@ export default function HomePage() {
                 <div className="grid__item-panel">
                   <div className="responsive-image" style={{ backgroundColor: '#84745c' }}>
                     <img
-                      src="https://cdn.sanity.io/images/8yrspuwy/production/85e2d3ee172dbc24aeaa4dc1de012065aa99b871-2437x3047.jpg?w=600&fit=max&auto=format&q=85"
-                      alt="Compartment Chair — side view"
+                      src="/images/Homeware/gardenornament3.JPG"
+                      alt="Garden Ornament — side view"
                       loading="eager"
                     />
                   </div>
