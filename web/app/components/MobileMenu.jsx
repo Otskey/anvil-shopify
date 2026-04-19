@@ -43,6 +43,7 @@ export default function MobileMenu() {
           <a href="#">Store</a>
           <Link href="/portfolio/homeware">Homeware</Link>
           <Link href="/portfolio/objects">Objects</Link>
+          <Link href="/reviews">Reviews</Link>
           <Link href="/contact">Contact</Link>
         </nav>
       </div>

@@ -2,6 +2,7 @@
 
 import { useEffect } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import gsap from 'gsap';
 import MobileMenu from './components/MobileMenu';
 import SiteNav from './components/SiteNav';
@@ -377,6 +378,37 @@ export default function HomePageClient() {
           </div>
         </section>
 
+        {/* Kind Words — home teaser */}
+        <section className="home-reviews">
+          <div className="section-header reveal">
+            <h2 className="section-title">Kind Words</h2>
+            <span className="section-count">Customer Feedback</span>
+          </div>
+          <div className="home-reviews__grid reveal-stagger">
+            <article className="home-reviews__card">
+              <blockquote className="home-reviews__quote">
+                Lewis is a bit of an artist when it comes to steel.
+              </blockquote>
+              <div className="home-reviews__attribution">
+                <p className="home-reviews__author">Lottie Judge</p>
+                <p className="home-reviews__tag">Pub Bar, North London</p>
+              </div>
+            </article>
+            <article className="home-reviews__card">
+              <blockquote className="home-reviews__quote">
+                A bulletproof, really pretty desk that will outlive me.
+              </blockquote>
+              <div className="home-reviews__attribution">
+                <p className="home-reviews__author">James Mumby</p>
+                <p className="home-reviews__tag">Home-Office Desk</p>
+              </div>
+            </article>
+          </div>
+          <div className="home-reviews__cta reveal">
+            <Link href="/reviews">Read all reviews →</Link>
+          </div>
+        </section>
+
         {/* Footer */}
         <footer>
           <div className="footer-brand reveal">
@@ -386,8 +418,9 @@ export default function HomePageClient() {
           <div className="footer-col reveal">
             <h4>Navigate</h4>
             <ul>
-              <li><a href="#">Homeware</a></li>
-              <li><a href="#">Objects</a></li>
+              <li><Link href="/portfolio/homeware">Homeware</Link></li>
+              <li><Link href="/portfolio/objects">Objects</Link></li>
+              <li><Link href="/reviews">Reviews</Link></li>
               <li><a href="#">Workshop</a></li>
             </ul>
           </div>
