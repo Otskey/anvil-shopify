@@ -102,14 +102,6 @@ export const items = [
     year:     '2025',
   },
   {
-    src:      '/images/Homeware/candleholders.JPG',
-    alt:      'Set of hand-formed steel candle holders by Anvil',
-    title:    'Candle Holders',
-    category: 'accessories',
-    material: 'Blackened Steel',
-    year:     '2025',
-  },
-  {
     src:      '/images/Homeware/gardenoranment.JPG',
     alt:      'Bespoke steel garden ornament, hand-forged by Anvil',
     title:    'Garden Ornament',

@@ -161,6 +161,7 @@ export default function ObjectsPageClient() {
             <li><Link href="/">Home</Link></li>
             <li><Link href="/portfolio/homeware">Homeware</Link></li>
             <li><Link href="/portfolio/objects">Objects</Link></li>
+            <li><Link href="/reviews">Reviews</Link></li>
           </ul>
           <button className="portfolio-back-top" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>Back to top ↑</button>
         </footer>
